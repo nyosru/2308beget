@@ -11,12 +11,12 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('telegram_id')->index('telegram_id');
-            $table->string('name_first', 200);
-            $table->string('name_last', 200);
-            $table->string('telegram_username', 100);
-            $table->string('telegram_photo', 200);
-            $table->integer('telegram_auth_date');
+            $table->integer('telegram_id')->index('telegram_id')->nullable();
+            $table->string('name_first', 200)->nullable();
+            $table->string('name_last', 200)->nullable();
+            $table->string('telegram_username', 100)->nullable();
+            $table->string('telegram_photo', 200)->nullable();
+            $table->integer('telegram_auth_date')->nullable();
         });
     }
 

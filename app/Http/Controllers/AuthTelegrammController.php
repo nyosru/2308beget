@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class AuthTelegrammController extends Controller
 {
@@ -20,13 +23,14 @@ class AuthTelegrammController extends Controller
         try {
             $res = $this->checkTelegramAuthorization($request->all());
             $user = User::where('telegram_id', $res['id'])->first();
+            // dd([ $user, empty($user) ]);
             // если пользователяя не нашли, регаем
-            if ($user->count() == 0) {
+            if (empty($user)) {
 
                 $user = new User();
                 // $user->telegram_id = $id;
                 $user->name = $res['first_name'];
-                $user->password = rand();
+                $user->password = md5($res['id'] . '.telega@php-cat.com77');
                 $user->email = $res['id'] . '.telega@php-cat.com';
                 $user->telegram_id = $res['id'];
                 $user->name_first = $res['first_name'];
@@ -45,16 +49,14 @@ class AuthTelegrammController extends Controller
 
             // dd(['uu',$user->id]);
             // $ee =  
+            // Auth::logout();
+
+            // Session::flash('flash_message_error', trans('interface.AccountNotActive'));
+            // \Session::flash('flash_message', trans('interface.ActivatedSuccess'));
+            // $request->session()->invalidate();
+            //  $request->session()->regenerateToken();
+
             Auth::loginUsingId($user->id, true);
-            // Auth::login($user, true);
-            // $ee = Auth::loginUsingId($user, true);
-            // dd($ee);
-            
-            // if (Auth::check()) {
-            //     dd(__LINE__);
-            // } else {
-            //     dd(__LINE__);
-            // }
 
             return redirect()
                 // ->route('domain_home')
@@ -62,7 +64,8 @@ class AuthTelegrammController extends Controller
                 ->with('success', 'Вы успешно авторизовались, доступен персональный функционал!');
             // ->flash('success', 'Вы успешно авторизовались, доступен персональный функционал!');
 
-            // dd($new);
+            // return to_route('login_post', ['login' => $user->email, 'password' => md5($user->email . '77')]);
+            // return redirect()->route('login_post', ['login' => $user->email, 'password' => md5($user->email . '77')]);
 
         } catch (\Exception $ex) {
             dd($ex);

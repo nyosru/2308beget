@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Domain;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DomainController extends Controller
 {
@@ -18,6 +19,8 @@ class DomainController extends Controller
             'REDIRECT_URI' => 'https://domain.php-cat.com/api/telega-auth/callback',
             'HTTP_HOST' => $_SERVER['HTTP_HOST']
         ];
+
+        $in['user'] = Auth::user();
 
         return view('domain.index', $in );
     }

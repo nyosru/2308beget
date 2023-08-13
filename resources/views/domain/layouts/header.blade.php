@@ -59,13 +59,15 @@
 
                     @auth
                         111 auth
+                        {{ $user }}
                     @else
                         @guest
                             222 quest
                         @else
                             2200 not guest
                         @endguest
-                    @endauths
+                    @endauth
+
                 </div>
 
             </div>
