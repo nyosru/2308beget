@@ -34,7 +34,7 @@
                             <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
                         </ul>
                     </li> --}}
-                    
+
                     {{-- <li class="nav-item">
                         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Отключенная</a>
                     </li> --}}
@@ -44,7 +44,30 @@
                     <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
                     <button class="btn btn-outline-success" type="submit">Поиск</button>
                 </form> --}}
-                <button class="button bg-info d-flex">Войти по Телеграм</button>
+                {{-- <button class="button bg-info d-flex">Войти по Телеграм</button> --}}
+
+
+                <div class="d-flex">
+                    <script src="https://telegram.org/js/telegram-widget.js?2" data-telegram-login="{{ $BOT_USERNAME }}" data-size="medium"
+                        data-auth-url="{{ $REDIRECT_URI }}" data-request-access="write"></script>
+
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    @auth
+                        111 auth
+                    @else
+                        @guest
+                            222 quest
+                        @else
+                            2200 not guest
+                        @endguest
+                    @endauths
+                </div>
+
             </div>
         @endif
     </div>
