@@ -21,6 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        // для телеги
+        'telega_id',
+        'name_first',
+        'name_last',
+        'telega_username',
+        'telega_photo',
+        'telega_auth_date'
     ];
 
     /**

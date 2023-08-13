@@ -1,24 +1,21 @@
 @extends('domain.layouts.master')
 
 @section('content')
+    <main class="px-3">
 
-<main class="px-3">
+        <div class="text-center">
+            <h1>Быстрый доступ к документам</h1>
 
-  <script src="https://telegram.org/js/telegram-widget.js?2" data-telegram-login="{{ $BOT_USERNAME }}" data-size="medium" data-auth-url="{{$REDIRECT_URI}}" data-request-access="write"></script>
+            <p class="lead">Секретный доступный метод хранения и показа документов.</p>
 
-    <div class="text-center" >
-    <h1>Быстрый доступ к документам</h1>    
-    
-    <p class="lead">Секретный доступный метод хранения и показа документов.</p>    
-    
-    <p class="lead">Войти в свои документы: </p>
-    
-    {{-- <p class="lead">
+            <p class="lead">Войти в свои документы: </p>
+
+            {{-- <p class="lead">
       <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Узнать больше</a>
     </p> --}}
-    
-</div>
-  </main>
+
+        </div>
+    </main>
 
     {{-- <h1>Hello World</h1>
     <p>
@@ -32,5 +29,4 @@
     {{-- @include('ttt.backw') --}}
 
     {{-- @include('ttt.footer') --}}
-
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthTelegrammController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+$d = function() {
+
+    Route::get('telega-auth/callback', [AuthTelegrammController::class,'callback']);
+    // Route::get('{any?}', [PhpcatController::class,'index']);
+    // Route::get('{any?}/{action?}', [PhpcatController::class,'index']);
+
+};
+
+Route::group(array('domain' => 'site2.local'), $d);
+Route::group(array('domain' => 'domain.php-cat.com'), $d);
+
