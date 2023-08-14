@@ -16,9 +16,11 @@ class AuthTelegrammController extends Controller
 
     function callback(Request $request)
     {
-        $this->token = '6290040530:AAFKIl0csADmwkXYUCSqEWXwlbFOItlv9Hg';
+        $this->token = env('bot_token');
         // $res = $this->checkTelegramAuthorization($request->all());
         // dd(['прошёл реавтор норм',$res]);
+
+        // dd([$this->token,987]);
 
         try {
             $res = $this->checkTelegramAuthorization($request->all());

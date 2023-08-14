@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$d = function() {
-    Route::get('/', [DomainController::class,'index']);
-    Route::get('/enter', [DomainController::class,'index'])->name('domain_enter');
+$d = function () {
+    Route::get('/', [DomainController::class, 'index']);
+    Route::get('/enter', [DomainController::class, 'index'])->name('domain_enter');
 };
+
 Route::group(array('domain' => 'site2.local'), $d);
 Route::group(array('domain' => 'domain.php-cat.com'), $d);
+Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 
 
 Route::get('/', function () {
@@ -37,4 +39,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
