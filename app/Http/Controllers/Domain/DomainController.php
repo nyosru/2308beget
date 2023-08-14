@@ -15,14 +15,14 @@ class DomainController extends Controller
     {
         $in = [
             'BOT_USERNAME' => 'WaitingDomainBot',
-            'BOT_TOKEN' => '6290040530:AAFKIl0csADmwkXYUCSqEWXwlbFOItlv9Hg',
+            'BOT_TOKEN' => env('bot_token'),
             'REDIRECT_URI' => 'https://domain.php-cat.com/api/telega-auth/callback',
             'HTTP_HOST' => $_SERVER['HTTP_HOST']
         ];
 
         $in['user'] = Auth::user();
 
-        return view('domain.index', $in );
+        return view('domain.index', $in);
     }
 
     /**
