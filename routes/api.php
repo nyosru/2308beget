@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 $d = function() {
 
     Route::get('telega-auth/callback', [AuthTelegrammController::class,'callback']);
+    Route::get('domain-whois-update', [\App\Http\Controllers\Domain\WhoisController::class,'whoisUpdate']);
     // Route::get('{any?}', [PhpcatController::class,'index']);
     // Route::get('{any?}/{action?}', [PhpcatController::class,'index']);
 
