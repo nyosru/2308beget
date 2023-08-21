@@ -28,13 +28,15 @@ $d = function () {
     Route::get('/logout', [AuthTelegrammController::class, 'logout'])->name('logout_lk');
     Route::post('/domain_add', [DomainController::class, 'domain_add'])->name('domain_add');
 //    Route::resource('/lk/cupons', CuponController::class )->name('domain_cupon');
-    Route::resource('/lk/cupon', CuponController::class )->only(['store','index']);
+    Route::resource('/lk/cupon', CuponController::class)->only(['store', 'index']);
 };
 
+if (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) {
+    Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+} else {
 // Route::group(array('domain' => 'site2.local'), $d);
-Route::group(array('domain' => 'domain.php-cat.com'), $d);
-Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
-
+    Route::group(array('domain' => 'domain.php-cat.com'), $d);
+}
 
 
 //Route::get('/', function () {
