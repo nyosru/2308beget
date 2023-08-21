@@ -48,7 +48,8 @@ class DomainController extends Controller
     {
 
         $in = [
-            'BOT_USERNAME' => 'WaitingDomainBot',
+//            'BOT_USERNAME' => 'WaitingDomainBot',
+            'BOT_USERNAME' => env('bot_token_name'),
             'BOT_TOKEN' => env('bot_token'),
             'REDIRECT_URI' => 'https://' . $_SERVER['HTTP_HOST'] . '/api/telega-auth/callback',
             'HTTP_HOST' => $_SERVER['HTTP_HOST']
