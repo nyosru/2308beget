@@ -25,7 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 $d = function() {
 
-    Route::get('onpay', [OnPayControllerAlias::class,'apiCall']);
+//    Route::get('onpay', [OnPayControllerAlias::class,'apiCall']);
+    Route::post('onpay', [OnPayControllerAlias::class,'apiCall']);
 
     Route::get('telega-auth/callback', [AuthTelegrammController::class,'callback']);
     Route::get('domain-whois-update', [\App\Http\Controllers\Domain\WhoisController::class,'whoisUpdate']);
