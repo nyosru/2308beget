@@ -39,7 +39,13 @@ class OnPayController extends Controller
                 )
             ));
 
-        dd($request);
+//        dd($request);
+
+        return response()->json([
+            "status" => false,
+            "pay_for" => $request->pay_for,
+            "signature" => $request->signature
+        ]);
     }
 
     public static function creatLink($in)
