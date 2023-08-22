@@ -10,6 +10,7 @@ class OnPayController extends Controller
 
     public static $merchant_login = '';
     public static $linkPaySystem = 'http://secure.onpay.ru/pay/';
+    public static $apiSercetKey = 'CEcLNBkdmQt';
 
     public function apiCall(Request $request)
     {
@@ -41,11 +42,14 @@ class OnPayController extends Controller
 
 //        dd($request);
 
-        return response()->json([
+        $out = [
             "status" => false,
             "pay_for" => $request->pay_for,
-            "signature" => $request->signature
-        ]);
+        ];
+
+        $out['signature'] = sha1('check;false;'.$out['pay_for'].';'.self::$apiSercetKey);
+
+        return response()->json($out);
     }
 
     public static function creatLink($in)
