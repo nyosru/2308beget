@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OnPayRequest;
+use App\Models\DomainOrder;
 use Illuminate\Http\Request;
 
 class OnPayController extends Controller
@@ -42,13 +43,20 @@ class OnPayController extends Controller
 
 //        dd($request);
 
+        try {
+            DomainOrder::whereId($request->pay_for)->firstOrFail()->get();
+            $result = true;
+        } catch (\Exception $ex) {
+            $result = false;
+        }
+
         $out = [
-            "status" => false,
+//            "status" => false,
+            "status" => $result,
             "pay_for" => $request->pay_for,
         ];
 
-
-        $out['signature'] = sha1($request->type.';false;'.$out['pay_for'].';'.self::$apiSercetKey);
+        $out['signature'] = sha1($request->type . ';false;' . $out['pay_for'] . ';' . self::$apiSercetKey);
 
         return response()->json($out);
     }
