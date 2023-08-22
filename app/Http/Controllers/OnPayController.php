@@ -47,7 +47,8 @@ class OnPayController extends Controller
             "pay_for" => $request->pay_for,
         ];
 
-        $out['signature'] = sha1('check;false;'.$out['pay_for'].';'.self::$apiSercetKey);
+
+        $out['signature'] = sha1($request->type.';false;'.$out['pay_for'].';'.self::$apiSercetKey);
 
         return response()->json($out);
     }
