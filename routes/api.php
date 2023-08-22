@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthTelegrammController;
 use App\Http\Controllers\BuyController;
-use App\Http\Controllers\OnPayController as OnPayControllerAlias;
+use App\Http\Controllers\OnPayController;
 use App\Http\Controllers\PromocodeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 $d = function() {
 
-//    Route::get('onpay', [OnPayControllerAlias::class,'apiCall']);
-    Route::post('onpay', [OnPayControllerAlias::class,'apiCall']);
+    Route::get('onpay', [OnPayController::class,'apiCall']);
+    Route::post('onpay', [OnPayController::class,'apiCall']);
 
     Route::get('telega-auth/callback', [AuthTelegrammController::class,'callback']);
     Route::get('domain-whois-update', [\App\Http\Controllers\Domain\WhoisController::class,'whoisUpdate']);
@@ -43,6 +43,6 @@ $d = function() {
 };
 
 //Route::group(array('domain' => 'site2.local'), $d);
-//Route::group(array('domain' => 'domain.php-cat.com'), $d);
+Route::group(array('domain' => 'domain.php-cat.com'), $d);
 Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 

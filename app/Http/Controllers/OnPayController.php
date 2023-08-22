@@ -11,7 +11,8 @@ class OnPayController extends Controller
     public static $merchant_login = '';
     public static $linkPaySystem = 'http://secure.onpay.ru/pay/';
 
-    public function apiCall( Request $request ){
+    public function apiCall(Request $request)
+    {
 
         // file_get_contents('https://api.uralweb.info/telegram.php?' . http_build_query(
         file_get_contents('https://api.php-cat.com/telegram.php?' . http_build_query(
@@ -40,6 +41,7 @@ class OnPayController extends Controller
 
         dd($request);
     }
+
     public static function creatLink($in)
     {
 //        //pay_mode 	«free» или «fix» 	Режим платежа. free – пользователь сможет менять сумму платежа в платежной форме, fix – пользователю будет показана сумма к зачислению (т.е. за вычетом всех комиссий) без возможности её редактирования. Обязательно указать сумму платежа price и назначение pay_for
@@ -102,7 +104,7 @@ class OnPayController extends Controller
 //    {
 
 
-        $link = self::$linkPaySystem.self::$merchant_login.'?'.http_build_query($in);
+        $link = self::$linkPaySystem . self::$merchant_login . '?' . http_build_query($in);
 
         //return $in;
         return $link;
