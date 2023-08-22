@@ -24,7 +24,7 @@ class DomainFactory extends Factory
         ];
 
         if( rand(1,3) == 1 )
-            $a['payed_to'] = date('Y-m-d',$_SERVER['REQUEST_TIME']+5*300*24*3600);
+            $a['payed_do'] = date('Y-m-d',$_SERVER['REQUEST_TIME']+5*300*24*3600);
 
         return $a;
     }

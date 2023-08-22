@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 $d = function () {
 
     Route::get('/', [DomainController::class, 'index'])->name('domain_index');
+    Route::get('/', [DomainController::class, 'index'])->name('login');
 //    Route::get('/', [DomainController::class, 'index'])->name('login');
 
 //    Route::get('/enter', [DomainController::class, 'index_enter'])
@@ -29,14 +30,18 @@ $d = function () {
     Route::post('/domain_add', [DomainController::class, 'domain_add'])->name('domain_add');
 //    Route::resource('/lk/cupons', CuponController::class )->name('domain_cupon');
     Route::resource('/lk/cupon', CuponController::class)->only(['store', 'index']);
+
+    Route::GET('/pay/success', [ CuponController::class, 'paySuccess' ] )->name('onpay_url_success');
+    Route::GET('/pay/fail', [ CuponController::class, 'payFail' ] )->name('onpay_url_success');
+
 };
 
-if (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) {
+//if (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) {
     Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
-} else {
+//} else {
 // Route::group(array('domain' => 'site2.local'), $d);
-    Route::group(array('domain' => 'domain.php-cat.com'), $d);
-}
+//    Route::group(array('domain' => 'domain.php-cat.com'), $d);
+//}
 
 
 //Route::get('/', function () {

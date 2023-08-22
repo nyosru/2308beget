@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             DomainSeeder::class,
-            DomainPaySeeder::class
+            DomainPaySeeder::class,
+            PromocodeSeeder::class,
+            DomainPricesSeeder::class
             // UserSeeder::class,
             // PostSeeder::class,
             // CommentSeeder::class,
