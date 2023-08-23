@@ -43,7 +43,23 @@ class OnPayController extends Controller
 
         $out["status"] = $result;
 //        $out['signature'] = sha1($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
-        $out['signature'] = md5($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
+//        'check;pay_for;order_amount;order_currency;code;merchant_api_in_key'
+//        $out['signature'] = md5($request->type . ';' . $out['pay_for'] . ';' . $request->amount . ';'.$request->.';' . self::$apiSercetKey);
+
+
+        $check = [
+            'type' => 'check',
+            'pay_for' => intval($request->pay_for),
+            'amount' => self::toFloat($request->amount),
+            'currency' => trim($request->way),
+            'mode' => trim($request->mode),
+//            'key' => self::key,
+            'key' => self::$apiSercetKey,
+        ];
+        $check['signature_string'] = implode(";", $check);
+        $out['signature'] = sha1($check['signature_string']);
+
+//        $out['signature'] = md5($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
 
         TelegramController::sendMsg(360209578,json_encode($out));
 //        $out['req'] = $request->all();
