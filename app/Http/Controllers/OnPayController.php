@@ -50,7 +50,7 @@ class OnPayController extends Controller
         $check = [
             'type' => 'check',
             'pay_for' => intval($request->pay_for),
-            'amount' => self::toFloat($request->amount),
+            'amount' => (int) $request->amount,
             'currency' => trim($request->way),
             'mode' => trim($request->mode),
 //            'key' => self::key,
