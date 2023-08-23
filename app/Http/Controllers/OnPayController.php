@@ -58,8 +58,6 @@ class OnPayController extends Controller
             }
 
             $out["status"] = $result;
-//        $out['signature'] = sha1($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
-
         }
 
         $check = [
@@ -72,28 +70,12 @@ class OnPayController extends Controller
         $out['signature'] = sha1($signature_string);
         TelegramController::sendMsg(360209578, json_encode($out));
 
-        $out['re'] = $request->All();
-//        'check;pay_for;order_amount;order_currency;code;merchant_api_in_key'
-//        $out['signature'] = md5($request->type . ';' . $out['pay_for'] . ';' . $request->amount . ';'.$request->.';' . self::$apiSercetKey);
-
-
-//        $tomd5 = [
-//            $request->type,
-//            $request->pay_for,
-//            $request->amount,
-//            $request->way,
-//            $request->mode,
-//            self::$apiSercetKey
-//        ];
-//
-////        $out['tomd5'] = $tomd5;
-//        $out['repeat_sign'] = sha1(implode(';', $tomd5));
-
         return response()->json($out);
     }
 
-    static function checkMd5(Request $request): boolean
+    static function checkMd5(Request $request): bool
     {
+
         $tomd5 = [
             $request->type,
             $request->pay_for,
@@ -102,7 +84,7 @@ class OnPayController extends Controller
             $request->mode,
             self::$apiSercetKey
         ];
-        return $request->signature == sha1(implode(';', $tomd5));
+        return ( $request->signature == sha1(implode(';', $tomd5)) ) ? true : false;
     }
 
     public static function creatLink($in)
