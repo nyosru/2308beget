@@ -28,17 +28,17 @@ class OnPayController extends Controller
         try {
             $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
 
-            $result = 'true';
+            $result = true;
 
             if( $res->price->amount != $request->amount ){
-                $result = 'false';
+                $result = false;
             }
 
             $err = '';
         } catch (\Exception $ex) {
             $err = $ex;
 //            dd($ex);
-            $result = 'false';
+            $result = false;
         }
 
         $out["status"] = $result;
