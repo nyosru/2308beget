@@ -16,47 +16,36 @@ class OnPayController extends Controller
     public function apiCall(Request $request)
     {
 
-        // file_get_contents('https://api.uralweb.info/telegram.php?' . http_build_query(
-        file_get_contents('https://api.php-cat.com/telegram.php?' . http_build_query(
-                array(
-                    // 's' => '1',
-                    's' => md5($_SERVER['HTTP_HOST']),
-                    'domain' => $_SERVER['HTTP_HOST'],
-                    // 'msg' => $_SERVER['HTTP_HOST'] . PHP_EOL . $msg,
-//                    'msg' => $msg,
-                    'msg' => json_encode($request->all()),
-                    // OrderUraBot @order_ura_bot:
-//                    'token' => env('TELEGA_ORDERBOT_TOKEN', 'xx'),
-//                    'id' => [   // 1368605419, // я тест
-//                        // серхио тест
-//                        // 5152088168,
-//                        // 2037908418 // ваш метролог
-//
-//
-//
-//                        // first_name: Авто-АС
-//                        1022228978,
-//                        // Денис Авто-СА
-//                        663501687 ]
-                )
-            ));
-
-//        dd($request);
-
-        try {
-            DomainOrder::whereId($request->pay_for)->firstOrFail()->get();
-            $result = true;
-        } catch (\Exception $ex) {
-            $result = false;
-        }
+        TelegramController::$token_telega = '776541435:AAH6efi0QRgzmifygi5bqih2m34XNjf8_As';
+//        TelegramController::sendMsg(360209578,'asdasd');
 
         $out = [
-//            "status" => false,
-            "status" => $result,
+//            "status" => $result,
             "pay_for" => $request->pay_for,
         ];
 
-        $out['signature'] = sha1($request->type . ';false;' . $out['pay_for'] . ';' . self::$apiSercetKey);
+
+        try {
+            $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
+
+            $result = 'true';
+
+            if( $res->price->amount_rub != $request->amount ){
+                $result = 'false';
+            }
+
+            $err = '';
+        } catch (\Exception $ex) {
+            $err = $ex;
+//            dd($ex);
+            $result = 'false';
+        }
+
+        $out["status"] = $result;
+        $out['signature'] = sha1($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
+
+        TelegramController::sendMsg(360209578,json_encode($out));
+//        $out['req'] = $request->all();
 
         return response()->json($out);
     }

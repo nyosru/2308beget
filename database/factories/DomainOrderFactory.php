@@ -19,7 +19,7 @@ class DomainOrderFactory extends Factory
         return [
 
             'user_id' => 1,
-            'price_id' => rand(1,5),
+            'domain_price_id' => rand(1,5),
 
 //        $table->string('domain')->nullable();
 //            $table->integer('amount')->default(1);

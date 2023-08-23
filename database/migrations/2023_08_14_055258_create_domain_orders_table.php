@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
 
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('price_id')->unsigned()->index();
+            $table->integer('domain_price_id')->unsigned()->index();
 
             $table->string('domain')->nullable();
 //            $table->integer('amount')->default(1);

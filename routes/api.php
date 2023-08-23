@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 $d = function() {
 
-//    Route::get('onpay', [OnPayController::class,'apiCall']);
+    Route::get('onpay', [OnPayController::class,'apiCall']);
     Route::post('onpay', [OnPayController::class,'apiCall']);
 
     Route::get('telega-auth/callback', [AuthTelegrammController::class,'callback']);
@@ -57,6 +57,6 @@ $d = function() {
 
 //Route::group(array('domain' => 'site2.local'), $d);
 //Route::group(array('domain' => 'domain.php-cat.com'), $d);
-//Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
-Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
+Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
 
