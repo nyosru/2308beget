@@ -50,9 +50,9 @@ class OnPayController extends Controller
         $check = [
 //            'type' => 'check',
             'check',
-            $result,
+            $result ? 'true' : 'false',
 //            'pay_for' => intval($request->pay_for),
-            $request->pay_for,
+            (int) $request->pay_for,
 //            'amount' => (int) $request->amount,
 //            'currency' => trim($request->way),
 //            'mode' => trim($request->mode),
@@ -62,6 +62,7 @@ class OnPayController extends Controller
         ];
         $signature_string = implode(";", $check);
         $out['signature'] = sha1($signature_string);
+//        $out['signature2'] = md5($signature_string);
 
 //        $out['signature'] = md5($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
 
