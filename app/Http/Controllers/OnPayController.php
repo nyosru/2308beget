@@ -13,6 +13,19 @@ class OnPayController extends Controller
     public static $linkPaySystem = 'http://secure.onpay.ru/pay/';
     public static $apiSercetKey = 'CEcLNBkdmQt';
 
+
+    static function toFloat($sum)
+    {
+        $sum = floatval($sum);
+        if (strpos($sum, ".")) {
+            $sum = round($sum, 2);
+        } else {
+            $sum = $sum . ".0";
+        }
+        return $sum;
+    }
+
+
     public function apiCall(Request $request)
     {
 
@@ -24,52 +37,72 @@ class OnPayController extends Controller
             "pay_for" => $request->pay_for,
         ];
 
+        if (!self::checkMd5($request)) {
+            $result = false;
+        } else {
 
-        try {
-            $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
+            try {
+                $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
 
-            $result = true;
+                $result = true;
 
-            if( $res->price->amount != $request->amount ){
+                if ($res->price->amount != $request->amount) {
+                    $result = false;
+                }
+
+                $err = '';
+            } catch (\Exception $ex) {
+                $err = $ex;
+//            dd($ex);
                 $result = false;
             }
 
-            $err = '';
-        } catch (\Exception $ex) {
-            $err = $ex;
-//            dd($ex);
-            $result = false;
+            $out["status"] = $result;
+//        $out['signature'] = sha1($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
+
         }
 
-        $out["status"] = $result;
-//        $out['signature'] = sha1($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
-//        'check;pay_for;order_amount;order_currency;code;merchant_api_in_key'
-//        $out['signature'] = md5($request->type . ';' . $out['pay_for'] . ';' . $request->amount . ';'.$request->.';' . self::$apiSercetKey);
-
-
         $check = [
-//            'type' => 'check',
             'check',
             $result ? 'true' : 'false',
-//            'pay_for' => intval($request->pay_for),
-            (int) $request->pay_for,
-//            'amount' => (int) $request->amount,
-//            'currency' => trim($request->way),
-//            'mode' => trim($request->mode),
-////            'key' => self::key,
-//            'key' => self::$apiSercetKey,
+            (int)$request->pay_for,
             self::$apiSercetKey
         ];
         $signature_string = implode(";", $check);
         $out['signature'] = sha1($signature_string);
-//        $out['signature2'] = md5($signature_string);
+        TelegramController::sendMsg(360209578, json_encode($out));
 
-//        $out['signature'] = md5($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
+        $out['re'] = $request->All();
+//        'check;pay_for;order_amount;order_currency;code;merchant_api_in_key'
+//        $out['signature'] = md5($request->type . ';' . $out['pay_for'] . ';' . $request->amount . ';'.$request->.';' . self::$apiSercetKey);
 
-        TelegramController::sendMsg(360209578,json_encode($out));
-//        $out['req'] = $request->all();
+
+//        $tomd5 = [
+//            $request->type,
+//            $request->pay_for,
+//            $request->amount,
+//            $request->way,
+//            $request->mode,
+//            self::$apiSercetKey
+//        ];
+//
+////        $out['tomd5'] = $tomd5;
+//        $out['repeat_sign'] = sha1(implode(';', $tomd5));
 
         return response()->json($out);
+    }
+
+    static function checkMd5(Request $request): boolean
+    {
+        $tomd5 = [
+            $request->type,
+            $request->pay_for,
+            $request->amount,
+            $request->way,
+            $request->mode,
+            self::$apiSercetKey
+        ];
+        return $request->signature == sha1(implode(';', $tomd5));
     }
 
     public static function creatLink($in)
