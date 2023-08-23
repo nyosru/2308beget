@@ -12,7 +12,8 @@ return new class extends Migration {
     {
         Schema::create('domain_prices', function (Blueprint $table) {
             $table->id();
-            $table->integer('amount_rub')->comment('Сколько стоит рублей');
+            $table->integer('amount')->comment('Сколько стоит денег');
+            $table->string('valute')->default('RUR')->comment('Валюта');
             $table->integer('amount_domain')->unsigned()->comment('сколько доменов');
             $table->boolean('default')->default(false)->comment('Это значение по умолчанию ?');
             $table->timestamps();

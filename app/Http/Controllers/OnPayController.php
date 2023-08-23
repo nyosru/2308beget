@@ -30,7 +30,7 @@ class OnPayController extends Controller
 
             $result = 'true';
 
-            if( $res->price->amount_rub != $request->amount ){
+            if( $res->price->amount != $request->amount ){
                 $result = 'false';
             }
 
