@@ -32,10 +32,25 @@
 
                 @if (session('button_buy'))
                     <div class="alert alert-success">
-                        <button class="btn btn-info">Оплатить</button>
-                        <button class="btn btn-info">Купоном с Баланса</button>
+
+
+                        {{--                        <button class="btn btn-info">Оплатить</button>--}}
+
+                        {{--                        <button class="btn btn-info">Купоном с Баланса</button>--}}
 
                         {{--                        {{ session('domain_status') }}--}}
+
+                        {{--                        {{ session('domain') }}--}}
+
+                        {{--                        @if( !empty( $user_info['bonuses']->kolvos ) && $user_info['bonuses']->kolvos > 0 )--}}
+                        $user->bonus: {{ $user->bonus }}
+                        <br/>
+                        @if( $user->bonus > 0 )
+                            <a class="btn btn-success"
+                               href="{{ route('domainNameBuyBonus',['domain_name' => session('domain') ]) }}">Оплатить
+                                бонусом</a>
+                        @endif
+
                     </div>
                 @endif
 
@@ -55,7 +70,9 @@
                         {{--                        @include('domain.domains.one')--}}
 
                         <tr class="domain">
-                            <td>{{ $d->name }}</td>
+                            <td>
+                                {{ $d->name }}
+                            </td>
                             {{--                            <td>{{ $d->expirationDate }}</td>--}}
                             <td style="font-size: 60%;">
                                 @if ( $d->available )
@@ -65,21 +82,36 @@
                                 @elseif ( !empty($d->payed_do) )
                                     <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">наблюдаем
                                     </div>
-                                    @if($d->last_scan != null)
+                                    @if( !empty($d->whois[0]->expirationDate) )
+                                        <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">
+                                            Занят до: {{ $d->whois[0]->expirationDate }}
+                                        </div>
+                                    @elseif($d->last_scan != null)
                                         <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">
-                                            Проверено: {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}</div>
+                                            Проверено: {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}c
+                                            @endif
+
+                                            {{--                                        @elseif (sizeof($d->pays) > 0)--}}
+                                            {{--                                            <div class="p-1 bg-success text-white" >оплачено, наблюдаем</div>--}}
+                                            @else
+                                                Ожидает оплаты
+                                                {{--                                    <a href="">Оплатить</a>--}}
+                                                {{--                                                <br/>--}}
+                                                @if( $user->bonus > 0 )
+{{--                                                    {{$user->bonus }}--}}
+                                                    <br/>
+                                                    <a href="{{ route('domainBuyBonus',['domain' => $d]) }}"
+                                                       onclick="return confirm('Хотите оплатить бонусом - наблюдение за доменом {{ $d->name }} ?')"
+                                                    >Оплатить
+                                                        бонусом</a>
                                     @endif
-                                    {{--                                        @elseif (sizeof($d->pays) > 0)--}}
-                                    {{--                                            <div class="p-1 bg-success text-white" >оплачено, наблюдаем</div>--}}
-                                @else
-                                    Ожидает оплаты <a href="">Оплатить</a>
                                 @endif
                             </td>
                             <td>
                                 {{--                                        @if ( $d->available )--}}
                                 {{--                                        <a href="https://timeweb.com/ru/?i=109721" >хостинг в TimeWeb</a>--}}
                                 {{--                                            @endif--}}
-{{--                                {{ route('domain_deactive',['id'=>$d->id]) }}--}}
+                                {{--                                {{ route('domain_deactive',['id'=>$d->id]) }}--}}
 
                                 <a href="{{ route('domain_deactive',['domain'=>$d]) }}"
                                    title="Удалить домен из активного списка наблюдения"
@@ -94,7 +126,7 @@
                             </td>
                         </tr>
 
-                        @if(1==1)
+                        @if(1==2)
                             <tr>
                                 <td colspan="3"><small style="font-size:10px;">{{ str_replace(',',', ',$d) }}</small>
                                 </td>

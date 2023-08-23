@@ -47,8 +47,8 @@ class AuthTelegrammController extends Controller
                 $user->telegram_id = $res['id'];
                 $user->name_first = $res['first_name'];
                 $user->name_last = $res['last_name'];
-                $user->telegram_username = $res['username'];
-                $user->telegram_photo = $res['photo_url'];
+                $user->telegram_username = $res['username'] ?? 'a';
+                $user->telegram_photo = $res['photo_url'] ?? 'x';
                 $user->telegram_auth_date = $res['auth_date'];
 
                 $user->save();

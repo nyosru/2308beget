@@ -92,7 +92,9 @@
             </div>
             <div class="col-6">
                 <h2 class="block">
-                    Баланс: {{ $all_cupon ?? 'x' }}
+{{--                    Баланс: {{ $all_cupon ?? 'x' }}--}}
+{{--                    <br/>--}}
+                    Бонусов: {{ !empty( $bonuses->kolvos ) ? $bonuses->kolvos : 0}}
                 </h2>
             </div>
         </div>

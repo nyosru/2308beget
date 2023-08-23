@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('telegram_id')->index('telegram_id')->nullable();
+            $table->bigInteger('telegram_id')->index('telegram_id')->nullable();
             $table->string('name_first', 200)->nullable();
             $table->string('name_last', 200)->nullable();
             $table->string('telegram_username', 100)->nullable();

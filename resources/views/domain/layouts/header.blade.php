@@ -55,7 +55,6 @@
                 <div class="d-flex">
 
 
-
                     @auth
 
                         @if(1 ==2)
@@ -68,7 +67,11 @@
                         @endif
 
                         <div class="text-end pt-2 mr-2">
-                            Баланс: 0
+
+{{--                            Баланс: {{ !empty( $user_info['bonuses']->kolvos ) ? $user_info['bonuses']->kolvos : 0}}--}}
+                            Баланс: {{ $user->bonus }}
+
+                            {{--                            <Br/>                            bonuses {{ $bonuses }}--}}
                             <Br/>
                             <small>
                                 <a href="{{ route('cupon.index') }}">Пополнить</a>
@@ -92,7 +95,7 @@
 
                     @else
 
-{{--                        {{ $BOT_USERNAME ?? 'xx' }}--}}
+                        {{--                        {{ $BOT_USERNAME ?? 'xx' }}--}}
 
                         <script src="https://telegram.org/js/telegram-widget.js?2"
                                 data-telegram-login="{{ $BOT_USERNAME ?? '' }}"

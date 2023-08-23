@@ -45,9 +45,17 @@ $d = function() {
         ->name('domain_deactive')
         ->middleware('auth');
 
+    Route::GET('/domain/buy/bonus/{domain}', [ DomainController::class, 'domainBuyBonus' ] )
+        ->name('domainBuyBonus')
+        ->middleware('auth');
+
+    Route::GET('/domain/buy-name/bonus/{domain_name}', [ DomainController::class, 'domainNameBuyBonus' ] )
+        ->name('domainNameBuyBonus')
+        ->middleware('auth');
+
 };
 
 //Route::group(array('domain' => 'site2.local'), $d);
-Route::group(array('domain' => 'domain.php-cat.com'), $d);
-//Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//Route::group(array('domain' => 'domain.php-cat.com'), $d);
+Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 

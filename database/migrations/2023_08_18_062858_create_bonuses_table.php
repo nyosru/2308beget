@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('bonus', function (Blueprint $table) {
+        Schema::create('bonuses', function (Blueprint $table) {
             $table->id();
 
             $table->integer('user_id');
@@ -22,8 +22,9 @@ return new class extends Migration {
             $table->enum('type', ['bonus', 'money'])->nullable()
                 ->comment('тип бонуса, за деньги или подарок');
 
-            $table->boolean('potracheno')->default(false)
-                ->comment('всё потрачено - тру');
+            $table->integer('potracheno')
+                ->default(0)
+                ->comment('сколько уже потрачено');
 
             $table->timestamps();
             $table->softDeletes();
@@ -35,6 +36,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('bonus');
+        Schema::dropIfExists('bonuses');
     }
 };
