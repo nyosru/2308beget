@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Domain;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\DomainLkController;
-use App\Models\Bonus;
 use App\Models\DomainPrice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class CuponController extends Controller
 {

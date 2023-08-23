@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Domain;
 
+use App\Http\Controllers\Controller;
 use App\Models\Bonus;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DomainLkController extends Controller
@@ -15,7 +14,7 @@ class DomainLkController extends Controller
         $in = [];
 //        if (Auth::check()) {
 //            $in['user'] = Auth::user();
-        $in['bonuses'] = Bonus::whereUser_id($user_id)->addSelect(db::raw('sum(Bonuses.kolvo) as kolvos'))->get()[0];
+        $in['bonuses'] = Bonus::whereUser_id($user_id)->addSelect(db::raw('sum(bonuses.kolvo) as kolvos'))->get()[0];
 //        }
         return $in;
     }
