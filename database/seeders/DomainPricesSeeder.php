@@ -33,5 +33,12 @@ class DomainPricesSeeder extends Seeder
             'amount_domain' => 1000,
 //        'default' => false
         ]);
+
+        DomainPrice::create([
+            'amount_rub' => 500,
+            'amount_domain' => 1050,
+//        'default' => false
+        ]);
+
     }
 }
