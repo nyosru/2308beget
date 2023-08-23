@@ -57,8 +57,9 @@ class OnPayController extends Controller
                 $result = false;
             }
 
-            $out["status"] = $result;
         }
+
+        $out["status"] = $result;
 
         $check = [
             'check',
