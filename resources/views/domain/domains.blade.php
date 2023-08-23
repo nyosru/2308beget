@@ -24,6 +24,21 @@
                     </div>
                 @endif
 
+                @if (session('domain_warning'))
+                    <div class="alert alert-warning">
+                        {{ session('domain_warning') }}
+                    </div>
+                @endif
+
+                @if (session('button_buy'))
+                    <div class="alert alert-success">
+                        <button class="btn btn-info">Оплатить</button>
+                        <button class="btn btn-info">Купоном с Баланса</button>
+
+                        {{--                        {{ session('domain_status') }}--}}
+                    </div>
+                @endif
+
                 {{-- {{ $domains }} --}}
                 <table class="table">
                     <thead>
@@ -37,7 +52,7 @@
                     <tbody>
                     @foreach ($domains as $d)
 
-{{--                        @include('domain.domains.one')--}}
+                        {{--                        @include('domain.domains.one')--}}
 
                         <tr class="domain">
                             <td>{{ $d->name }}</td>
@@ -48,9 +63,11 @@
                                         можно регистрировать!!
                                     </div>
                                 @elseif ( !empty($d->payed_do) )
-                                    <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">наблюдаем</div>
+                                    <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">наблюдаем
+                                    </div>
                                     @if($d->last_scan != null)
-                                    <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">Проверено: {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}</div>
+                                        <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">
+                                            Проверено: {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}</div>
                                     @endif
                                     {{--                                        @elseif (sizeof($d->pays) > 0)--}}
                                     {{--                                            <div class="p-1 bg-success text-white" >оплачено, наблюдаем</div>--}}
@@ -62,7 +79,9 @@
                                 {{--                                        @if ( $d->available )--}}
                                 {{--                                        <a href="https://timeweb.com/ru/?i=109721" >хостинг в TimeWeb</a>--}}
                                 {{--                                            @endif--}}
-                                <a href="#"
+{{--                                {{ route('domain_deactive',['id'=>$d->id]) }}--}}
+
+                                <a href="{{ route('domain_deactive',['domain'=>$d]) }}"
                                    title="Удалить домен из активного списка наблюдения"
                                    onclick="return confirm('удалить домен {{ $d->name }} из активного списка ?');"
                                    class="remove">

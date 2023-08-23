@@ -42,7 +42,7 @@ class Domain extends Model
 
     public function scopePayed($query)
     {
-        return $query->where('payed_to', '>', date('Y-m-d'));
+        return $query->where('payed_do', '>', date('Y-m-d'));
     }
 
     public function scopeExpiraDate($query)

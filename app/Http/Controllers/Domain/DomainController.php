@@ -9,20 +9,61 @@ use Illuminate\Support\Facades\Auth;
 
 class DomainController extends Controller
 {
+
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
     /**
      * Display a listing of the resource.
      */
 
+    /**
+     * перевод домен а в неактивное состояние
+     * @param Domain $id
+     * @return void
+     */
+    public function deactive(Domain $domain)
+    {
+
+        try {
+
+            $user = Auth::user()->id;
+
+            // владелец домена наш чувак
+            if ($domain->user_id == Auth::user()->id) {
+                $domain->show = false;
+                $domain->save();
+
+                return redirect('/')
+                    ->with('domain_status', 'Домен удалён из активного списка! (виден в неактивном списке доменов)');
+            }
+//        // владелец домена НЕ наш чувак
+//        else { dd(__LINE__); }
+        }
+        catch (\Exception $ex) {
+        }
+
+        return redirect('/')
+            ->with('domain_warning', 'что то пошло не так');
+
+    }
+
+
     public function domain_add(Request $request)
     {
 
-        Domain::create([
+        $add = Domain::create([
             'name' => $request->domain,
             'user_id' => Auth::user()->id
         ]);
 
-        return redirect()->route('domain_enter')
-            ->with('domain_status', 'Домен добавлен');
+//        dd($add);
+
+        return redirect('/')
+            //->route('domain_enter')
+            ->with('domain_status', 'Домен добавлен!')
+            ->with('button_buy', 'da');
     }
 
 //    public function index()
@@ -59,8 +100,9 @@ class DomainController extends Controller
             $in['user'] = Auth::user();
             $in['domains'] = Domain::with(['pays',
                 'whois'
-            ])->where('user_id', Auth::user()->id)
+            ])->whereUser_id(Auth::user()->id)
                 ->select(['domains.*'])
+                ->whereShow(true)
                 ->orderBy('domains.name')
                 ->ExpiraDate()
                 ->get();

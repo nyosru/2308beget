@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthTelegrammController;
 use App\Http\Controllers\BuyController;
+use App\Http\Controllers\Domain\DomainController;
 use App\Http\Controllers\OnPayController;
 use App\Http\Controllers\PromocodeController;
 use Illuminate\Http\Request;
@@ -40,9 +41,13 @@ $d = function() {
     // Route::get('{any?}', [PhpcatController::class,'index']);
     // Route::get('{any?}/{action?}', [PhpcatController::class,'index']);
 
+    Route::GET('/domain/deactive/{domain}', [ DomainController::class, 'deactive' ] )
+        ->name('domain_deactive')
+        ->middleware('auth');
+
 };
 
 //Route::group(array('domain' => 'site2.local'), $d);
 Route::group(array('domain' => 'domain.php-cat.com'), $d);
-Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 

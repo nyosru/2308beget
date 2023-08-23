@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class WhoisController extends Controller
 {
-    public function whoisUpdate(int $limit = 1)
+    public function whoisUpdate(int $limit = 2)
     {
 
         try {

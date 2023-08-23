@@ -21,6 +21,9 @@ return new class extends Migration
 
             $table->boolean('available')->nullable()->default(null);
 
+            $table->boolean('show')->default(true)
+                ->comment('показываем в активном списке или нет');
+
             $table->softDeletes();
             $table->timestamps();
         });

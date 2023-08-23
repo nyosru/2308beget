@@ -20,6 +20,8 @@ $d = function () {
 
     Route::get('/', [DomainController::class, 'index'])->name('domain_index');
     Route::get('/', [DomainController::class, 'index'])->name('login');
+
+
 //    Route::get('/', [DomainController::class, 'index'])->name('login');
 
 //    Route::get('/enter', [DomainController::class, 'index_enter'])
@@ -37,7 +39,7 @@ $d = function () {
 };
 
 //if (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) {
-    Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//    Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 //} else {
 // Route::group(array('domain' => 'site2.local'), $d);
     Route::group(array('domain' => 'domain.php-cat.com'), $d);
