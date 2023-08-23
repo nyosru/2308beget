@@ -42,7 +42,8 @@ class OnPayController extends Controller
         }
 
         $out["status"] = $result;
-        $out['signature'] = sha1($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
+//        $out['signature'] = sha1($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
+        $out['signature'] = md5($request->type . ';'.$result.';' . $out['pay_for'] . ';' . self::$apiSercetKey);
 
         TelegramController::sendMsg(360209578,json_encode($out));
 //        $out['req'] = $request->all();
