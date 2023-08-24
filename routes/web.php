@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 $d = function () {
 
+    Route::get('/test', [DomainController::class, 'test']);
+
     Route::get('/', [DomainController::class, 'index'])->name('domain_index');
     Route::get('/', [DomainController::class, 'index'])->name('login');
 
