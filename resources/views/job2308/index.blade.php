@@ -14,10 +14,14 @@
     .up_tr td{ border-right: 1px solid rgb(50,50,50);}
 </style>
 
+        <form action="" method="POST">
+
 <table class="table table-striped" >
     <tr class="up_tr">
 
-        <td>&nbsp;</td>
+        <td>&nbsp;
+        <button type="submit" class="btn btn-success" >Сохранить</button>
+        </td>
 
         <td>            1111        </td>
         <td>            1111        </td>
@@ -81,6 +85,6 @@
     </tr>
         @endforeach
 </table>
-
+        </form>
     </main>
 @endsection

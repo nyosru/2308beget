@@ -228,13 +228,13 @@ CD- и DVD-плееры[16]
 //        dd($name);
         $in['data'] = [];
 
-        for ($row = 0; $row <= 100; $row++) {
+        for ($row = 0; $row <= 40; $row++) {
             $r = [];
             for ($col = 0; $col <= 20; $col++) {
                 $r[] = [
                     'type' => rand(1, 5),
-                    'type2' => rand(1, 15),
-                    'val' => rand(100, 800),
+                    'type2' => rand(1, 30),
+                    'val' => rand(10, 8000),
                     'dop' => rand(100, 800),
                     'nap' => rand(1,3)
                 ];
