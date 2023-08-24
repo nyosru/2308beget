@@ -15,7 +15,7 @@
 </style>
 
         <form action="" method="POST">
-
+@csrf
 <table class="table table-striped" >
     <tr class="up_tr">
 
