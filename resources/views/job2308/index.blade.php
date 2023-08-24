@@ -14,7 +14,7 @@
     .up_tr td{ border-right: 1px solid rgb(50,50,50);}
 </style>
 
-<table class="table" >
+<table class="table table-striped" >
     <tr class="up_tr">
 
         <td>&nbsp;</td>
