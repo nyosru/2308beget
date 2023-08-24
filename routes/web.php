@@ -40,8 +40,8 @@ $d = function () {
 };
 
 //    Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
-    Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
-//    Route::group(array('domain' => 'domain.php-cat.com'), $d);
+//    Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+    Route::group(array('domain' => 'domain.php-cat.com'), $d);
 
 
 //Route::get('/', function () {
