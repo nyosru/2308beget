@@ -56,4 +56,5 @@ $d = function () {
 
 Route::group(array('domain' => 'ttt72.local'), $d);
 Route::group(array('domain' => 'ttt72.ru'), $d);
+Route::group(array('domain' => 'xn--72-qmcaa.xn--p1ai'), $d);
 Route::group(array('domain' => 'ттт72.рф'), $d);
