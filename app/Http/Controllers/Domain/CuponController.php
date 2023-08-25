@@ -30,7 +30,7 @@ class CuponController extends Controller
         }
 
         $in['all_cupon'] = 100;
-        $in['prices'] = DomainPrice::orderBy('amount_rub')->get();
+        $in['prices'] = DomainPrice::orderBy('amount')->get();
         return view('domain.lk.index', $in);
     }
 

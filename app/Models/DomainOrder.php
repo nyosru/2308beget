@@ -13,7 +13,7 @@ class DomainOrder extends Model
 
     protected $fillable = [
         'user_id',
-        'price_id',
+        'domain_price_id',
         'domain',
         'promocode_id',
         'payed_dt'

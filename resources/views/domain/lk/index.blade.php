@@ -22,7 +22,9 @@
                                 <th>Сумма (р)</th>
                             </tr>
                             </thead>
+
                             <tbody>
+
                             @foreach( $prices as $p )
                                 <tr>
                                     <td><label class="block">
@@ -32,7 +34,7 @@
                                         </label></td>
                                     <td>
                                         <label class="block" for="a{{$p->id}}">
-                                            {{ number_format($p->amount_rub,0,'','`') }}
+                                            {{ number_format($p->amount,0,'','`') }}
                                         </label></td>
                                 </tr>
                             @endforeach

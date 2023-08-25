@@ -5,17 +5,6 @@ use App\Http\Controllers\Domain\CuponController;
 use App\Http\Controllers\Domain\DomainController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 $d = function () {
 
     Route::get('/test', [DomainController::class, 'test']);
@@ -35,13 +24,13 @@ $d = function () {
 //    Route::resource('/lk/cupons', CuponController::class )->name('domain_cupon');
     Route::resource('/lk/cupon', CuponController::class)->only(['store', 'index']);
 
-    Route::GET('/pay/success', [ CuponController::class, 'paySuccess' ] )->name('onpay_url_success');
-    Route::GET('/pay/fail', [ CuponController::class, 'payFail' ] )->name('onpay_url_success');
+    Route::GET('/pay/success', [CuponController::class, 'paySuccess'])->name('onpay_url_success');
+    Route::GET('/pay/fail', [CuponController::class, 'payFail'])->name('onpay_url_success');
 
 };
 
 //    Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
-//    Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
     Route::group(array('domain' => 'domain.php-cat.com'), $d);
 
 
@@ -60,3 +49,11 @@ $d = function () {
 //});
 //
 //require __DIR__ . '/auth.php';
+
+$d = function () {
+    Route::view('/', 'site_ttt.welcome')->name('site_ttt_index');
+};
+
+Route::group(array('domain' => 'ttt72.local'), $d);
+Route::group(array('domain' => 'ttt72.ru'), $d);
+Route::group(array('domain' => 'ттт72.рф'), $d);

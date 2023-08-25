@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Domain;
 
+use App\Http\Controllers\Controller;
 use App\Models\DomainOrder;
 use Illuminate\Http\Request;
 

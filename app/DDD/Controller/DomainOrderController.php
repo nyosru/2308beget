@@ -26,8 +26,9 @@ class DomainOrderController
 //        dd($request->price,$price);
         $add = [
             'user_id' => $user->id,
-            'price_id' => $price->id,
+            'domain_price_id' => $price->id,
         ];
+
 
         $promo = Promocode::whereCode($request->promocode)->first();
         if (!empty($promo)) {
@@ -36,7 +37,7 @@ class DomainOrderController
 
         $order = DomainOrder::create($add);
 
-        $order['amount'] = $price->amount_rub;
+        $order['amount'] = $price->amount;
 
         // dd($request->all(), $order, $promo, $add);
         return $order;
