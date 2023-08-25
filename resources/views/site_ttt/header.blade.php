@@ -61,7 +61,7 @@
         style="
             background-position: 50%;
             xxbackground-image: url('https://tecdn.b-cdn.net/img/new/slides/146.webp');
-            background-image: url('/storage/site_ttt/img/bb.png');
+            background-image: url('/site_ttt/img/bb.png');
             height: 350px;
           ">
         <div class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
