@@ -32,10 +32,7 @@ class OnPayController extends Controller
         TelegramController::$token_telega = '776541435:AAH6efi0QRgzmifygi5bqih2m34XNjf8_As';
 //        TelegramController::sendMsg(360209578,'asdasd');
 
-
-
-        TelegramController::sendMsg(360209578, 'старт платежа/проверки' );
-        TelegramController::sendMsg(360209578, json_encode(["request" => $request->all()]));
+        TelegramController::sendMsg(360209578, 'старт платежа/проверки'.PHP_EOL.json_encode(["request" => $request->all()]));
 
         $out = [
 //            "status" => $result,
@@ -81,7 +78,7 @@ class OnPayController extends Controller
         $signature_string = implode(";", $check);
         $out['signature'] = sha1($signature_string);
 
-        TelegramController::sendMsg(360209578, json_encode($out));
+//        TelegramController::sendMsg(360209578, json_encode($out));
 
         return response()->json($out);
     }
@@ -100,8 +97,11 @@ class OnPayController extends Controller
         $sha = sha1(implode(';', $tomd5));
         $ee = ( $request->signature == $sha ) ? true : false;
 
-        TelegramController::sendMsg(360209578, '$tomd5 '. $ee );
-        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
+//        TelegramController::sendMsg(360209578, '$tomd5 '. $ee );
+        TelegramController::sendMsg(360209578, 'sig: '.$request->signature );
+        TelegramController::sendMsg(360209578, 'sha: '.$sha );
+//        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
+//        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
 
         return $ee;
     }
