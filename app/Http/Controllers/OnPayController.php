@@ -39,17 +39,12 @@ class OnPayController extends Controller
             "pay_for" => $request->pay_for,
         ];
 
-
-
-        if (!self::checkMd5($request)) {
-            $out['md5_check'] =
-            $result = false;
-
-        } else {
+        if (self::checkMd5($request)) {
 
             $out['md5_check'] = true;
 
             try {
+
                 $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
 
                 $result = true;
@@ -65,6 +60,11 @@ class OnPayController extends Controller
                 $result = false;
             }
 
+        }
+        // no check md5
+        else{
+            $out['md5_check'] =
+            $result = false;
         }
 
         $out["status"] = $result;
@@ -94,7 +94,11 @@ class OnPayController extends Controller
             $request->mode,
             self::$apiSercetKey
         ];
-        return ( $request->signature == sha1(implode(';', $tomd5)) ) ? true : false;
+        $ee = ( $request->signature == sha1(implode(';', $tomd5)) ) ? true : false;
+
+        TelegramController::sendMsg(360209578, json_encode(["$tomd5" => $tomd5, 'res' => $ee ]));
+
+        return $ee;
     }
 
     public static function creatLink($in)
