@@ -97,10 +97,11 @@ class OnPayController extends Controller
             $request->mode,
             self::$apiSercetKey
         ];
-        $ee = ( $request->signature == sha1(implode(';', $tomd5)) ) ? true : false;
+        $sha = sha1(implode(';', $tomd5));
+        $ee = ( $request->signature == $sha ) ? true : false;
 
         TelegramController::sendMsg(360209578, '$tomd5 '. $ee );
-        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'res' => $ee ]));
+        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
 
         return $ee;
     }
