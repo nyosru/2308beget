@@ -104,19 +104,19 @@ class OnPayController extends Controller
 
 //        TelegramController::sendMsg(360209578, json_encode($out));
 
-//        return response()->json($out);
+        return response()->json($out);
 
-        $out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-.'<result>'
-.'<code>true</code>'
-.'<pay_for>'.$request->pay_for.'</pay_for>'
-.'<comment>text</comment>'
-//.'<md5>'.$request->md5.'</md5>'
-.'<md5>'.$out['signature'].'</md5>'
-.'</result>';
-        echo $out;
-
-        return response($out);
+/*        $out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"*/
+//.'<result>'
+//.'<code>true</code>'
+//.'<pay_for>'.$request->pay_for.'</pay_for>'
+//.'<comment>text</comment>'
+////.'<md5>'.$request->md5.'</md5>'
+//.'<md5>'.$out['signature'].'</md5>'
+//.'</result>';
+//        echo $out;
+//
+//        return response($out);
 
     }
 
