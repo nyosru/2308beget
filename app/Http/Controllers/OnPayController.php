@@ -35,11 +35,18 @@ class OnPayController extends Controller
         $out = [
 //            "status" => $result,
             "pay_for" => $request->pay_for,
+            "request" => $request->all(),
         ];
 
+
+
         if (!self::checkMd5($request)) {
+            $out['md5_check'] =
             $result = false;
+
         } else {
+
+            $out['md5_check'] = true;
 
             try {
                 $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
@@ -69,6 +76,7 @@ class OnPayController extends Controller
         ];
         $signature_string = implode(";", $check);
         $out['signature'] = sha1($signature_string);
+
         TelegramController::sendMsg(360209578, json_encode($out));
 
         return response()->json($out);
