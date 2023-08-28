@@ -90,8 +90,10 @@ class OnPayController extends Controller
             $result = false;
         }
 
-        if( $request->balance->way != 'RUR' )
-            $result = false;
+        TelegramController::sendMsg(360209578, '$request->balance->way: '.PHP_EOL.$request->balance->way );
+
+//        if( $request->balance->way != 'RUR' )
+//            $result = false;
 
 //        {"request":{
 //"type":"pay",
