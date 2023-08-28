@@ -90,7 +90,16 @@ class OnPayController extends Controller
             $result = false;
         }
 
-//        if( )
+        if( $request->balance->way != 'RUR' )
+            $result = false;
+
+//        {"request":{
+//"type":"pay",
+//"signature":"123321","pay_for":"214",
+//"user":{"email":null,"phone":null,"note":null},
+//"payment":{"id":23042401,"date_time":"2021-08-28 22:26:07 +0300",
+    //"amount":100,"way":"RUR","rate":1,"release_at":"null","login":null},
+//"balance":{"amount":100,"way":"RUR"}}}
 
 
         $out["status"] = $result;
