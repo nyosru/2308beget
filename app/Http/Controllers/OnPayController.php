@@ -94,6 +94,8 @@ class OnPayController extends Controller
 //            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way);
 //            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way ?? 'bw');
             TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->way ?? 'bw');
+            TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->payment->way ?? 'bw');
+            TelegramController::sendMsg(360209578, '$request->balance->amount: ' . PHP_EOL . $request->balance->amount ?? 'bw');
 //        }catch ( \Exception $ex ){
 //            TelegramController::sendMsg(360209578, implode(' ' , $ex ));
 //        }
