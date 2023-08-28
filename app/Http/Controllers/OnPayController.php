@@ -93,8 +93,11 @@ class OnPayController extends Controller
 //        try {
 //            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way);
 //            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way ?? 'bw');
+        if (!empty($request->way))
             TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->way ?? 'bw');
+        if (!empty($request->payment->way))
             TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->payment->way ?? 'bw');
+        if (!empty($request->balance->amount))
             TelegramController::sendMsg(360209578, '$request->balance->amount: ' . PHP_EOL . $request->balance->amount ?? 'bw');
 //        }catch ( \Exception $ex ){
 //            TelegramController::sendMsg(360209578, implode(' ' , $ex ));
@@ -108,7 +111,7 @@ class OnPayController extends Controller
 //"signature":"123321","pay_for":"214",
 //"user":{"email":null,"phone":null,"note":null},
 //"payment":{"id":23042401,"date_time":"2021-08-28 22:26:07 +0300",
-    //"amount":100,"way":"RUR","rate":1,"release_at":"null","login":null},
+        //"amount":100,"way":"RUR","rate":1,"release_at":"null","login":null},
 //"balance":{"amount":100,"way":"RUR"}}}
 
 
@@ -128,11 +131,11 @@ class OnPayController extends Controller
         $out['signature'] = sha1($signature_string);
 //        $out['signature'] = md5($signature_string);
 
-        TelegramController::sendMsg(360209578, 'sig_string: '.$signature_string.PHP_EOL.'end: '.json_encode($out) );
+        TelegramController::sendMsg(360209578, 'sig_string: ' . $signature_string . PHP_EOL . 'end: ' . json_encode($out));
 
         return response()->json($out);
 
-/*        $out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"*/
+        /*        $out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"*/
 //.'<result>'
 //.'<code>true</code>'
 //.'<pay_for>'.$request->pay_for.'</pay_for>'
