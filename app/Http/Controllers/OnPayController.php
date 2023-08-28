@@ -97,7 +97,7 @@ class OnPayController extends Controller
 // "check;false;111;MERCHANT_KEY_HERE"
 
         $check = [
-            'check',
+            $request->type,
             $result ? 'true' : 'false',
             (int)$request->pay_for,
             self::$apiSercetKey
