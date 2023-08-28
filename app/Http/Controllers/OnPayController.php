@@ -90,18 +90,18 @@ class OnPayController extends Controller
             $result = false;
         }
 
-//        try {
-//            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way);
-//            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way ?? 'bw');
-        if (!empty($request->way))
-            TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->way ?? 'bw');
-        if (!empty($request->payment->way))
-            TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->payment->way ?? 'bw');
-        if (!empty($request->balance->amount))
-            TelegramController::sendMsg(360209578, '$request->balance->amount: ' . PHP_EOL . $request->balance->amount ?? 'bw');
-//        }catch ( \Exception $ex ){
-//            TelegramController::sendMsg(360209578, implode(' ' , $ex ));
-//        }
+////        try {
+////            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way);
+////            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way ?? 'bw');
+//        if (!empty($request->way))
+//            TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->way ?? 'bw');
+//        if (!empty($request->payment->way))
+//            TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->payment->way ?? 'bw');
+//        if (!empty($request->balance->amount))
+//            TelegramController::sendMsg(360209578, '$request->balance->amount: ' . PHP_EOL . $request->balance->amount ?? 'bw');
+////        }catch ( \Exception $ex ){
+////            TelegramController::sendMsg(360209578, implode(' ' , $ex ));
+////        }
 
 //        if( $request->balance->way != 'RUR' )
 //            $result = false;
