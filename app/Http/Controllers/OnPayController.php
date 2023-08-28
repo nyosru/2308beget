@@ -90,6 +90,9 @@ class OnPayController extends Controller
             $result = false;
         }
 
+//        if( )
+
+
         $out["status"] = $result;
 
 
@@ -106,7 +109,7 @@ class OnPayController extends Controller
         $out['signature'] = sha1($signature_string);
 //        $out['signature'] = md5($signature_string);
 
-//        TelegramController::sendMsg(360209578, json_encode($out));
+        TelegramController::sendMsg(360209578, 'sig_string: '.$signature_string.PHP_EOL.'end: '.json_encode($out) );
 
         return response()->json($out);
 
