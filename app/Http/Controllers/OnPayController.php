@@ -33,8 +33,7 @@ class OnPayController extends Controller
 
         TelegramController::$token_telega = '776541435:AAH6efi0QRgzmifygi5bqih2m34XNjf8_As';
 //        TelegramController::sendMsg(360209578,'asdasd');
-
-        TelegramController::sendMsg(360209578, 'старт платежа/проверки' . PHP_EOL . json_encode(["request" => $request->all()]));
+//        TelegramController::sendMsg(360209578, 'старт платежа/проверки' . PHP_EOL . json_encode(["request" => $request->all()]));
 
 
 //        $rqst = self::GetData();
@@ -137,9 +136,9 @@ class OnPayController extends Controller
         $out['signature'] = sha1($signature_string);
 //        $out['signature'] = md5($signature_string);
 
-        TelegramController::sendMsg(360209578,
-            'res_line: '.$lines.PHP_EOL.
-            'sig_string: ' . $signature_string . PHP_EOL . 'end: ' . json_encode($out));
+//        TelegramController::sendMsg(360209578,
+//            'res_line: '.$lines.PHP_EOL.
+//            'sig_string: ' . $signature_string . PHP_EOL . 'end: ' . json_encode($out));
 
         return response()->json($out);
 
@@ -172,11 +171,11 @@ class OnPayController extends Controller
         $sha = sha1(implode(';', $tomd5));
         $ee = ($request->signature == $sha) ? true : false;
 
-//        TelegramController::sendMsg(360209578, '$tomd5 '. $ee );
-        TelegramController::sendMsg(360209578, 'sig: ' . $request->signature
-            . PHP_EOL . 'sha: ' . $sha);
-//        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
-//        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
+////        TelegramController::sendMsg(360209578, '$tomd5 '. $ee );
+//        TelegramController::sendMsg(360209578, 'sig: ' . $request->signature
+//            . PHP_EOL . 'sha: ' . $sha);
+////        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
+////        TelegramController::sendMsg(360209578, json_encode(['$tomd5' => $tomd5, 'sha' => $sha, 'res' => $ee ]));
 
         return $ee;
     }
