@@ -29,6 +29,8 @@ class OnPayController extends Controller
     public function apiCall(Request $request)
     {
 
+        $lines = '';
+
         TelegramController::$token_telega = '776541435:AAH6efi0QRgzmifygi5bqih2m34XNjf8_As';
 //        TelegramController::sendMsg(360209578,'asdasd');
 
@@ -65,6 +67,7 @@ class OnPayController extends Controller
 
         if (self::checkMd5($request)) {
 
+            $lines .= '/'.__LINE__;
             $out['md5_check'] = true;
 
             try {
@@ -74,11 +77,13 @@ class OnPayController extends Controller
                 $result = true;
 
                 if ($res->price->amount != $request->amount) {
+                    $lines .= '/'.__LINE__;
                     $result = false;
                 }
 
                 $err = '';
             } catch (\Exception $ex) {
+                $lines .= '/'.__LINE__;
                 $err = $ex;
 //            dd($ex);
                 $result = false;
@@ -86,6 +91,7 @@ class OnPayController extends Controller
 
         } // no check md5
         else {
+            $lines .= '/'.__LINE__;
             $out['md5_check'] =
             $result = false;
         }
@@ -131,7 +137,9 @@ class OnPayController extends Controller
         $out['signature'] = sha1($signature_string);
 //        $out['signature'] = md5($signature_string);
 
-        TelegramController::sendMsg(360209578, 'sig_string: ' . $signature_string . PHP_EOL . 'end: ' . json_encode($out));
+        TelegramController::sendMsg(360209578,
+            'res_line: '.$lines.PHP_EOL.
+            'sig_string: ' . $signature_string . PHP_EOL . 'end: ' . json_encode($out));
 
         return response()->json($out);
 
