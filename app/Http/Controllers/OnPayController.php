@@ -103,8 +103,8 @@ class OnPayController extends Controller
             self::$apiSercetKey
         ];
         $signature_string = implode(";", $check);
-//        $out['signature'] = sha1($signature_string);
-        $out['signature'] = md5($signature_string);
+        $out['signature'] = sha1($signature_string);
+//        $out['signature'] = md5($signature_string);
 
 //        TelegramController::sendMsg(360209578, json_encode($out));
 
