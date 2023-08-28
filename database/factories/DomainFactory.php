@@ -17,14 +17,21 @@ class DomainFactory extends Factory
      */
     public function definition(): array
     {
+
+        $domain = rand(1, 2) == 1 ? 'com' : (rand(1, 2) == 1 ? 'рф' : 'ru');
+
         $a = [
             // 'name'=> Str::random(10).'.'.( rand(1,2) == 1 ? 'com' : 'ru' ),
-            'name'=> fake()->word().'.'.( rand(1,2) == 1 ? 'com' : ( rand(1,2) == 1 ? 'рф' : 'ru' ) ),
+            'name' => fake()->word() . '.' . $domain,
             'user_id' => 1
         ];
 
-        if( rand(1,3) == 1 )
-            $a['payed_do'] = date('Y-m-d',$_SERVER['REQUEST_TIME']+5*300*24*3600);
+        if ($domain == 'рф')
+            $a['name_tech'] = idn_to_ascii($a['name']);
+//        echo idn_to_ascii('täst.de');
+
+        if (rand(1, 3) == 1)
+            $a['payed_do'] = date('Y-m-d', $_SERVER['REQUEST_TIME'] + 5 * 300 * 24 * 3600);
 
         return $a;
     }

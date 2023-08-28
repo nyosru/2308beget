@@ -29,7 +29,6 @@ class OnPayController extends Controller
     public function apiCall(Request $request)
     {
 
-
         TelegramController::$token_telega = '776541435:AAH6efi0QRgzmifygi5bqih2m34XNjf8_As';
 //        TelegramController::sendMsg(360209578,'asdasd');
 
@@ -93,6 +92,10 @@ class OnPayController extends Controller
 
         $out["status"] = $result;
 
+
+//        String for signature from Merchant:
+// "check;false;111;MERCHANT_KEY_HERE"
+
         $check = [
             'check',
             $result ? 'true' : 'false',
@@ -100,7 +103,8 @@ class OnPayController extends Controller
             self::$apiSercetKey
         ];
         $signature_string = implode(";", $check);
-        $out['signature'] = sha1($signature_string);
+//        $out['signature'] = sha1($signature_string);
+        $out['signature'] = md5($signature_string);
 
 //        TelegramController::sendMsg(360209578, json_encode($out));
 

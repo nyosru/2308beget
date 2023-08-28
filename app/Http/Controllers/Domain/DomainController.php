@@ -154,12 +154,23 @@ class DomainController extends Controller
             $in['user_info'] = DomainLkController::UserInfo($in['user']->id);
 
             $in['domains'] = Domain::with(['pays',
-                'whois'
-            ])->whereUser_id(Auth::user()->id)
+                'whois' => function ($query) {
+//                    $query->orderBy('created_at', 'desc');
+                    $query->limit(1);
+                },
+                'whois2' => function ($query) {
+//                    $query->orderBy('created_at', 'desc');
+                    $query->limit(1);
+                },
+            ])
+                ->whereUser_id(Auth::user()->id)
                 ->select(['domains.*'])
+//                ->distinct('domains.domain')
                 ->whereShow(true)
                 ->orderBy('domains.name')
-                ->ExpiraDate()
+//                ->distinct('domains.name')
+//                ->groupBy('domains.id')
+//                ->ExpiraDate()
                 ->get();
 
         }
@@ -224,7 +235,7 @@ CD- и DVD-плееры[16]
 
         $in = [];
 
-        $in['names'] = explode("\n",$name0);
+        $in['names'] = explode("\n", $name0);
 //        dd($name);
         $in['data'] = [];
 
@@ -236,7 +247,7 @@ CD- и DVD-плееры[16]
                     'type2' => rand(1, 30),
                     'val' => rand(10, 8000),
                     'dop' => rand(100, 800),
-                    'nap' => rand(1,3)
+                    'nap' => rand(1, 3)
                 ];
             }
             $in['data'][] = $r;

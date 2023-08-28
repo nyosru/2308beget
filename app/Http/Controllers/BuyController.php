@@ -6,11 +6,45 @@ use App\DDD\Controller\DomainOrderController;
 use App\Models\Buy;
 use App\Models\DomainOrder;
 use App\Models\Promocode;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use mysql_xdevapi\Exception;
 
 class BuyController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function calculatePromocodeToUser(string $promocode, int|null $user_id = null)
+    {
+
+//        dd([$promocode, $user_id]);
+
+
+        if( empty($user_id) ){
+            if (Auth::check()) {
+                $user_id = Auth::user()->id;
+            }else{
+                new Exception('no_user',600);
+//                return false;
+            }
+        }
+
+        $p = Promocode::whereCode($promocode)->firstOrFail();
+
+        $user = User::find($user_id)->firstOrFail();
+
+        $user->increment('bonus',$p->kolvo);
+        $user->save();
+
+//        try {
+//        }catch (){
+//            new Exception('no_user',600)
+//        }
+
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,6 +73,12 @@ class BuyController extends Controller
 //        $user = Auth::user();
 
         if (Auth::check()) {
+
+//            dd($request->promocode);
+
+            if (!empty($request->promocode))
+                self::calculatePromocodeToUser($request->promocode);
+
             $order = DomainOrderController::createOrder($request);
 
 //            $link = new OnPayController();
@@ -72,7 +112,7 @@ class BuyController extends Controller
             );
 
 //            dd($link);
-            die( '<a href="'.$link.'" target="_blank" >link</a>' );
+            die('<a href="' . $link . '" target="_blank" >link</a>');
 
             return ('Заказ создан #' . $order->id . ' сумма' . $order->amount);
 //            dd(__LINE__);

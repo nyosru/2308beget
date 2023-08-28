@@ -14,12 +14,19 @@ return new class extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('name');
+            $table->string('name')
+                ->comment('название домена');
+            $table->string('name_tech')->nullable()
+                ->comment('тех название если домен рф');
 
-            $table->date('payed_do')->nullable();
-            $table->date('last_scan')->nullable();
+            $table->date('payed_do')->nullable()
+                ->comment('');
+            $table->date('last_scan')->nullable()
+                ->comment('');
 
-            $table->boolean('available')->nullable()->default(null);
+            $table->boolean('available')
+                ->nullable()->default(null)
+                ->comment('');
 
             $table->boolean('show')->default(true)
                 ->comment('показываем в активном списке или нет');
