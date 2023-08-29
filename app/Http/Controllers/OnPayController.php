@@ -33,7 +33,7 @@ class OnPayController extends Controller
 
         TelegramController::$token_telega = '776541435:AAH6efi0QRgzmifygi5bqih2m34XNjf8_As';
 //        TelegramController::sendMsg(360209578,'asdasd');
-//        TelegramController::sendMsg(360209578, 'старт платежа/проверки' . PHP_EOL . json_encode(["request" => $request->all()]));
+        TelegramController::sendMsg(360209578, 'старт платежа/проверки' . PHP_EOL . json_encode(["request" => $request->all()]));
 
 
 //        $rqst = self::GetData();
