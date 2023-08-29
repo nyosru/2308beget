@@ -64,9 +64,14 @@ class OnPayController extends Controller
             "pay_for" => $request->pay_for,
         ];
 
+
+        $check_md5 = (self::checkMd5($request)) ? true : false;
+        TelegramController::sendMsg(360209578, 'md5 check: ' . ($check_md5 ? 'true' : 'false'));
+
+
         if (self::checkMd5($request)) {
 
-            $lines .= '/'.__LINE__;
+            $lines .= '/' . __LINE__;
             $out['md5_check'] = true;
 
             try {
@@ -76,13 +81,13 @@ class OnPayController extends Controller
                 $result = true;
 
                 if ($res->price->amount != $request->amount) {
-                    $lines .= '/'.__LINE__;
+                    $lines .= '/' . __LINE__;
                     $result = false;
                 }
 
                 $err = '';
             } catch (\Exception $ex) {
-                $lines .= '/'.__LINE__;
+                $lines .= '/' . __LINE__;
                 $err = $ex;
 //            dd($ex);
                 $result = false;
@@ -90,7 +95,7 @@ class OnPayController extends Controller
 
         } // no check md5
         else {
-            $lines .= '/'.__LINE__;
+            $lines .= '/' . __LINE__;
             $out['md5_check'] =
             $result = false;
         }
