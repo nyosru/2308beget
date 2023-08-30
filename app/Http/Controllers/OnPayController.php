@@ -54,6 +54,8 @@ class OnPayController extends Controller
             //pay_for 	string 	Номер заказа
             $out['pay_for'] = $request->pay_for;
             //signature 	string 	Контрольная подпись, SHA1 от строки - «pay;status;pay_for;secret_key»
+            $out['signature'] = sha1('pay;'.$out['status'].';'.$request->pay_for.';'.self::$apiSecretKey );
+
             //receipt 	json 	Содержит информацию о списке покупок в чеке
             //receipt.items 	array 	Список товаров в чеке
             //receipt.items.name 	string 	Название товара
