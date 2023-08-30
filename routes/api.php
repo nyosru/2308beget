@@ -30,7 +30,7 @@ $d = function() {
     Route::post('onpay', [OnPayController::class,'apiCall']);
 
     Route::get('telega-auth/callback', [AuthTelegrammController::class,'callback']);
-    Route::get('domain-whois-update', [\App\Http\Controllers\Domain\WhoisController::class,'whoisUpdate']);
+    Route::get('domain-whois-update/{limit?}', [\App\Http\Controllers\Domain\WhoisController::class,'whoisUpdate']);
     Route::resource('promo', PromocodeController::class );
 
     Route::resource('buy', BuyController::class )
