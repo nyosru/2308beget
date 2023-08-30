@@ -59,12 +59,12 @@ class OnPayController extends Controller
             //receipt.items.name 	string 	Название товара
             //receipt.items.price 	float 	Цена за единицу товара
             //receipt.items.quantity 	float 	Количество
-            $out['receipt']['items'] = [
+            $out['receipt']['items'][] = [
                 'name' => 'Услуги по наблюдению заз освобождениеем домена',
                 'price' => 500,
                 'quantity' => 10
             ];
-            $out['receipt']['items'] = [
+            $out['receipt']['items'][] = [
                 'name' => 'Услуги по наблюдению заз освобождениеем домена',
                 'price' => 500,
                 'quantity' => 10
