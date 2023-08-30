@@ -51,7 +51,8 @@ class OnPayController extends Controller
                 $res = DomainOrder::with(['price' => function ($query) use ($amount) {
 //                $query->orderBy('created_at', 'desc');
 //                $query->where('amount', $amount );
-                    $query->whereAmount($amount);
+//                    $query->whereAmount($amount);
+                    $query->where('amount', '=', $amount);
                     $query->limit(1);
                 }])->whereId($request->pay_for)->firstOrFail();
 
