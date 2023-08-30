@@ -44,14 +44,25 @@ class OnPayController extends Controller
 
             TelegramController::send('type = pay ');
 
+            try {
+
+            $res = DomainOrder::with(['price' => function ($query) use ($request) {
+//                $query->orderBy('created_at', 'desc');
+                $query->where('amount', $request->balance->amount );
+                $query->limit(1);
+            }])->whereId($request->pay_for)->firstOrFail();
+
+            TelegramController::send('res: ' . json_encode($res));
+            TelegramController::send('res: ' . json_encode([$res->price->amount, $res->price->valute]));
+            TelegramController::send('res: ' . json_encode([$request->balance->amount, $request->balance->way]));
+
+            }
+            catch( \Exception $ex ){
+                TelegramController::send('заказа с ценой не найдено' );
+            }
 
 
-
-            $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
-            TelegramController::send('res: '.json_encode($res));
-            TelegramController::send('res: '.json_encode($res->price->amount));
-            TelegramController::send('res: '.json_encode($res->price->valutes));
-
+//            if ($request->balance->amount, $request->balance->way )
 
 
 //            $result = false;
@@ -64,7 +75,7 @@ class OnPayController extends Controller
             //pay_for 	string 	Номер заказа
             $out['pay_for'] = $request->pay_for;
             //signature 	string 	Контрольная подпись, SHA1 от строки - «pay;status;pay_for;secret_key»
-            $out['signature'] = sha1('pay;'.$out['status'].';'.$request->pay_for.';'.self::$apiSecretKey );
+            $out['signature'] = sha1('pay;' . $out['status'] . ';' . $request->pay_for . ';' . self::$apiSecretKey);
 
             //receipt 	json 	Содержит информацию о списке покупок в чеке
             //receipt.items 	array 	Список товаров в чеке
@@ -86,8 +97,7 @@ class OnPayController extends Controller
 
             TelegramController::send(json_encode($out));
 
-        }
-        // если check
+        } // если check
         else {
 
             $check_md5 = self::checkMd5($request);
