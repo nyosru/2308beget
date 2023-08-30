@@ -46,19 +46,21 @@ class OnPayController extends Controller
 
             try {
 
-            $res = DomainOrder::with(['price' => function ($query) use ($request) {
+                $amount = $request->balance->amount;
+
+                $res = DomainOrder::with(['price' => function ($query) use ($amount) {
 //                $query->orderBy('created_at', 'desc');
-                $query->where('amount', $request->balance->amount );
-                $query->limit(1);
-            }])->whereId($request->pay_for)->firstOrFail();
+//                $query->where('amount', $amount );
+                    $query->whereAmount($amount);
+                    $query->limit(1);
+                }])->whereId($request->pay_for)->firstOrFail();
 
-            TelegramController::send('res: ' . json_encode($res));
-            TelegramController::send('res: ' . json_encode([$res->price->amount, $res->price->valute]));
-            TelegramController::send('res: ' . json_encode([$request->balance->amount, $request->balance->way]));
+                TelegramController::send('res: ' . json_encode($res));
+                TelegramController::send('res: ' . json_encode([$res->price->amount, $res->price->valute]));
+                TelegramController::send('res: ' . json_encode([$request->balance->amount, $request->balance->way]));
 
-            }
-            catch( \Exception $ex ){
-                TelegramController::send('заказа с ценой не найдено' );
+            } catch (\Exception $ex) {
+                TelegramController::send('заказа с ценой не найдено' . json_encode($ex->getMessage()));
             }
 
 
