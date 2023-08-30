@@ -44,6 +44,10 @@ class OnPayController extends Controller
 
             TelegramController::send('type = pay ');
 
+            $result = false;
+
+            $out["status"] = $result;
+
         }
         // если check
         else {
