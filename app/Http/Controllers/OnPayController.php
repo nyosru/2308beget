@@ -44,10 +44,34 @@ class OnPayController extends Controller
 
             TelegramController::send('type = pay ');
 
-            $result = false;
+//            $result = false;
+//            $out["status"] = $result;
 
-            $out["status"] = $result;
-            $out["md5"] = md5(1);
+//            $out["md5"] = md5(1);
+
+            //status 	boolean 	Статус ответа, true для подтверждения, false для отказа(отказ не является отказом от платежа, а лишь информацией о том, что мерчант не знает о таком платеже, при этом у платежа проставится статус как «не было уведомления», и мерчант сможет активировать его вручную в личном кабинете, если такой платеж в действительности имеет место быть).
+            $out['status'] = true;
+            //pay_for 	string 	Номер заказа
+            $out['pay_for'] = $request->pay_for;
+            //signature 	string 	Контрольная подпись, SHA1 от строки - «pay;status;pay_for;secret_key»
+            //receipt 	json 	Содержит информацию о списке покупок в чеке
+            //receipt.items 	array 	Список товаров в чеке
+            //receipt.items.name 	string 	Название товара
+            //receipt.items.price 	float 	Цена за единицу товара
+            //receipt.items.quantity 	float 	Количество
+            $out['receipt']['items'] = [
+                'name' => 'Услуги по наблюдению заз освобождениеем домена',
+                'price' => 500,
+                'quantity' => 10
+            ];
+            $out['receipt']['items'] = [
+                'name' => 'Услуги по наблюдению заз освобождениеем домена',
+                'price' => 500,
+                'quantity' => 10
+            ];
+            //receipt.sum 	float 	Сумма чека
+            $out['receipt']['sum'] = 300;
+
 
         }
         // если check
