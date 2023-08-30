@@ -58,9 +58,13 @@ class OnPayController extends Controller
 //                }
                 ])->whereId($request->pay_for)->firstOrFail();
 
-                TelegramController::send('res: ' . json_encode($res));
-                TelegramController::send('res: ' . json_encode([$res->price->amount, $res->price->valute]));
-                TelegramController::send('res: ' . json_encode([$request->balance->amount, $request->balance->way]));
+                TelegramController::send('res: ' . __LINE__.' / '.json_encode($res));
+                TelegramController::send('res: ' . __LINE__.' / '.( $res->price[0]->amount ?? 'x' ) );
+                TelegramController::send('res: ' . __LINE__.' / '.( $res->price[0]->amount ?? 'x' ) );
+//                TelegramController::send('res: ' . json_encode([$res->price->amount, $res->price->valute]));
+//                TelegramController::send('res: ' . json_encode([$request->balance->amount, $request->balance->way]));
+                TelegramController::send('res: ' .__LINE__.' / '. $request->balance->amount ?? 'y' );
+                TelegramController::send('res: ' .__LINE__.' / '. $request->balance->way ?? 'y' );
 
                 if ($res->price->amount == $request->balance->amount &&
                     $res->price->valute == $request->balance->way) {
