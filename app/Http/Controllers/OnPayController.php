@@ -46,7 +46,7 @@ class OnPayController extends Controller
 
             try {
 
-                $amount = $request->balance->amount;
+//                $amount = $request->balance->amount;
 
 //                $res = DomainOrder::with(['price' => function ($query) use ($amount) {
                 $res = DomainOrder::with(['price'
