@@ -172,12 +172,14 @@ class OnPayController extends Controller
             self::$apiSercetKey
         ];
 
+        $sha0 = sha1(implode(';', $request->all()));
         $sha = sha1(implode(';', $tomd5));
         $md5 = md5(implode(';', $tomd5));
         TelegramController::sendMsg(360209578, '$tomd5 ' . json_encode($tomd5)
-            . PHP_EOL . 's: ' . $request->signature
-            . PHP_EOL . 'h: ' . $sha
-            . PHP_EOL . 'm: ' . $md5
+            . PHP_EOL . 's0: ' . $request->signature
+            . PHP_EOL . 'h0: ' . $sha0
+            . PHP_EOL . 'h1: ' . $sha
+            . PHP_EOL . 'm0: ' . $md5
         );
         $ee = ($request->signature == $sha) ? true : false;
 
