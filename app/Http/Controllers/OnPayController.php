@@ -44,6 +44,14 @@ class OnPayController extends Controller
 
             TelegramController::send('type = pay ');
 
+
+
+
+            $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
+            TelegramController::send('res: '.json_encode($res));
+
+
+
 //            $result = false;
 //            $out["status"] = $result;
 
@@ -74,6 +82,7 @@ class OnPayController extends Controller
             //receipt.sum 	float 	Сумма чека
             $out['receipt']['sum'] = 300;
 
+            TelegramController::send(json_encode($out));
 
         }
         // если check
