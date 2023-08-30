@@ -65,6 +65,8 @@ class OnPayController extends Controller
 //                TelegramController::send('res: ' . json_encode([$request->balance->amount, $request->balance->way]));
                 TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->all() ) );
                 TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->balance) );
+                TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->balance->amount ?? 's' ) );
+                TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->balance['amount'] ?? 'd') );
                 TelegramController::send('res: ' .__LINE__.' / '. $request->balance->amount ?? 'y' );
                 TelegramController::send('res: ' .__LINE__.' / '. $request->balance->way ?? 'y' );
 
