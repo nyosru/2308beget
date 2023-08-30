@@ -11,7 +11,7 @@ class OnPayController extends Controller
 
     public static $merchant_login = '';
     public static $linkPaySystem = 'http://secure.onpay.ru/pay/';
-    public static $apiSercetKey = 'CEcLNBkdmQt';
+    public static $apiSecretKey = 'CEcLNBkdmQt';
 
 
     static function toFloat($sum)
@@ -35,34 +35,13 @@ class OnPayController extends Controller
 //        TelegramController::sendMsg(360209578,'asdasd');
         TelegramController::sendMsg(360209578, PHP_EOL . PHP_EOL . PHP_EOL . 'старт платежа/проверки' . PHP_EOL . json_encode($request->all()));
 
-
-//        $rqst = self::GetData();
-//
-//        TelegramController::sendMsg(360209578, '$rqst: '. json_encode($rqst));
-//
-//        if($rqst['type'] == 'check') {
-//
-////            $psObj = new COnpayPaymentV2();
-//            $this->CheckAction($rqst);
-//
-//        } elseif($rqst['type'] == 'pay') {
-//            $psObj = new COnpayPaymentV2();
-//            $psObj->PayAction($rqst);
-//        } elseif($_REQUEST['type'] == 'check') {
-//            $psObj = new COnpayPayment();
-//            $psObj->CheckAction($_REQUEST);
-//        } elseif($_REQUEST['type'] == 'pay') {
-//            $psObj = new COnpayPayment();
-//            $psObj->PayAction($_POST);
-//        } else {
-//            COnpayPayment::SaveLog(array_merge($_REQUEST, array('INPUT.REQUEST' => $rqst)));
-//        }
-
-
         $out = [
-//            "status" => $result,
             "pay_for" => $request->pay_for,
         ];
+
+        if( $request->type == 'pay' ){
+            TelegramController::send('type = pay ' );
+        }
 
         $check_md5 = self::checkMd5($request);
         TelegramController::sendMsg(360209578, 'md5 check: ' . ($check_md5 ? 'true' : 'false'));
@@ -134,7 +113,7 @@ class OnPayController extends Controller
             $request->type,
             $result ? 'true' : 'false',
             (int)$request->pay_for,
-            self::$apiSercetKey
+            self::$apiSecretKey
         ];
         $signature_string = implode(";", $check);
         $out['signature'] = sha1($signature_string);
@@ -169,18 +148,18 @@ class OnPayController extends Controller
             $request->amount,
             $request->way,
             $request->mode,
-            self::$apiSercetKey
+            self::$apiSecretKey
         ];
 
-        $sha0 = sha1(implode(';', $request->all()));
+//        $sha0 = sha1(implode(';', $request->all()));
         $sha = sha1(implode(';', $tomd5));
-        $md5 = md5(implode(';', $tomd5));
-        TelegramController::sendMsg(360209578, '$tomd5 ' . json_encode($tomd5)
-            . PHP_EOL . 's0: ' . $request->signature
-            . PHP_EOL . 'h0: ' . $sha0
-            . PHP_EOL . 'h1: ' . $sha
-            . PHP_EOL . 'm0: ' . $md5
-        );
+//        $md5 = md5(implode(';', $tomd5));
+//        TelegramController::sendMsg(360209578, '$tomd5 ' . json_encode($tomd5)
+//            . PHP_EOL . 's0: ' . $request->signature
+//            . PHP_EOL . 'h0: ' . $sha0
+//            . PHP_EOL . 'h1: ' . $sha
+//            . PHP_EOL . 'm0: ' . $md5
+//        );
         $ee = ($request->signature == $sha) ? true : false;
 
 ////        TelegramController::sendMsg(360209578, '$tomd5 '. $ee );

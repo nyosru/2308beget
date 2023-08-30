@@ -10,6 +10,11 @@ class TelegramController extends Controller
 
     public static $token_telega = '6639660147:AAEt_jnVDblGLeVT6yP0-OECDaM8Ezg5m5g';
 
+    public static function send( string $msg,  int $telegaId = 360209578 ): void
+    {
+        self::sendMsg($telegaId, $msg);
+    }
+
     public static function sendMsgToUser(User $user, string $msg): void
     {
         self::sendMsg($user->telegram_id, $msg);
