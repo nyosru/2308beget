@@ -33,7 +33,7 @@ class OnPayController extends Controller
 
         TelegramController::$token_telega = '776541435:AAH6efi0QRgzmifygi5bqih2m34XNjf8_As';
 //        TelegramController::sendMsg(360209578,'asdasd');
-        TelegramController::sendMsg(360209578, 'старт платежа/проверки' . PHP_EOL . json_encode($request->all()) );
+        TelegramController::sendMsg(360209578, PHP_EOL .PHP_EOL .PHP_EOL .'старт платежа/проверки' . PHP_EOL . json_encode($request->all()) );
 
 
 //        $rqst = self::GetData();
@@ -64,10 +64,9 @@ class OnPayController extends Controller
             "pay_for" => $request->pay_for,
         ];
 
-
         $check_md5 = self::checkMd5($request);
         TelegramController::sendMsg(360209578, 'md5 check: ' . ($check_md5 ? 'true' : 'false'));
-        TelegramController::sendMsg(360209578, 'request'.PHP_EOL. json_encode( $request->all() ));
+//        TelegramController::sendMsg(360209578, 'request'.PHP_EOL. json_encode( $request->all() ));
 
         if (self::checkMd5($request)) {
 
