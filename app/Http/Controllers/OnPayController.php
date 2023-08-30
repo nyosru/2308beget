@@ -39,105 +39,64 @@ class OnPayController extends Controller
             "pay_for" => $request->pay_for,
         ];
 
-        if( $request->type == 'pay' ){
-            TelegramController::send('type = pay ' );
+        // если pay
+        if ($request->type == 'pay') {
+
+            TelegramController::send('type = pay ');
+
         }
+        // если check
+        else {
 
-
-
-        $check_md5 = self::checkMd5($request);
-        TelegramController::sendMsg(360209578, 'md5 check: ' . ($check_md5 ? 'true' : 'false'));
+            $check_md5 = self::checkMd5($request);
+            TelegramController::sendMsg(360209578, 'md5 check: ' . ($check_md5 ? 'true' : 'false'));
 //        TelegramController::sendMsg(360209578, 'request'.PHP_EOL. json_encode( $request->all() ));
 
-        if (self::checkMd5($request)) {
+            if (self::checkMd5($request)) {
 
-            $lines .= '/' . __LINE__;
-            $out['md5_check'] = true;
+                $lines .= '/' . __LINE__;
+                $out['md5_check'] = true;
 
-            try {
+                try {
 
-                $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
+                    $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
 
-                $result = true;
+                    $result = true;
 
-                if ($res->price->amount != $request->amount) {
+                    if ($res->price->amount != $request->amount) {
+                        $lines .= '/' . __LINE__;
+                        $result = false;
+                    }
+
+                    $err = '';
+                } catch (\Exception $ex) {
                     $lines .= '/' . __LINE__;
+                    $err = $ex;
+//            dd($ex);
                     $result = false;
                 }
 
-                $err = '';
-            } catch (\Exception $ex) {
+            } // no check md5
+            else {
                 $lines .= '/' . __LINE__;
-                $err = $ex;
-//            dd($ex);
+                $out['md5_check'] =
                 $result = false;
             }
 
-        } // no check md5
-        else {
-            $lines .= '/' . __LINE__;
-            $out['md5_check'] =
-            $result = false;
+            $out["status"] = $result;
+
+            $check = [
+                $request->type,
+                $result ? 'true' : 'false',
+                (int)$request->pay_for,
+                self::$apiSecretKey
+            ];
+            $signature_string = implode(";", $check);
+            $out['signature'] = sha1($signature_string);
+
         }
 
-////        try {
-////            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way);
-////            TelegramController::sendMsg(360209578, '$request->balance->way: ' . PHP_EOL . $request->balance->way ?? 'bw');
-//        if (!empty($request->way))
-//            TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->way ?? 'bw');
-//        if (!empty($request->payment->way))
-//            TelegramController::sendMsg(360209578, '$request->way: ' . PHP_EOL . $request->payment->way ?? 'bw');
-//        if (!empty($request->balance->amount))
-//            TelegramController::sendMsg(360209578, '$request->balance->amount: ' . PHP_EOL . $request->balance->amount ?? 'bw');
-////        }catch ( \Exception $ex ){
-////            TelegramController::sendMsg(360209578, implode(' ' , $ex ));
-////        }
-
-//        if( $request->balance->way != 'RUR' )
-//            $result = false;
-
-//        {"request":{
-//"type":"pay",
-//"signature":"123321","pay_for":"214",
-//"user":{"email":null,"phone":null,"note":null},
-//"payment":{"id":23042401,"date_time":"2021-08-28 22:26:07 +0300",
-        //"amount":100,"way":"RUR","rate":1,"release_at":"null","login":null},
-//"balance":{"amount":100,"way":"RUR"}}}
-
-
-        $out["status"] = $result;
-
-
-//        String for signature from Merchant:
-// "check;false;111;MERCHANT_KEY_HERE"
-
-        $check = [
-            $request->type,
-            $result ? 'true' : 'false',
-            (int)$request->pay_for,
-            self::$apiSecretKey
-        ];
-        $signature_string = implode(";", $check);
-        $out['signature'] = sha1($signature_string);
-//        $out['signature'] = md5($signature_string);
-
-//        TelegramController::sendMsg(360209578,
-//            'res_line: '.$lines.PHP_EOL.
-//            'sig_string: ' . $signature_string . PHP_EOL . 'end: ' . json_encode($out));
-
         return response()->json($out);
-
-        /*        $out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"*/
-//.'<result>'
-//.'<code>true</code>'
-//.'<pay_for>'.$request->pay_for.'</pay_for>'
-//.'<comment>text</comment>'
-////.'<md5>'.$request->md5.'</md5>'
-//.'<md5>'.$out['signature'].'</md5>'
-//.'</result>';
-//        echo $out;
-//
-//        return response($out);
 
     }
 
