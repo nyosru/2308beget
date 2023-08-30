@@ -42,7 +42,7 @@ class OnPayController extends Controller
         // если pay
         if ($request->type == 'pay') {
 
-            TelegramController::send('type = pay ');
+//            TelegramController::send('type = pay ');
 
             try {
 
@@ -70,11 +70,13 @@ class OnPayController extends Controller
 //                TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->balance['amount'] ?? 'd') );
 //                TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->balance['way'] ?? 'd') );
 
-                if ($res->price->amount == $request->balance['amount'] &&
+                if ($res->price->amount <= $request->balance['amount'] &&
                     $res->price->valute == $request->balance['way']) {
-                    TelegramController::send('line:' . __LINE__);
+//                    TelegramController::send('line:' . __LINE__);
+                    TelegramController::send('платёж гут' );
                 } else {
-                    TelegramController::send('line:' . __LINE__);
+//                    TelegramController::send('line:' . __LINE__);
+                    TelegramController::send('платёж НЕ гут' );
                 }
 
             } catch (\Exception $ex) {
