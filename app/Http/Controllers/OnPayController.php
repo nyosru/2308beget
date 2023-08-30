@@ -49,6 +49,8 @@ class OnPayController extends Controller
 
             $res = DomainOrder::with('price')->whereId($request->pay_for)->firstOrFail();
             TelegramController::send('res: '.json_encode($res));
+            TelegramController::send('res: '.json_encode($res->price->amount));
+            TelegramController::send('res: '.json_encode($res->price->valutes));
 
 
 
