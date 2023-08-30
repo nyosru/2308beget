@@ -47,6 +47,7 @@ class OnPayController extends Controller
             $result = false;
 
             $out["status"] = $result;
+            $out["md5"] = md5(1);
 
         }
         // если check
