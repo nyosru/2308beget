@@ -43,6 +43,8 @@ class OnPayController extends Controller
             TelegramController::send('type = pay ' );
         }
 
+
+
         $check_md5 = self::checkMd5($request);
         TelegramController::sendMsg(360209578, 'md5 check: ' . ($check_md5 ? 'true' : 'false'));
 //        TelegramController::sendMsg(360209578, 'request'.PHP_EOL. json_encode( $request->all() ));
