@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Domain;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TelegramController;
 use App\Models\Bonus;
 use App\Models\Domain;
 use App\Models\User;
@@ -134,6 +135,30 @@ class DomainController extends Controller
 //
 //        return view('domain.index', $in);
 //    }
+
+    public function backwordSend(Request $request)
+    {
+
+        TelegramController::send('сообщение из обратной связи доменонаблюдателя:' . PHP_EOL . $request->text);
+
+        return redirect()
+            ->route('domain_backword')
+//            ->action([DomainController::class, 'backword'])
+            ->with('status', 'Сообщение отправлено!');
+    }
+
+    public function backword()
+    {
+
+        $in = [];
+
+        if (Auth::check()) {
+            $in['user'] = Auth::user();
+//            $in['bonuses'] = Bonus::whereUser_id($in['user']->id)->addSelect(db::raw('sum(Bonuses.kolvo) as kolvos'))->get()[0];
+            $in['user_info'] = DomainLkController::UserInfo($in['user']->id);
+        }
+        return view('domain.backword', $in);
+    }
 
     public function index()
     {
