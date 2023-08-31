@@ -53,10 +53,10 @@ class OnPayController extends Controller
             $request->pay_for,
 
             $request->payment['amount'],
-            $request->payment['way'],
+            strtolower($request->payment['way']),
 
             $request->balance['amount'],
-            $request->balance['way'],
+            strtolower($request->balance['way']),
 
             //        secret_key»
             self::$apiSecretKey
