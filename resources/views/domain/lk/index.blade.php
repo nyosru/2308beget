@@ -91,6 +91,9 @@
                 </form>
                 <br/>
                 <br/>
+                <img src="/logo/onpay.png" alt="" />
+                <br/>
+                <br/>
             </div>
             <div class="col-6">
                 <h2 class="block">
