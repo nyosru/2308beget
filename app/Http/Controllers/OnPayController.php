@@ -65,7 +65,8 @@ class OnPayController extends Controller
         TelegramController::send('проверка '.$r0 .PHP_EOL.
             'проверка подписи ' .
             PHP_EOL . $request->signature .
-            PHP_EOL . $r
+            PHP_EOL . $r.
+            PHP_EOL . md5($r0)
         );
         return $request->signature === $r;
     }
