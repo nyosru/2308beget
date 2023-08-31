@@ -44,17 +44,22 @@ class OnPayController extends Controller
     // проверка подписи от онпая когда приходит запрос "оплачено"
     static function signatureFromApiThenPay(object $request): bool
     {
-        return $request->signature === sha1(implode(';', [
+        $r = sha1(implode(';', [
 //                «pay;pay_for;payment.amount;payment.way;balance.amount;balance.way;secret_key»
-                'pay',
-                (int)$request->pay_for,
-                $request->payment['amount'],
-                $request->payment['way'],
-                $request->balance['amount'],
-                $request->balance['way'],
-                //        secret_key»
-                self::$apiSecretKey
-            ]));
+            'pay',
+            (int)$request->pay_for,
+            $request->payment['amount'],
+            $request->payment['way'],
+            $request->balance['amount'],
+            $request->balance['way'],
+            //        secret_key»
+            self::$apiSecretKey
+        ]));
+        TelegramController::send('проверка подписи ' .
+            PHP_EOL . $request->signature .
+            PHP_EOL . $r
+        );
+        return $request->signature === $r;
     }
 
     public function apiCall(Request $request)
@@ -73,9 +78,9 @@ class OnPayController extends Controller
         // если pay
         if ($request->type == 'pay') {
 
-            if( self::signatureFromApiThenPay($request) ){
+            if (self::signatureFromApiThenPay($request)) {
                 TelegramController::send('проверка подписи норм');
-            }else{
+            } else {
                 TelegramController::send('проверка подписи НЕ норм');
             }
 
