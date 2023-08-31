@@ -54,10 +54,12 @@ class OnPayController extends Controller
             $request->type,
             intval($request->pay_for),
 
-            self::toFloat($request['payment']['amount']),
+//            self::toFloat($request['payment']['amount']),
+            !strpos($request['payment']['amount'], '.') ? $request['payment']['amount'] . '.0' : $request['payment']['amount'],
             trim($request->payment['way']),
 
-            self::toFloat($request['balance']['amount']),
+//            self::toFloat($request['balance']['amount']),
+            !strpos($request['balance']['amount'], '.') ? $request['balance']['amount'] . '.0' : $request['balance']['amount'],
             trim($request->balance['way']),
 
             //        secret_key»
