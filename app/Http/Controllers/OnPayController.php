@@ -19,10 +19,10 @@ class OnPayController extends Controller
     {
         $sum = floatval($sum);
 
-        if (strpos($sum, ".") != false ) {
+        if (strpos($sum, ".") != false) {
             $sum = round($sum, 2);
         } else {
-            $sum = $sum.'.0';
+            $sum = $sum . '.0';
         }
         return $sum;
     }
@@ -43,11 +43,10 @@ class OnPayController extends Controller
     }
 
 
-
     /**
      * проверка подписи от онпая когда приходит запрос "оплачено"
      **/
-    static function signatureFromApiThenPay( Request $request): bool
+    static function signatureFromApiThenPay(Request $request): bool
     {
         $r0 = implode(';', [
 //                «pay;pay_for;payment.amount;payment.way;balance.amount;balance.way;secret_key»
@@ -66,8 +65,8 @@ class OnPayController extends Controller
         ]);
         $r = sha1($r0);
 
-        TelegramController::send('проверка '.PHP_EOL.
-            $r0 .PHP_EOL.
+        TelegramController::send('проверка ' . PHP_EOL .
+            $r0 . PHP_EOL .
             'проверка подписи ' .
             PHP_EOL . $request->signature .
             PHP_EOL . $r
@@ -93,27 +92,27 @@ class OnPayController extends Controller
         // если pay
         if ($request->type == 'pay') {
 
-            if (self::signatureFromApiThenPay($request)) {
-                TelegramController::send('проверка подписи норм');
+            if (!self::signatureFromApiThenPay($request)) {
+//                TelegramController::send('проверка подписи норм');
+//                TelegramController::send('проверка подписи НЕ норм');
+                $out['status'] = false;
             } else {
-                TelegramController::send('проверка подписи НЕ норм');
-            }
 
 //            TelegramController::send('type = pay ');
 
-            try {
+                try {
 
 //                $amount = $request->balance->amount;
 
 //                $res = DomainOrder::with(['price' => function ($query) use ($amount) {
-                $res = DomainOrder::with(['price'
+                    $res = DomainOrder::with(['price'
 ////                $query->orderBy('created_at', 'desc');
 ////                $query->where('amount', $amount );
 ////                    $query->whereAmount($amount);
 //                    $query->where('amount', '=', $amount);
 //                    $query->limit(1);
 //                }
-                ])->whereId($request->pay_for)->firstOrFail();
+                    ])->whereId($request->pay_for)->firstOrFail();
 
 //                TelegramController::send('res: ' . __LINE__.' / '.json_encode($res));
 //                TelegramController::send('res: ' . __LINE__.' / '.( $res->price->amount ?? 'x' ) );
@@ -127,20 +126,20 @@ class OnPayController extends Controller
 //                TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->balance['amount'] ?? 'd') );
 //                TelegramController::send('res: ' .__LINE__.' / '. json_encode($request->balance['way'] ?? 'd') );
 
-                if ($res->price->amount <= $request->balance['amount'] &&
-                    $res->price->valute == $request->balance['way']) {
+                    if ($res->price->amount <= $request->balance['amount'] &&
+                        $res->price->valute == $request->balance['way']) {
 //                    TelegramController::send('line:' . __LINE__);
-                    TelegramController::send('платёж гут');
-                    $out['status'] = true;
-                } else {
+                        TelegramController::send('платёж гут');
+                        $out['status'] = true;
+                    } else {
 //                    TelegramController::send('line:' . __LINE__);
-                    TelegramController::send('платёж НЕ гут');
-                    $out['status'] = false;
-                }
+                        TelegramController::send('платёж НЕ гут');
+                        $out['status'] = false;
+                    }
 
-            } catch (\Exception $ex) {
-                TelegramController::send('заказа с ценой не найдено' . json_encode($ex->getMessage()));
-            }
+                } catch (\Exception $ex) {
+                    TelegramController::send('заказа с ценой не найдено' . json_encode($ex->getMessage()));
+                }
 
 
 //            if ($request->balance->amount, $request->balance->way )
@@ -151,8 +150,12 @@ class OnPayController extends Controller
 
 //            $out["md5"] = md5(1);
 
-            //status 	boolean 	Статус ответа, true для подтверждения, false для отказа(отказ не является отказом от платежа, а лишь информацией о том, что мерчант не знает о таком платеже, при этом у платежа проставится статус как «не было уведомления», и мерчант сможет активировать его вручную в личном кабинете, если такой платеж в действительности имеет место быть).
+                //status 	boolean 	Статус ответа, true для подтверждения, false для отказа(отказ не является отказом от платежа, а лишь информацией о том, что мерчант не знает о таком платеже, при этом у платежа проставится статус как «не было уведомления», и мерчант сможет активировать его вручную в личном кабинете, если такой платеж в действительности имеет место быть).
 //            $out['status'] = true;
+
+
+            }
+
 
             //pay_for 	string 	Номер заказа
             $out['pay_for'] = $request->pay_for;
