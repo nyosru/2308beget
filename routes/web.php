@@ -27,6 +27,9 @@ $d = function () {
     Route::GET('/pay/success', [CuponController::class, 'paySuccess'])->name('onpay_url_success');
     Route::GET('/pay/fail', [CuponController::class, 'payFail'])->name('onpay_url_success');
 
+    Route::GET('/backword', [DomainController::class, 'backword'])->name('domain_backword');
+    Route::POST('/backword', [DomainController::class, 'backwordSend'])->name('domain_backword_send');
+
 };
 
 //    Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
