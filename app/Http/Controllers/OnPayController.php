@@ -18,10 +18,11 @@ class OnPayController extends Controller
     static function toFloat($sum): float
     {
         $sum = floatval($sum);
+
         if (strpos($sum, ".")) {
             $sum = round($sum, 2);
         } else {
-            $sum = $sum . ".0";
+            $sum .= '.0';
         }
         return $sum;
     }
@@ -54,10 +55,10 @@ class OnPayController extends Controller
             $request->type,
             intval($request->pay_for),
 
-            self::toFloat($request['payment']['amount']),
+            self::toFloat($request['payment']['amount']).'.0',
             trim($request->payment['way']),
 
-            self::toFloat($request['balance']['amount']),
+            self::toFloat($request['balance']['amount']).'.0',
             trim($request->balance['way']),
 
             //        secret_key»
