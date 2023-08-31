@@ -44,17 +44,19 @@ class OnPayController extends Controller
     /**
      * проверка подписи от онпая когда приходит запрос "оплачено"
      **/
-    static function signatureFromApiThenPay(object $request): bool
+    static function signatureFromApiThenPay( Request $request): bool
     {
         $r0 = implode(';', [
 //                «pay;pay_for;payment.amount;payment.way;balance.amount;balance.way;secret_key»
             'pay',
             $request->pay_for,
-//            number_format( $request->payment['amount'],2 ),
-            number_format( $request->payment->amount,2 ),
+
+            number_format( $request->payment['amount'],2 ),
             $request->payment['way'],
-            number_format($request->balance->amount,2 ),
+
+            number_format($request->balance['amount'],2 ),
             $request->balance['way'],
+
             //        secret_key»
             self::$apiSecretKey
         ]);
