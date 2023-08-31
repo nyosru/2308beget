@@ -48,13 +48,14 @@ class OnPayController extends Controller
     {
         $r0 = implode(';', [
 //                «pay;pay_for;payment.amount;payment.way;balance.amount;balance.way;secret_key»
-            'pay',
+//            'pay',
+            $request->type,
             $request->pay_for,
 
-            number_format( $request->payment['amount'],2 ),
+            $request->payment['amount'],
             $request->payment['way'],
 
-            number_format($request->balance['amount'],2 ),
+            $request->balance['amount'],
             $request->balance['way'],
 
             //        secret_key»
@@ -62,13 +63,15 @@ class OnPayController extends Controller
         ]);
         $r = sha1($r0);
 
-        TelegramController::send('проверка '.$r0 .PHP_EOL.
+        TelegramController::send('проверка '.PHP_EOL.
+            $r0 .PHP_EOL.
             'проверка подписи ' .
             PHP_EOL . $request->signature .
-            PHP_EOL . $r.
-            PHP_EOL . md5($r0)
+            PHP_EOL . $r
+        //.
+//            PHP_EOL . md5($r0)
         );
-        return $request->signature === $r;
+        return $request->signature == $r;
     }
 
     public function apiCall(Request $request)
