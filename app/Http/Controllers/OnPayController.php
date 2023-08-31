@@ -25,6 +25,20 @@ class OnPayController extends Controller
         return $sum;
     }
 
+    /**
+     * создание секретной подписи при приёме платежа
+     * @param Request $request
+     * @return void
+     */
+    static function signatureFromPay($pay_for, $status)
+    {
+        return sha1(implode(';', [
+            'pay',
+            $status,
+            $pay_for,
+            self::$apiSecretKey
+        ]));
+    }
 
     public function apiCall(Request $request)
     {
@@ -73,10 +87,12 @@ class OnPayController extends Controller
                 if ($res->price->amount <= $request->balance['amount'] &&
                     $res->price->valute == $request->balance['way']) {
 //                    TelegramController::send('line:' . __LINE__);
-                    TelegramController::send('платёж гут' );
+                    TelegramController::send('платёж гут');
+                    $out['status'] = true;
                 } else {
 //                    TelegramController::send('line:' . __LINE__);
-                    TelegramController::send('платёж НЕ гут' );
+                    TelegramController::send('платёж НЕ гут');
+                    $out['status'] = false;
                 }
 
             } catch (\Exception $ex) {
@@ -93,11 +109,13 @@ class OnPayController extends Controller
 //            $out["md5"] = md5(1);
 
             //status 	boolean 	Статус ответа, true для подтверждения, false для отказа(отказ не является отказом от платежа, а лишь информацией о том, что мерчант не знает о таком платеже, при этом у платежа проставится статус как «не было уведомления», и мерчант сможет активировать его вручную в личном кабинете, если такой платеж в действительности имеет место быть).
-            $out['status'] = true;
+//            $out['status'] = true;
+
             //pay_for 	string 	Номер заказа
             $out['pay_for'] = $request->pay_for;
             //signature 	string 	Контрольная подпись, SHA1 от строки - «pay;status;pay_for;secret_key»
-            $out['signature'] = sha1('pay;' . $out['status'] . ';' . $request->pay_for . ';' . self::$apiSecretKey);
+//            $out['signature'] = sha1('pay;' . $out['status'] . ';' . $request->pay_for . ';' . self::$apiSecretKey);
+            $out['signature'] = signatureFromPay( $request->pay_for , $out['status'] );
 
             //receipt 	json 	Содержит информацию о списке покупок в чеке
             //receipt.items 	array 	Список товаров в чеке
