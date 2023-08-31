@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OnPayRequest;
 use App\Models\DomainOrder;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class OnPayController extends Controller
@@ -14,7 +15,7 @@ class OnPayController extends Controller
     public static $apiSecretKey = 'CEcLNBkdmQt';
 
 
-    static function toFloat($sum)
+    static function toFloat($sum) : float
     {
         $sum = floatval($sum);
         if (strpos($sum, ".")) {
@@ -30,11 +31,11 @@ class OnPayController extends Controller
      * @param Request $request
      * @return void
      */
-    static function signatureFromPay($pay_for, $status)
+    static function signatureFromPay( int $pay_for, bool $status) : string
     {
         return sha1(implode(';', [
             'pay',
-            $status,
+            $status ? 'true' : 'false',
             $pay_for,
             self::$apiSecretKey
         ]));
