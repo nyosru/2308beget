@@ -41,6 +41,8 @@ class OnPayController extends Controller
         ]));
     }
 
+
+
     /**
      * проверка подписи от онпая когда приходит запрос "оплачено"
      **/
@@ -50,13 +52,13 @@ class OnPayController extends Controller
 //                «pay;pay_for;payment.amount;payment.way;balance.amount;balance.way;secret_key»
 //            'pay',
             $request->type,
-            $request->pay_for,
+            intval($request->pay_for),
 
-            $request->payment['amount'],
-            strtolower($request->payment['way']),
+            self::toFloat($request->payment['amount']),
+            trim($request->payment['way']),
 
-            $request->balance['amount'],
-            strtolower($request->balance['way']),
+            self::toFloat($request->balance['amount']),
+            trim($request->balance['way']),
 
             //        secret_key»
             self::$apiSecretKey
