@@ -15,7 +15,7 @@ class OnPayController extends Controller
     public static $apiSecretKey = 'CEcLNBkdmQt';
 
 
-    static function toFloat($sum) : float
+    static function toFloat($sum): float
     {
         $sum = floatval($sum);
         if (strpos($sum, ".")) {
@@ -31,7 +31,7 @@ class OnPayController extends Controller
      * @param Request $request
      * @return void
      */
-    static function signatureFromPay( int $pay_for, bool $status) : string
+    static function signatureForPay(int $pay_for, bool $status): string
     {
         return sha1(implode(';', [
             'pay',
@@ -39,6 +39,22 @@ class OnPayController extends Controller
             $pay_for,
             self::$apiSecretKey
         ]));
+    }
+
+    // проверка подписи от онпая когда приходит запрос "оплачено"
+    static function signatureFromApiThenPay(object $request): bool
+    {
+        return $request->signature === sha1(implode(';', [
+//                «pay;pay_for;payment.amount;payment.way;balance.amount;balance.way;secret_key»
+                'pay',
+                (int)$request->pay_for,
+                $request->payment['amount'],
+                $request->payment['way'],
+                $request->balance['amount'],
+                $request->balance['way'],
+                //        secret_key»
+                self::$apiSecretKey
+            ]));
     }
 
     public function apiCall(Request $request)
@@ -56,6 +72,12 @@ class OnPayController extends Controller
 
         // если pay
         if ($request->type == 'pay') {
+
+            if( self::signatureFromApiThenPay($request) ){
+                TelegramController::send('проверка подписи норм');
+            }else{
+                TelegramController::send('проверка подписи НЕ норм');
+            }
 
 //            TelegramController::send('type = pay ');
 
@@ -115,8 +137,7 @@ class OnPayController extends Controller
             //pay_for 	string 	Номер заказа
             $out['pay_for'] = $request->pay_for;
             //signature 	string 	Контрольная подпись, SHA1 от строки - «pay;status;pay_for;secret_key»
-//            $out['signature'] = sha1('pay;' . $out['status'] . ';' . $request->pay_for . ';' . self::$apiSecretKey);
-            $out['signature'] = self::signatureFromPay( $request->pay_for , $out['status'] );
+            $out['signature'] = self::signatureForPay($request->pay_for, $out['status']);
 
             //receipt 	json 	Содержит информацию о списке покупок в чеке
             //receipt.items 	array 	Список товаров в чеке
