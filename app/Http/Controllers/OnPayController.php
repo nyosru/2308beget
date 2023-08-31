@@ -15,16 +15,17 @@ class OnPayController extends Controller
     public static $apiSecretKey = 'CEcLNBkdmQt';
 
 
-    static function toFloat($sum): float
+    static function toFloat($sum): string
     {
-        $sum = floatval($sum);
-
-        if (strpos($sum, ".") != false) {
-            $sum = round($sum, 2);
-        } else {
-            $sum = $sum . '.0';
-        }
-        return $sum;
+//        $sum = floatval($sum);
+//
+//        if (strpos($sum, ".") != false) {
+//            $sum = round($sum, 2);
+//        } else {
+//            $sum = $sum . '.0';
+//        }
+//        return $sum;
+        return !strpos($sum, '.') ? $sum . '.0' : round($sum, 2);
     }
 
     /**
@@ -42,7 +43,6 @@ class OnPayController extends Controller
         ]));
     }
 
-
     /**
      * проверка подписи от онпая когда приходит запрос "оплачено"
      **/
@@ -54,12 +54,12 @@ class OnPayController extends Controller
             $request->type,
             intval($request->pay_for),
 
-//            self::toFloat($request['payment']['amount']),
-            !strpos($request['payment']['amount'], '.') ? $request['payment']['amount'] . '.0' : $request['payment']['amount'],
+            self::toFloat($request['payment']['amount']),
+//            !strpos($request['payment']['amount'], '.') ? $request['payment']['amount'] . '.0' : $request['payment']['amount'],
             trim($request->payment['way']),
 
-//            self::toFloat($request['balance']['amount']),
-            !strpos($request['balance']['amount'], '.') ? $request['balance']['amount'] . '.0' : $request['balance']['amount'],
+            self::toFloat($request['balance']['amount']),
+//            !strpos($request['balance']['amount'], '.') ? $request['balance']['amount'] . '.0' : $request['balance']['amount'],
             trim($request->balance['way']),
 
             //        secret_key»
