@@ -2,7 +2,8 @@ name: Run cron - domain scan
 
 on:
   schedule:
-    - cron: "1,5,10,15,20,25,30,35,40,45,50,55 * * * *"
+    - cron: "1/18 * * * *"
+#    - cron: "1,5,10,15,20,25,30,35,40,45,50,55 * * * *"
 #    - cron: "1/10 * * * *"
 
 #     03-08 07-12 12-17
@@ -27,8 +28,9 @@ jobs:
           host: ${{ env.VPS_IP }}
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY }}
-          script: |
-            docker exec 2308beget php artisan app:domain-whois-scan
+          script: docker exec 2308beget php artisan app:domain-whois-scan
+#          script: |
+#            docker exec 2308beget php artisan app:domain-whois-scan
 #            cd ${{ env.DIR }}
 #            docker exec 2308beget php artisan app:domain-whois-scan
 #            git fetch --all
