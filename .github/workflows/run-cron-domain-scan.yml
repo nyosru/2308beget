@@ -2,7 +2,7 @@ name: Run cron - domain scan
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "1/15 * * * *"
 #    - cron: "1/18 * * * *"
 #    - cron: "1,5,10,15,20,25,30,35,40,45,50,55 * * * *"
 #    - cron: "1/10 * * * *"
