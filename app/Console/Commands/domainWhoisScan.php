@@ -31,7 +31,7 @@ class domainWhoisScan extends Command
         $this->info('Сканирование whois информации о доменах');
 
         try {
-            $e = $whc->whoisUpdate(10, 'array');
+            $e = $whc->whoisUpdate(2, 'array');
             if( !empty($e) ) {
                 $msg = 'скан доменов ';
                 foreach ($e as $domain) {
