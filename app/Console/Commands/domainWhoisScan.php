@@ -34,7 +34,7 @@ class domainWhoisScan extends Command
             $e = $whc->whoisUpdate(10, 'array');
             $msg = 'скан доменов ';
             foreach ($e as $domain) {
-                $this->success($domain);
+//                $this->success($domain);
                 $msg .= ' '.$domain;
             }
             $tele::send($msg);
