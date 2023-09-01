@@ -1,9 +1,12 @@
 name: Run cron - domain scan
 
 on:
-  push:
-    branches:
-      - main2
+  schedule:
+#    - cron: "1/14 * * * *"
+    - cron: "1/14 03-12 * * *"
+#     03-08 07-12 12-17
+
+  workflow_dispatch:
 
 env:
   VPS_IP: 45.12.72.4
@@ -24,8 +27,9 @@ jobs:
           username: ${{ env.VPS_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: |
-            cd ${{ env.DIR }}
             docker exec 2308beget php artisan app:domain-whois-scan
+#            cd ${{ env.DIR }}
+#            docker exec 2308beget php artisan app:domain-whois-scan
 #            git fetch --all
 #            git reset --hard ${{ env.GIT_BRANCH }}
 
