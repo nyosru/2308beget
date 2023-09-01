@@ -40,7 +40,7 @@ class domainWhoisScan extends Command
             $tele::send($msg);
         } catch (\Exception $ex) {
             $this->error('нет доменов для сканироваиня');
-            $tele::send('нет доменов для сканироваиня');
+            $tele::send('нет доменов для сканироваиня '.$ex->getMessage() );
         }
 
     }
