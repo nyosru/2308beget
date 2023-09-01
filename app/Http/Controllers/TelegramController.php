@@ -26,8 +26,8 @@ class TelegramController extends Controller
         file_get_contents('https://api.php-cat.com/telegram.php?' . http_build_query(
                 array(
                     // 's' => '1',
-                    's' => md5($_SERVER['HTTP_HOST']),
-                    'domain' => $_SERVER['HTTP_HOST'],
+                    's' => md5($_SERVER['HTTP_HOST'] ?? 'domain.php-cat.com'),
+                    'domain' => $_SERVER['HTTP_HOST'] ?? 'domain.php-cat.com',
                     // 'msg' => $_SERVER['HTTP_HOST'] . PHP_EOL . $msg,
                     'msg' => $msg,
                     // OrderUraBot @order_ura_bot:
