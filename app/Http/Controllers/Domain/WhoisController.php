@@ -28,7 +28,7 @@ class WhoisController extends Controller
                 ->distinct('name')
                 ->orderBy('last_scan', 'ASC')
                 ->limit($limit)
-                ->getOrFail();
+                ->get();
 
             if (sizeof($e) == 0)
                 throw new Exception('нет доменов для скана');
