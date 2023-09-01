@@ -12,7 +12,12 @@ use Illuminate\Support\Facades\Validator;
 
 class WhoisController extends Controller
 {
-    public function whoisUpdate(int $limit = 1)
+    /**
+     * @param int $limit
+     * @param string $type json|array
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function whoisUpdate(int $limit = 1, string $type = 'json' ) : string|array
     {
 
         try {
@@ -23,7 +28,7 @@ class WhoisController extends Controller
                 ->distinct('name')
                 ->orderBy('last_scan', 'ASC')
                 ->limit($limit)
-                ->get();
+                ->getOrFail();
 
             if (sizeof($e) == 0)
                 throw new Exception('нет доменов для скана');
@@ -38,11 +43,18 @@ class WhoisController extends Controller
 
             }
 
-            return response()->json([
-                'status' => 'Просканировано доменов',
-                'domains' => $domainList,
-                'count' => count($e)
-            ]);
+            if( $type == 'array' ){
+
+                return $domainList;
+
+            } else {
+
+                return response()->json([
+                    'status' => 'Просканировано доменов',
+                    'domains' => $domainList,
+                    'count' => count($e)
+                ]);
+            }
 
         } catch (\Exception $er) {
             return response()->json([
