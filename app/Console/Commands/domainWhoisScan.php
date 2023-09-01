@@ -32,12 +32,14 @@ class domainWhoisScan extends Command
 
         try {
             $e = $whc->whoisUpdate(10, 'array');
-            $msg = 'скан доменов ';
-            foreach ($e as $domain) {
+            if( !empty($e) ) {
+                $msg = 'скан доменов ';
+                foreach ($e as $domain) {
 //                $this->success($domain);
-                $msg .= ' '.$domain;
+                    $msg .= ' ' . $domain;
+                }
+                $tele::send($msg);
             }
-            $tele::send($msg);
         } catch (\Exception $ex) {
             $this->error('нет доменов для сканироваиня');
             $tele::send('нет доменов для сканироваиня '.$ex->getMessage() );

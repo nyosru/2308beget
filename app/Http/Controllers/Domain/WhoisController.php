@@ -17,51 +17,41 @@ class WhoisController extends Controller
      * @param string $type json|array
      * @return \Illuminate\Http\JsonResponse
      */
-    public function whoisUpdate(int $limit = 1, string $type = 'json' ) : string|array
+    public function whoisUpdate(int $limit = 1, string $type = 'json'): string|array
     {
 
-        try {
+        $e = Domain::LiveToScan()
+            ->Payed()
+            ->select(['id', 'name', 'last_scan'])
+            ->distinct('name')
+            ->orderBy('last_scan', 'ASC')
+            ->limit($limit)
+            ->get();
 
-            $e = Domain::LiveToScan()
-                ->Payed()
-                ->select(['id', 'name', 'last_scan'])
-                ->distinct('name')
-                ->orderBy('last_scan', 'ASC')
-                ->limit($limit)
-                ->get();
+        if (sizeof($e) == 0)
+            throw new Exception('нет доменов для скана');
 
-            if (sizeof($e) == 0)
-                throw new Exception('нет доменов для скана');
 
-            $domainList = [];
+        $domainList = [];
 
-            foreach ($e as $domain) {
+        foreach ($e as $domain) {
 
-                $domainList[] = $domain->name;
-                $res = $this->whoisGet($domain->name);
-                $this->domainSetStatus($res['domain'], $res['available']);
+            $domainList[] = $domain->name;
+            $res = $this->whoisGet($domain->name);
+            $this->domainSetStatus($res['domain'], $res['available']);
 
-            }
+        }
 
-            if( $type == 'array' ){
+        if ($type == 'array') {
 
-                return $domainList;
+            return (array)$domainList;
 
-            } else {
+        } else {
 
-                return response()->json([
-                    'status' => 'Просканировано доменов',
-                    'domains' => $domainList,
-                    'count' => count($e)
-                ]);
-            }
-
-        } catch (\Exception $er) {
             return response()->json([
-                'error' => $er->getMessage(),
-                'line' => $er->getLine(),
-                'file' => $er->getFile()
-
+                'status' => 'Просканировано доменов',
+                'domains' => $domainList,
+                'count' => count($e)
             ]);
         }
 
@@ -79,7 +69,7 @@ class WhoisController extends Controller
         try {
             $res = file_get_contents('http://api.php-cat.com/whois.php?domain=' . addslashes($domain) . '&return=json');
 //            $res = file_get_contents('/whois.php?domain=' . addslashes($domain) . '&return=json');
-        }catch( Exception $e ){
+        } catch (Exception $e) {
             dd($e);
         }
 
@@ -99,10 +89,10 @@ class WhoisController extends Controller
     }
 
 //    public function whoisSaveData(WhoisAddRequest $data)
-    public function whoisSaveData( array $data)
+    public function whoisSaveData(array $data)
     {
 
-        $validator = Validator::make( $data, [
+        $validator = Validator::make($data, [
 //            'email' => 'required|email',
 //            'games' => 'required|numeric',
             "domainName" => "string|required",
