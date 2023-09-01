@@ -3,7 +3,7 @@ name: Run cron - domain scan
 on:
   schedule:
 #    - cron: "1/14 * * * *"
-    - cron: "0/3 * * * *"
+    - cron: "1,5,10,15,20,25,30,35,40,45,50,55 * * * *"
 #     03-08 07-12 12-17
 
   workflow_dispatch:
