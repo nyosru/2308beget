@@ -184,10 +184,12 @@ class DomainController extends Controller
 //                    $query->orderBy('created_at', 'desc');
                     $query->limit(1);
                 },
+
 //                'whois2' => function ($query) {
 ////                    $query->orderBy('created_at', 'desc');
 //                    $query->limit(1);
 //                },
+
             ])
                 ->whereUser_id(Auth::user()->id)
                 ->select(['domains.*'])
