@@ -4,12 +4,35 @@ use App\Http\Controllers\AuthTelegrammController;
 use App\Http\Controllers\Domain\CuponController;
 use App\Http\Controllers\Domain\DomainController;
 use Illuminate\Support\Facades\Route;
+//use Illuminate\Contracts\Cookie\Factory as Coockie;
+//use Illuminate\Support\Facades\App;
 
 $d = function () {
+
+//    App->setLocale('en');
 
     Route::get('/test', [DomainController::class, 'test']);
     Route::post('/test', [DomainController::class, 'test']);
 
+    Route::get('/go/{locale}',
+        function ($locale) {
+            if (!in_array($locale, [
+                'en',
+                'ru'
+//            'es', 'fr'
+            ])) {
+                abort(400);
+            }
+//            Coockie->forever();// ::forever('language', $lang);
+            session()->put('locale', $locale);
+//            App::setlocale($lang);
+//            $e = new DomainController();
+            return redirect()->back();
+
+        });
+
+
+//    Route::get('/{lang}', [DomainController::class, 'index1'])->name('domain_index1');
     Route::get('/', [DomainController::class, 'index'])->name('domain_index');
     Route::get('/', [DomainController::class, 'index'])->name('login');
 
@@ -33,11 +56,13 @@ $d = function () {
 };
 
 //    Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
+
 //Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 
 if(
     strtolower($_SERVER['HTTP_HOST']) == 'domainwaiter.com'
     || strtolower($_SERVER['HTTP_HOST']) == 'domain.php-cat.com'
+//    || strtolower($_SERVER['HTTP_HOST']) == 'domain.dev.php-cat.com'
 )
 Route::group(array('domain' => $_SERVER['HTTP_HOST'] ), $d);
 
