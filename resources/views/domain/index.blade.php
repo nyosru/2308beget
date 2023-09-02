@@ -5,6 +5,9 @@
 
         <div class="text-center">
 
+{{--            {{ __('local.site_name') }}<br/>--}}
+{{--            {{ __('lll') }}<br/>--}}
+
             @auth
                 @include('domain.domains')
             @else

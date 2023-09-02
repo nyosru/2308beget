@@ -1,8 +1,29 @@
+<div class="container-fluid" style="background-color: peachpuff;">
+    <div class="row">
+        <div class="col-12 text-center text-sm py-2">
+            {{ __('local.lang_title') }}:&nbsp;
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="/go/ru"
+                   class="btn btn-sm @if(session('locale') == 'ru' ) btn-info @else btn-outline-info @endif">ru</a>
+                <a href="/go/en"
+                   class="btn btn-sm  @if(session('locale') == 'en' ) btn-info @else btn-outline-info @endif">en</a>
+                {{--            {{ session('locale') }}--}}
+            </div>
+        </div>
+    </div>
+</div>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
+
+
         {{--    <div class="container-fluid">--}}
 
-        <a class="navbar-brand" href="/">Сервис ожидания освобожденя доменов</a>
+        <a class="navbar-brand" href="/">
+            <h2>
+            {{ __('local.site_name') }}
+            </h2>
+        </a>
 
         {{--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"--}}
         {{--            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">--}}
@@ -68,13 +89,13 @@
 
                         <div class="text-end pt-2 mr-2">
 
-{{--                            Баланс: {{ !empty( $user_info['bonuses']->kolvos ) ? $user_info['bonuses']->kolvos : 0}}--}}
-                            Баланс: {{ $user->bonus }}
+                            {{--                            Баланс: {{ !empty( $user_info['bonuses']->kolvos ) ? $user_info['bonuses']->kolvos : 0}}--}}
+                            {{ __('local.balance_title') }}: {{ $user->bonus }}
 
                             {{--                            <Br/>                            bonuses {{ $bonuses }}--}}
                             <Br/>
                             <small>
-                                <a href="{{ route('cupon.index') }}">Пополнить</a>
+                                <a href="{{ route('cupon.index') }}">{{ __('local.balance_add') }}</a>
                             </small>
                         </div>
                         <div class="dropdown text-end">
@@ -89,7 +110,8 @@
                                 {{--                                <li><a class="dropdown-item" href="#">Settings</a></li>--}}
                                 {{--                                <li><a class="dropdown-item" href="#">Profile</a></li>--}}
                                 {{--                                <li><hr class="dropdown-divider"></li>--}}
-                                <li><a class="dropdown-item" href="{{ route('logout_lk') }}">Выйти</a></li>
+                                <li><a class="dropdown-item"
+                                       href="{{ route('logout_lk') }}">{{ __('local.lk_exit') }}</a></li>
                             </ul>
                         </div>
 

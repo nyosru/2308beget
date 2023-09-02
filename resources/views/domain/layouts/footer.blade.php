@@ -6,13 +6,13 @@
                 &copy; 2020-{{ date('Y') }}
             </div>
             <div class="col-12 col-md-6 p-1">
-                <a href="{{ route('domain_backword') }}">Обратная связь</a>
+                <a href="{{ route('domain_backword') }}">{{ __('local.site_backword_title') }}</a>
             </div>
         </div>
         <div class="row">
             <div class="col-12 text-center">
                 <small>
-                <a href="https://php-cat.com" target="_blank">Создание сайта
+                <a href="https://php-cat.com" target="_blank">{{ __('local.created_site') }}
                     php-cat.com</a>
                 </small>
             </div>

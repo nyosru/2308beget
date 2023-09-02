@@ -9,8 +9,8 @@
             <div class="col-12 col-sm-8 col-lg-6">
                 <form action="{{ route('domain_add') }}" method="POST">
                     @csrf
-                    <input type="text" name="domain" placeholder="домен"/>
-                    <button>Добавить</button>
+                    <input type="text" name="domain" placeholder="{{ __('local.form_add__input__placeholder') }}"/>
+                    <button>{{ __('local.form_add_button_add_tittle') }}</button>
                 </form>
             </div>
         </div>
@@ -45,10 +45,12 @@
                         {{--                        @if( !empty( $user_info['bonuses']->kolvos ) && $user_info['bonuses']->kolvos > 0 )--}}
                         $user->bonus: {{ $user->bonus }}
                         <br/>
+
                         @if( $user->bonus > 0 )
                             <a class="btn btn-success"
-                               href="{{ route('domainNameBuyBonus',['domain_name' => session('domain') ]) }}">Оплатить
-                                бонусом</a>
+                               href="{{ route('domainNameBuyBonus',['domain_name' => session('domain') ]) }}">
+                                {{ __('local.list_domains__button_buy_bonuses__title') }}
+                            </a>
                         @endif
 
                     </div>
@@ -58,10 +60,10 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>Домен</th>
+                        <th>{{ __('local.list_domains__table_header_domain') }}</th>
                         {{--                        <th>Занят до</th>--}}
-                        <th>Статус</th>
-                        <th>-</th>
+                        <th>{{ __('local.list_domains__table_header_status') }}</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,11 +79,13 @@
                             <td style="font-size: 60%;">
                                 @if ( $d->available )
                                     <div class="p-1 bg-success text-white">
-                                        можно регистрировать!!
+                                        {{ __('local.list_domains__domain__mogno_regit') }}
                                     </div>
                                 @elseif ( !empty($d->payed_do) )
-                                    <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">наблюдаем
+                                    <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">
+                                        {{ __('local.list_domains__domain__nabludaem') }}
                                     </div>
+
 {{--                                    @if( !empty($d->expirationDate) )--}}
 {{--                                        <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">--}}
 {{--                                            Занят до: {{ $d->expirationDate }}--}}
@@ -99,26 +103,25 @@
 
                                     @if( !empty($d->expirationDate) )
                                         <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">
-                                            Занят до: {{ $d->expirationDate }}
+                                            {{ __('local.list_domains__domain__zanyat_do') }}: {{ $d->expirationDate }}
                                         </div>
                                     @elseif($d->last_scan != null)
                                         <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">
-                                            Проверено: {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}c
+                                            {{ __('local.list_domains__domain__provereno') }}: {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}c
                                             @endif
 
                                             {{--                                        @elseif (sizeof($d->pays) > 0)--}}
                                             {{--                                            <div class="p-1 bg-success text-white" >оплачено, наблюдаем</div>--}}
                                             @else
-                                                Ожидает оплаты
+                                                {{ __('local.list_domains__domain__ogidaet_oplatu') }}
                                                 {{--                                    <a href="">Оплатить</a>--}}
                                                 {{--                                                <br/>--}}
                                                 @if( $user->bonus > 0 )
 {{--                                                    {{$user->bonus }}--}}
                                                     <br/>
                                                     <a href="{{ route('domainBuyBonus',['domain' => $d]) }}"
-                                                       onclick="return confirm('Хотите оплатить бонусом - наблюдение за доменом {{ $d->name }} ?')"
-                                                    >Оплатить
-                                                        бонусом</a>
+                                                       onclick="return confirm('{{ __('local.list_domains__domain__oplatit_bonusom__podtv') }} {{ $d->name }} ?')"
+                                                    >{{ __('local.list_domains__domain__oplatit_bonusom') }}</a>
                                     @endif
                                 @endif
                             </td>
@@ -130,7 +133,7 @@
 
                                 <a href="{{ route('domain_deactive',['domain'=>$d]) }}"
                                    title="Удалить домен из активного списка наблюдения"
-                                   onclick="return confirm('удалить домен {{ $d->name }} из активного списка ?');"
+                                   onclick="return confirm('{{ __('local.list_domains__domain__udalit_domen',['domain' => $d->name]) }}');"
                                    class="remove">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-x" viewBox="0 0 16 16">
