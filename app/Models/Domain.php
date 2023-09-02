@@ -16,19 +16,13 @@ class Domain extends Model
 
     public function pays()
     {
-      return $this->hasMany(DomainPay::class);
+        return $this->hasMany(DomainPay::class);
     }
 
     public function whois()
     {
-      return $this->hasMany(Whois::class, 'domain', 'name')->orderByDesc('expirationDate');
+        return $this->hasMany(Whois::class, 'domain', 'name_tech')->orderByDesc('expirationDate');
 //      return $this->hasOne(Whois::class, 'domain', 'name')->orderByDesc('expirationDate');
-    }
-
-    public function whois2()
-    {
-      return $this->hasMany(Whois::class, 'domain', 'name_tech')->orderByDesc('expirationDate');
-//      return $this->hasOne(Whois::class, 'domain', 'name_tech')->orderByDesc('expirationDate');
     }
 
 
@@ -36,6 +30,7 @@ class Domain extends Model
     {
         return $this->belongsTo(Bonus::class);
     }
+
     /**
      * выборка доменов где последнее сканирование было вчера и позднее
      * @param $query
@@ -56,21 +51,18 @@ class Domain extends Model
     {
 //        return $query->leftJoin( 'whois', 'whois.domain', '=', 'domains.name' )
 //            ->addSelect('whois.expirationDate')            ;
-        return $query->leftJoin( 'whois',
-            function($join) {
+        return $query->leftJoin('whois',
+            function ($join) {
                 $join
                     ->on('whois.domain', '=', 'domains.name')
-                    ->orOn('whois.domain', '=', 'domains.name_tech')
-//                    ->on('whois.domain', '=', 'domains.name_tech')
+                    ->orOn('whois.domain', '=', 'domains.name_tech')//                    ->on('whois.domain', '=', 'domains.name_tech')
                 ;
             }
 //            'whois.domain', '=', 'domains.name'
-    )
+        )
             ->orderByDESC('whois.expirationDate')
 //            ->groupBy('whois.domain')
-            ->addSelect('whois.expirationDate')
-
-            ;
+            ->addSelect('whois.expirationDate');
     }
 
 }

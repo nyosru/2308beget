@@ -178,15 +178,16 @@ class DomainController extends Controller
 
             $in['user_info'] = DomainLkController::UserInfo($in['user']->id);
 
-            $in['domains'] = Domain::with(['pays',
+            $in['domains'] = Domain::with([
+                'pays',
                 'whois' => function ($query) {
 //                    $query->orderBy('created_at', 'desc');
                     $query->limit(1);
                 },
-                'whois2' => function ($query) {
-//                    $query->orderBy('created_at', 'desc');
-                    $query->limit(1);
-                },
+//                'whois2' => function ($query) {
+////                    $query->orderBy('created_at', 'desc');
+//                    $query->limit(1);
+//                },
             ])
                 ->whereUser_id(Auth::user()->id)
                 ->select(['domains.*'])

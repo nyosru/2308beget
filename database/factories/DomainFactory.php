@@ -26,8 +26,8 @@ class DomainFactory extends Factory
             'user_id' => 1
         ];
 
-        if ($domain == 'рф')
-            $a['name_tech'] = idn_to_ascii($a['name']);
+//        if ($domain == 'рф')
+            $a['name_tech'] = ($domain == 'рф') ? idn_to_ascii($a['name']) : $a['name'];
 //        echo idn_to_ascii('täst.de');
 
         if (rand(1, 3) == 1)

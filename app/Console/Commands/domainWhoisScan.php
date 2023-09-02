@@ -28,6 +28,9 @@ class domainWhoisScan extends Command
     public function handle(WhoisController $whc, TelegramController $tele)
     {
 
+        // fon bot
+        $tele::$token_telega = env('bot_fon_token');
+
         $this->info('Сканирование whois информации о доменах');
 
         try {

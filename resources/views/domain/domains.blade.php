@@ -87,9 +87,19 @@
 {{--                                            Занят до: {{ $d->expirationDate }}--}}
 {{--                                        </div>--}}
 {{--                                    @elseif( !empty($d->whois[0]->expirationDate) )--}}
-                                    @if( !empty($d->whois[0]->expirationDate) || !empty($d->whois2[0]->expirationDate) )
+
+
+
+{{--                                    @if( !empty($d->whois[0]->expirationDate) || !empty($d->whois2[0]->expirationDate) )--}}
+{{--                                        <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">--}}
+{{--                                            Занят до: {{ $d->whois2[0]->expirationDate ?? $d->whois[0]->expirationDate }}--}}
+{{--                                        </div>--}}
+{{--                                    @elseif( !empty($d->expirationDate) )--}}
+
+
+                                    @if( !empty($d->expirationDate) )
                                         <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">
-                                            Занят до: {{ $d->whois2[0]->expirationDate ?? $d->whois[0]->expirationDate }}
+                                            Занят до: {{ $d->expirationDate }}
                                         </div>
                                     @elseif($d->last_scan != null)
                                         <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">
@@ -131,7 +141,7 @@
                             </td>
                         </tr>
 
-                        @if(1==2)
+                        @if(1==1)
                             <tr>
                                 <td colspan="3"><small style="font-size:10px;">{{ str_replace(',',', ',$d) }}</small>
                                 </td>
