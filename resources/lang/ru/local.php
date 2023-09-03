@@ -28,5 +28,7 @@ return [
     'site_backword_title' => 'Обратная связь'
     ,
     'created_site' => 'Создание сайта'
+    ,
+    'list_domains__domain__zanyat_do' => 'Занят до: :date'
 
 ];

@@ -41,6 +41,8 @@ return [
     'site_backword_title' => 'Backword'
     ,
     'created_site' => 'Created this site >'
+    ,
+    'list_domains__domain__zanyat_do' => 'Busy until: :date'
 
 
 ];

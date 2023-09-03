@@ -86,28 +86,27 @@
                                         {{ __('local.list_domains__domain__nabludaem') }}
                                     </div>
 
-{{--                                    @if( !empty($d->expirationDate) )--}}
-{{--                                        <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">--}}
-{{--                                            Занят до: {{ $d->expirationDate }}--}}
-{{--                                        </div>--}}
-{{--                                    @elseif( !empty($d->whois[0]->expirationDate) )--}}
+                                    {{--                                    @if( !empty($d->expirationDate) )--}}
+                                    {{--                                        <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">--}}
+                                    {{--                                            Занят до: {{ $d->expirationDate }}--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    @elseif( !empty($d->whois[0]->expirationDate) )--}}
 
 
 
-{{--                                    @if( !empty($d->whois[0]->expirationDate) || !empty($d->whois2[0]->expirationDate) )--}}
-{{--                                        <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">--}}
-{{--                                            Занят до: {{ $d->whois2[0]->expirationDate ?? $d->whois[0]->expirationDate }}--}}
-{{--                                        </div>--}}
-{{--                                    @elseif( !empty($d->expirationDate) )--}}
-
-
-                                    @if( !empty($d->expirationDate) )
+                                    @if( !empty($d->whois[0]->expirationDate) || !empty($d->whois2[0]->expirationDate) )
+                                        <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">
+                                            {{ __('local.list_domains__domain__zanyat_do',['date' => $d->whois2[0]->expirationDate ?? $d->whois[0]->expirationDate ?? '']) }}:
+                                        </div>
+                                    @elseif( !empty($d->expirationDate) )
+                                        {{--                                    @if( !empty($d->expirationDate) )--}}
                                         <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">
                                             {{ __('local.list_domains__domain__zanyat_do') }}: {{ $d->expirationDate }}
                                         </div>
                                     @elseif($d->last_scan != null)
                                         <div style="background-color: rgba(0,255,0,0.1)" class="p-1 xtext-white">
-                                            {{ __('local.list_domains__domain__provereno') }}: {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}c
+                                            {{ __('local.list_domains__domain__provereno') }}
+                                            : {{  Carbon\Carbon::parse($d->last_scan)->format('d.m.Y') }}c
                                             @endif
 
                                             {{--                                        @elseif (sizeof($d->pays) > 0)--}}
@@ -117,7 +116,7 @@
                                                 {{--                                    <a href="">Оплатить</a>--}}
                                                 {{--                                                <br/>--}}
                                                 @if( $user->bonus > 0 )
-{{--                                                    {{$user->bonus }}--}}
+                                                    {{--                                                    {{$user->bonus }}--}}
                                                     <br/>
                                                     <a href="{{ route('domainBuyBonus',['domain' => $d]) }}"
                                                        onclick="return confirm('{{ __('local.list_domains__domain__oplatit_bonusom__podtv') }} {{ $d->name }} ?')"
