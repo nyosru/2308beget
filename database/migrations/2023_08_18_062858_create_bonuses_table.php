@@ -10,6 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
+
         Schema::create('bonuses', function (Blueprint $table) {
             $table->id();
 

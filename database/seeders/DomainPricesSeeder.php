@@ -14,22 +14,22 @@ class DomainPricesSeeder extends Seeder
     public function run(): void
     {
         DomainPrice::create([
-            'amount' => 150,
+            'amount' => 149,
             'amount_domain' => 1,
 //        'default' => false
         ]);
         DomainPrice::create([
-            'amount' => 1000,
+            'amount' => 990,
             'amount_domain' => 10,
             'default' => true
         ]);
         DomainPrice::create([
-            'amount' => 5000,
+            'amount' => 4900,
             'amount_domain' => 100,
 //        'default' => false
         ]);
         DomainPrice::create([
-            'amount' => 10000,
+            'amount' => 9900,
             'amount_domain' => 1000,
 //        'default' => false
         ]);

@@ -69,6 +69,9 @@
                     <tbody>
                     @foreach ($domains as $d)
 
+                        @include('domain.domains_item',['d' => $d ])
+
+                        @if(1==2)
                         {{--                        @include('domain.domains.one')--}}
 
                         <tr class="domain">
@@ -148,6 +151,7 @@
                                 <td colspan="3"><small style="font-size:10px;">{{ str_replace(',',', ',$d) }}</small>
                                 </td>
                             </tr>
+                        @endif
                         @endif
 
                     @endforeach

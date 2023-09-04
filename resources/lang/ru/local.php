@@ -18,8 +18,8 @@ return [
 
     'list_domains__domain__mogno_regit' => 'можно регистрировать!!',
     'list_domains__domain__nabludaem' => 'наблюдаем',
-    'list_domains__domain__zanyat_do' => 'Занят до',
-    'list_domains__domain__provereno' => 'Проверено',
+//    'list_domains__domain__zanyat_do' => 'Занят до: :date',
+    'list_domains__domain__provereno' => 'Проверено: :date',
     'list_domains__domain__ogidaet_oplatu' => 'Ожидает оплаты',
     'list_domains__domain__oplatit_bonusom' => 'Оплатить бонусом',
     'list_domains__domain__oplatit_bonusom__podtv' => 'Хотите оплатить бонусом - наблюдение за доменом',
