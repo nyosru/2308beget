@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 $d = function () {
     Route::get('/{any?}', [KrugiController::class, 'index'])->name('index');
 };
-
 Route::group([
 //    'as' => 'krugi.',
     'domain' => 'krugi.local'], $d);
