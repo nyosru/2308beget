@@ -59,6 +59,8 @@
     </div>
 @endif
 
+<div class="p-2 alert alert-info shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">Создание сайта <a href="https://php-cat.com" class="underline" target="_blank" >php-cat.com</a></div>
+
 <div class="container">
     <div class="row">
         <div class="col-12 py-5">
