@@ -1,0 +1,38 @@
+body {
+    padding: 0 !important;
+    width: 100%;
+}
+body {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
+
+.content_wrapper { width: 800px; margin: 0 auto; }
+.content_wrapper .logo { height: 70px; margin-bottom: 40px; border-bottom: 2px solid #eee; }
+.content_wrapper .logo a { padding-top: 40px; display: block;}
+.content { width: 600px; margin: 0 auto; }
+.content_wrapper a, .content h1 .name { color: #4c7e08; }
+.content h1 { font-size: 18px; margin: 15px 0 30px 20px; }
+.content .form { width: 500px; margin: 14px auto; }
+.content .caption { font-weight: bold; display: inline-block; }
+.content .caption .code { color: #4c7e08; font-size: 120%; }
+.content .caption1 { width: 350px; }
+.content .caption2 { width: 190px; }
+.content .caption3 { width: 350px; }
+.content .input { height: 24px; font-size: 16px; width: 140px; margin-right: 10px; position: relative; top: 1px; }
+.content .submit {
+    background: -moz-linear-gradient(center bottom , #397a37, #718f41) repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: -webkit-linear-gradient(bottom, #397a37, #718f41);
+    border: medium none;
+    box-shadow: 1px 1px 6px #666;
+    font-family: "Trebuchet MS",Tahoma,Verdana,Arial,helvetica,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    padding: 0;
+    width: 100px;
+}
