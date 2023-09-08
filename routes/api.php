@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('photo/mapJs{any?}', [\App\Http\Controllers\Krugi\KrugiController::class,'mapJs']);
+Route::get('photo/mapJs', [\App\Http\Controllers\Krugi\KrugiController::class,'mapJs']);
+
+Route::get('phpcat/news', [\App\Http\Controllers\PhpcatController::class,'apiNews']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -56,7 +61,8 @@ $d = function() {
 };
 
 //Route::group(array('domain' => 'site2.local'), $d);
-Route::group(array('domain' => 'domain.php-cat.com'), $d);
+//Route::group(array('domain' => 'domain.php-cat.com'), $d);
+Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 //Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
 
 

@@ -3,9 +3,25 @@
 use App\Http\Controllers\AuthTelegrammController;
 use App\Http\Controllers\Domain\CuponController;
 use App\Http\Controllers\Domain\DomainController;
+use App\Http\Controllers\Krugi\KrugiController;
+use App\Http\Controllers\PhpcatController;
 use Illuminate\Support\Facades\Route;
+
 //use Illuminate\Contracts\Cookie\Factory as Coockie;
 //use Illuminate\Support\Facades\App;
+
+
+$d = function () {
+    Route::get('/{any?}', [KrugiController::class, 'index'])->name('index');
+};
+
+Route::group([
+//    'as' => 'krugi.',
+    'domain' => 'krugi.local'], $d);
+Route::group([
+    'as' => 'krugi.',
+    'domain' => 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
+
 
 $d = function () {
 
@@ -56,19 +72,19 @@ $d = function () {
 };
 
 //    Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
-
 //Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//Route::group(array('domain' => ['domain.dev.php-cat.com',
+//    'domain.php-cat.com', 'domainwaiter.com'] ), $d);
 
-//if(
-//    strtolower($_SERVER['HTTP_HOST']) == 'domainwaiter.com'
-//    || strtolower($_SERVER['HTTP_HOST']) == 'domain.php-cat.com'
-//    || strtolower($_SERVER['HTTP_HOST']) == 'domain.dev.php-cat.com'
-//)
-//Route::group(array('domain' => $_SERVER['HTTP_HOST'] ), $d);
+Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//Route::group(array('domain' => 'domain.php-cat.com'), $d);
+//Route::group(array('domain' => 'domainwaiter.com'), $d);
 
 
-Route::group(array('domain' => 'domain.php-cat.com'), $d);
-Route::group(array('domain' => 'domainwaiter.com'), $d);
+$d = function () {
+    Route::get('/{any?}', [PhpcatController::class, 'index']);
+};
+Route::group(array('domain' => 'phpcat.local'), $d);
 
 
 //Route::get('/', function () {
@@ -95,3 +111,6 @@ Route::group(array('domain' => 'ttt72.local'), $d);
 Route::group(array('domain' => 'ttt72.ru'), $d);
 Route::group(array('domain' => 'xn--72-qmcaa.xn--p1ai'), $d);
 Route::group(array('domain' => 'ттт72.рф'), $d);
+
+//xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai.
+//IDN: кружки.сергейсб.рф
