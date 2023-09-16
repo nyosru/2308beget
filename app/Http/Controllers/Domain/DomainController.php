@@ -172,21 +172,26 @@ class DomainController extends Controller
 //        $in['BOT_USERNAME'] = env('bot_token_name');
 //        $in['BOT_TOKEN'] = env('bot_token');
 
-        [$in['BOT_USERNAME'], $in['BOT_TOKEN']] = match ($_SERVER['HTTP_HOST']) {
-            'domain.php-cat.com' => [
-                env('domain_domphpcat__bot_token_name'),
-                env('domain_domphpcat__bot_token')
-            ],
-            'domainwaiter.com' => [
-                env('domain_domdomwait__bot_token_name'),
-                env('domain_domdomwait__bot_token'),
-            ],
-//            'domain.dev.php-cat.com' => [
-            default => [
-                env('domain_domdevphpcat__bot_token_name'),
-                env('domain_domdevphpcat__bot_token'),
-            ],
-        };
+        $dom_to_env = str_replace(['-', '.'], ['_', '_'], $_SERVER['HTTP_HOST']);
+        $in['BOT_USERNAME'] = env('domain_' . $dom_to_env . '__bot_token_name', 'x');
+        $in['BOT_TOKEN'] = env('domain_' . $dom_to_env . '__bot_token', 'x');
+
+//            [$in['BOT_USERNAME'], $in['BOT_TOKEN']] = match ($_SERVER['HTTP_HOST']) {
+//            'domain.php-cat.com' => [
+//                env('domain_domphpcat__bot_token_name' , 'x' ),
+//                env('domain_domphpcat__bot_token' , 'x' )
+//            ],
+//            'domainwaiter.com' => [
+//                env('domain_domdomwait__bot_token_name'),
+//                env('domain_domdomwait__bot_token'),
+//            ],
+////            'domain.dev.php-cat.com' => [
+//            default => [
+//                env('domain_domdevphpcat__bot_token_name'),
+//                env('domain_domdevphpcat__bot_token'),
+//            ],
+//        };
+
 
         if (Auth::check()) {
 
