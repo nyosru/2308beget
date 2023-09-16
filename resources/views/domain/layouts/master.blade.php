@@ -26,7 +26,7 @@
     {{-- @vite('resources/css/app.css') --}}
     {{-- @vite() --}}
 
-    @vite(['resources/css/app.css', 'resources/xxx-js/app.xxx-js'])
+{{--    @vite(['resources/css/app.css', 'resources/xxx-js/app.xxx-js'])--}}
 
 </head>
 
