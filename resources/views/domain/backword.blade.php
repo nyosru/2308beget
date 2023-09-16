@@ -19,7 +19,7 @@
 
             <h1>Напишите сообщение</h1>
 
-            <form action="{{ route('domain_backword_send') }}" method="post">
+            <form action="{{ route('domain.domain_backword_send') }}" method="post">
                 @csrf
                 <textarea name="text"></textarea>
                 <br/>

@@ -75,9 +75,19 @@ $d = function () {
 //Route::group(array('domain' => ['domain.dev.php-cat.com',
 //    'domain.php-cat.com', 'domainwaiter.com'] ), $d);
 
-//Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
-Route::group(array('domain' => 'domain.php-cat.com'), $d);
-Route::group(array('domain' => 'domainwaiter.com'), $d);
+
+Route::group( [
+    'as' => ( $_SERVER['HTTP_HOST'] == 'domain.dev.php-cat.com' ? 'domain.' : '' ),
+    'domain' => 'domain.dev.php-cat.com'
+], $d);
+Route::group( [
+    'as' => ( $_SERVER['HTTP_HOST'] == 'domain.dev.php-cat.com' ? 'domain.' : '' ),
+    'domain' => 'domain.php-cat.com'
+], $d);
+Route::group( [
+    'as' => ( $_SERVER['HTTP_HOST'] == 'domain.dev.php-cat.com' ? 'domain.' : '' ),
+    'domain' => 'domainwaiter.com'
+], $d);
 
 
 $d = function () {

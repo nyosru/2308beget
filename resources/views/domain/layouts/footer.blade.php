@@ -24,7 +24,7 @@
                 &copy; 2020-{{ date('Y') }}
             </div>
             <div class="col-12 col-md-6 p-1 text-center">
-                <a href="{{ route('domain_backword') }}">{{ __('local.site_backword_title') }}</a>
+                <a href="{{ route('domain.domain_backword') }}">{{ __('local.site_backword_title') }}</a>
             </div>
         </div>
         <div class="row">

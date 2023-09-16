@@ -142,7 +142,7 @@ class DomainController extends Controller
         TelegramController::send('сообщение из обратной связи доменонаблюдателя:' . PHP_EOL . $request->text);
 
         return redirect()
-            ->route('domain_backword')
+            ->route('domain.domain_backword')
 //            ->action([DomainController::class, 'backword'])
             ->with('status', 'Сообщение отправлено!');
     }
@@ -165,11 +165,28 @@ class DomainController extends Controller
 
         $in = [
 //            'BOT_USERNAME' => 'WaitingDomainBot',
-            'BOT_USERNAME' => env('bot_token_name'),
-            'BOT_TOKEN' => env('bot_token'),
             'REDIRECT_URI' => 'https://' . $_SERVER['HTTP_HOST'] . '/api/telega-auth/callback',
             'HTTP_HOST' => $_SERVER['HTTP_HOST']
         ];
+
+//        $in['BOT_USERNAME'] = env('bot_token_name');
+//        $in['BOT_TOKEN'] = env('bot_token');
+
+        [$in['BOT_USERNAME'], $in['BOT_TOKEN']] = match ($_SERVER['HTTP_HOST']) {
+            'domain.php-cat.com' => [
+                env('domain_domphpcat__bot_token_name'),
+                env('domain_domphpcat__bot_token')
+            ],
+            'domainwaiter.com' => [
+                env('domain_domdomwait__bot_token_name'),
+                env('domain_domdomwait__bot_token'),
+            ],
+//            'domain.dev.php-cat.com' => [
+            default => [
+                env('domain_domdevphpcat__bot_token_name'),
+                env('domain_domdevphpcat__bot_token'),
+            ],
+        };
 
         if (Auth::check()) {
 
