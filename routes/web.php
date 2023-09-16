@@ -81,11 +81,11 @@ Route::group( [
     'domain' => 'domain.dev.php-cat.com'
 ], $d);
 Route::group( [
-    'as' => ( $_SERVER['HTTP_HOST'] == 'domain.dev.php-cat.com' ? 'domain.' : '' ),
+    'as' => ( $_SERVER['HTTP_HOST'] == 'domain.php-cat.com' ? 'domain.' : '' ),
     'domain' => 'domain.php-cat.com'
 ], $d);
 Route::group( [
-    'as' => ( $_SERVER['HTTP_HOST'] == 'domain.dev.php-cat.com' ? 'domain.' : '' ),
+    'as' => ( $_SERVER['HTTP_HOST'] == 'domainwaiter.com' ? 'domain.' : '' ),
     'domain' => 'domainwaiter.com'
 ], $d);
 
