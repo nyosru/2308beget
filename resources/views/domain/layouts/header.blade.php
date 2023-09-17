@@ -123,7 +123,11 @@
                                 data-telegram-login="{{ $BOT_USERNAME ?? '' }}"
                                 data-size="medium" data-auth-url="{{ $REDIRECT_URI ?? '' }}"
                                 data-request-access="write"></script>
-
+                        <script type="text/javascript">
+                            function onTelegramAuth(user) {
+                                alert('Logged 2222 in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+                            }
+                        </script>
                         {{-- @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
