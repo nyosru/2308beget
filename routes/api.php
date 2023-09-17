@@ -75,7 +75,7 @@ Route::group( [
     'domain' => 'domain.php-cat.com'
 ], $d);
 Route::group( [
-    'as' => 'domain.',
+    'as' => 'domain_api.',
     'domain' => 'domainwaiter.com'
 ], $d);
 
