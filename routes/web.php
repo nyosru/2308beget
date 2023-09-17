@@ -56,14 +56,14 @@ $d = function () {
     Route::POST('/backword', [DomainController::class, 'backwordSend'])->name('domain_backword_send');
 };
 
-Route::group([
-    //    'as' => 'domain.',
-    'domain' => 'domain.dev.php-cat.com'], $d);
+//Route::group([
+//    //    'as' => 'domain.',
+//    'domain' => 'domain.dev.php-cat.com'], $d);
 //Route::group( [
 ////    'as' => 'domain.',
 //    'domain' => 'domain.php-cat.com' ], $d);
 Route::group([
-    'as' => 'domain77.',
+    'as' => 'domain.',
     'domain' => 'domainwaiter.com'], $d);
 
 
