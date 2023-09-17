@@ -52,7 +52,6 @@ $d = function () {
 
         });
 
-
 //    Route::get('/{lang}', [DomainController::class, 'index1'])->name('domain_index1');
     Route::get('/', [DomainController::class, 'index'])->name('domain_index');
     Route::get('/', [DomainController::class, 'index'])->name('login');
@@ -88,6 +87,8 @@ Route::group( [
     'as' => 'domain.',
     'domain' => 'domainwaiter.com'
 ], $d);
+
+
 
 
 $d = function () {
