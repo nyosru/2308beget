@@ -111,7 +111,7 @@
                                 {{--                                <li><a class="dropdown-item" href="#">Profile</a></li>--}}
                                 {{--                                <li><hr class="dropdown-divider"></li>--}}
                                 <li><a class="dropdown-item"
-                                       href="{{ route('logout_lk') }}">{{ __('local.lk_exit') }}</a></li>
+                                       href="{{ route('domain.logout_lk') }}">{{ __('local.lk_exit') }}</a></li>
                             </ul>
                         </div>
 
