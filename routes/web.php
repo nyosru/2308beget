@@ -51,10 +51,12 @@ $d = function () {
 
 //    Route::get('/{lang}', [DomainController::class, 'index1'])->name('domain_index1');
 
-    Route::get('/',function () { return ''; } )->name('domain_index2');
-
+//    Route::get('/',function () { return ''; } )->name('domain_index2');
     Route::GET('/', [DomainController::class, 'index'])->name('domain_index');
-    Route::GET('/', [DomainController::class, 'index'])->name('login');
+//    Route::GET('/', [DomainController::class, 'index'])->name('login');
+//    Route::GET('/llogin', [DomainController::class, 'index'])->name('login');
+    Route::get('/llogin',function () {
+        return redirect('/'); } )->name('login');
 
 //    Route::get('/', [DomainController::class, 'index'])->name('login');
 //    Route::get('/enter', [DomainController::class, 'index_enter'])
