@@ -17,8 +17,8 @@ class AuthTelegrammController extends Controller
     function logout()
     {
         Auth::logout();
-        return redirect('/')
-//            ->route('domain_index')
+        return redirect()
+            ->route('domain.domain_index')
             ;
 
     }
