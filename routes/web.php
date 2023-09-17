@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 //use Illuminate\Support\Facades\App;
 
 
+
+
 $d = function () {
     Route::get('/{any?}', [KrugiController::class, 'index'])->name('index');
 };
@@ -20,6 +22,10 @@ Route::group([
 Route::group([
 //    'as' => 'krugi.',
     'domain' => 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
+
+
+
+
 
 
 $d = function () {
@@ -43,11 +49,22 @@ $d = function () {
 
         });
 
+//    Route::get('/{lang}', [DomainController::class, 'index1'])->name('domain_index1');
+
+    Route::get('/',function () { return ''; } )->name('domain_index2');
+
     Route::GET('/', [DomainController::class, 'index'])->name('domain_index');
     Route::GET('/', [DomainController::class, 'index'])->name('login');
 
+//    Route::get('/', [DomainController::class, 'index'])->name('login');
+//    Route::get('/enter', [DomainController::class, 'index_enter'])
+//        ->name('domain_enter')
+//        ->middleware('auth');
+
     Route::get('/logout', [AuthTelegrammController::class, 'logout'])->name('logout_lk');
     Route::post('/domain_add', [DomainController::class, 'domain_add'])->name('domain_add');
+
+//    Route::resource('/lk/cupons', CuponController::class )->name('domain_cupon');
 
     Route::resource('/lk/cupon', CuponController::class)->only(['store', 'index']);
     Route::GET('/pay/success', [CuponController::class, 'paySuccess'])->name('onpay_url_success');
@@ -56,15 +73,26 @@ $d = function () {
     Route::POST('/backword', [DomainController::class, 'backwordSend'])->name('domain_backword_send');
 };
 
-//Route::group([
-//    //    'as' => 'domain.',
-//    'domain' => 'domain.dev.php-cat.com'], $d);
+//    Route::group(array('domain' => (strpos($_SERVER['HTTP_HOST'], 'dev') !== false) ? 'domain.dev.php-cat.com' : 'domain.php-cat.com' ), $d);
+//Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
+//Route::group(array('domain' => ['domain.dev.php-cat.com',
+//    'domain.php-cat.com', 'domainwaiter.com'] ), $d);
+
+
+Route::group( [
+//    'as' => 'domain.',
+    'domain' => 'domain.dev.php-cat.com'
+], $d);
 //Route::group( [
 ////    'as' => 'domain.',
-//    'domain' => 'domain.php-cat.com' ], $d);
-Route::group([
+//    'domain' => 'domain.php-cat.com'
+//], $d);
+Route::group( [
     'as' => 'domain.',
-    'domain' => 'domainwaiter.com'], $d);
+    'domain' => 'domainwaiter.com'
+], $d);
+
+
 
 
 $d = function () {
