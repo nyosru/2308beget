@@ -90,7 +90,7 @@ class DomainController extends Controller
             }
 //        // владелец домена НЕ наш чувак
         } catch (\Exception $ex) {
-//            dd($ex);
+            dd($ex);
             return redirect()
                 ->route('domain.domain_index')
                 ->with('domain_warning', 'Упс, ошибочка');
