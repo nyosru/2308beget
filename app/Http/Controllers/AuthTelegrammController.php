@@ -18,12 +18,9 @@ class AuthTelegrammController extends Controller
     function logout( Request $request ): RedirectResponse
     {
         Auth::logout();
-//        $request->session()->invalidate();
-//        $request->session()->regenerateToken();
-        Auth::attempt([
-            'name' => 11,
-            'password' => 22,
-        ]);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()
             ->route('domain.domain_index')
             ;
