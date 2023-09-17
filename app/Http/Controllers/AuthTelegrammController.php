@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -14,9 +15,12 @@ class AuthTelegrammController extends Controller
 
     public $token = '';
 
-    function logout()
+    function logout( Request $request ): RedirectResponse
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()
             ->route('domain.domain_index')
             ;
