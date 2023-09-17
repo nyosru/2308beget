@@ -84,7 +84,8 @@ class DomainController extends Controller
                 $bonuses->increment('potracheno', 1);
                 $bonuses->save();
 
-                return redirect('/')
+                return redirect()
+                    ->route('domain.domain_index')
                     ->with('domain_status', 'Наблюдение за ' . $domain->name . ' оплачено бонусом, наблюдаем и оповестим как домен будет доступен к регистрации');
             }
 //        // владелец домена НЕ наш чувак
