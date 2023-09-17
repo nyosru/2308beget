@@ -29,9 +29,6 @@ Route::group([
 
 
 $d = function () {
-
-//    App->setLocale('en');
-
     Route::get('/test', [DomainController::class, 'test']);
     Route::post('/test', [DomainController::class, 'test']);
 
@@ -53,15 +50,20 @@ $d = function () {
         });
 
 //    Route::get('/{lang}', [DomainController::class, 'index1'])->name('domain_index1');
-    Route::get('/', [DomainController::class, 'index'])->name('domain_index');
-    Route::get('/', [DomainController::class, 'index'])->name('login');
+
+    Route::GET('/', [DomainController::class, 'index'])->name('domain_index');
+    Route::GET('/', [DomainController::class, 'index'])->name('login');
+
 //    Route::get('/', [DomainController::class, 'index'])->name('login');
 //    Route::get('/enter', [DomainController::class, 'index_enter'])
 //        ->name('domain_enter')
 //        ->middleware('auth');
+
     Route::get('/logout', [AuthTelegrammController::class, 'logout'])->name('logout_lk');
     Route::post('/domain_add', [DomainController::class, 'domain_add'])->name('domain_add');
+
 //    Route::resource('/lk/cupons', CuponController::class )->name('domain_cupon');
+
     Route::resource('/lk/cupon', CuponController::class)->only(['store', 'index']);
     Route::GET('/pay/success', [CuponController::class, 'paySuccess'])->name('onpay_url_success');
     Route::GET('/pay/fail', [CuponController::class, 'payFail'])->name('onpay_url_success');
