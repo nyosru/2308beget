@@ -10,20 +10,18 @@ use Illuminate\Support\Facades\Route;
 //use Illuminate\Contracts\Cookie\Factory as Coockie;
 //use Illuminate\Support\Facades\App;
 
-
+Route::get('phpinfo', function () { phpinfo(); });
 
 
 $d = function () {
     Route::get('/{any?}', [KrugiController::class, 'index'])->name('index');
 };
+//Route::group([
+////    'as' => 'krugi.',
+//    'domain' => 'krugi.local'], $d);
 Route::group([
     'as' => 'krugi.',
-    'domain' => 'krugi.local'], $d);
-Route::group([
-//    'as' => 'krugi.',
     'domain' => 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
-
-
 
 
 
@@ -81,10 +79,10 @@ $d = function () {
 //    'domain.php-cat.com', 'domainwaiter.com'] ), $d);
 
 
-Route::group( [
-//    'as' => 'domain.',
-    'domain' => 'domain.dev.php-cat.com'
-], $d);
+//Route::group( [
+////    'as' => 'domain.',
+//    'domain' => 'domain.dev.php-cat.com'
+//], $d);
 //Route::group( [
 ////    'as' => 'domain.',
 //    'domain' => 'domain.php-cat.com'

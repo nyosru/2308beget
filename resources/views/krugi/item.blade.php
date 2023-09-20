@@ -1,10 +1,10 @@
-<div class="col-12 col-md-4 col-lg-3 mb-5">
+<div class="col-6 col-md-4 col-lg-3 mb-5">
     <div class="mb-6 lg:mb-0">
-        <div class="relative block bg-white rounded-lg shadow-lg">
+        <div class="relative block bg-white rounded-lg shadow-lg overflow-hidden">
 
             @if( !empty($item['img1']) )
 
-                <img src="{{ '/storage/krugi/cups/'.$item['img1'] }}"/>
+                <img src="{{ '/storage/krugi/cups/mini/'.$item['img1'] }}" loading=lazy />
 
                 @if( 1==2 )
                     @if( !empty($item['img1']) )
@@ -60,6 +60,7 @@
 
                     @endif
                 @endif
+
             @endif
 
             <div class="flex">

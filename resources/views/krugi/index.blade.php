@@ -5,7 +5,7 @@
     {{--    <meta name="viewport" content="width=device-width, initial-scale=1">--}}
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1"/>
 
-    <link rel="shortcut icon" href="/storage/krugi/favicon.png" type="image/png" />
+    <link rel="shortcut icon" href="/storage/krugi/favicon.png" type="image/png"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
@@ -54,13 +54,14 @@
     <div id="app"></div>
 
     <div style="max-height: 100px; overflow: auto;">
-<pre>
-{{ print_r($cups->toArray(), true) }}
-</pre>
+        <pre>
+        {{ print_r($cups->toArray(), true) }}
+        </pre>
     </div>
 @endif
 
-<div class="p-2 alert alert-info shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">Создание сайта <a href="https://php-cat.com" class="underline" target="_blank" >php-cat.com</a></div>
+<div class="p-2 alert alert-info shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">Создание
+    сайта <a href="https://php-cat.com" class="underline" target="_blank">php-cat.com</a></div>
 
 <div class="container">
     <div class="row">
@@ -71,11 +72,11 @@
 
             <br/>
             <div class="alert alert-warning">
-            <p>Как получится прислать кружку от себя, присылайте!</p>
+                <p>Как получится прислать кружку от себя, присылайте!</p>
                 <br/>
                 <p>
-                используйте почту россии, получатель по
-                номеру телефона 8-922-262-22-89 Сергей Бакланов (доставят мне прямо в руки)</p>
+                    используйте почту россии, получатель по
+                    номеру телефона 8-922-262-22-89 Сергей Бакланов (доставят мне прямо в руки)</p>
             </div>
         </div>
     </div>

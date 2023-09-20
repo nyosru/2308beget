@@ -5,6 +5,7 @@ use App\Http\Controllers\BuyController;
 use App\Http\Controllers\Domain\DomainController;
 use App\Http\Controllers\OnPayController;
 use App\Http\Controllers\PromocodeController;
+use App\Http\Controllers\Service\ServiceImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,34 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+
+//Route::get('/resize/{type}/{size}/{imgDir}', [ ServiceImageController::class, 'resizeDir' ] )->name('resizeDir');
+//Route::get('/resize/{type}', [ ServiceImageController::class, 'resizeDir' ] )->name('resizeDir');
+
+Route::get('resize', [ ServiceImageController::class, 'resizeDir' ] )->name('resizeDir');
+
+//Route::get('/resize/{locale}',
+//    function ($locale) {
+//    dd($locale);
+////        if (!in_array($locale, [
+////            'en',
+////            'ru'
+//////            'es', 'fr'
+////        ])) {
+////            abort(400);
+////        }
+//////            Coockie->forever();// ::forever('language', $lang);
+////        session()->put('locale', $locale);
+//////            App::setlocale($lang);
+//////            $e = new DomainController();
+////        return redirect()->back();
+//
+//    });
+
+
+
+
 
 //Route::get('photo/mapJs{any?}', [\App\Http\Controllers\Krugi\KrugiController::class,'mapJs']);
 Route::get('photo/mapJs', [\App\Http\Controllers\Krugi\KrugiController::class,'mapJs']);
@@ -79,9 +108,6 @@ Route::group( [
     'domain' => 'domainwaiter.com'
 ], $d);
 
-
-
-
 //Route::group(array('domain' => 'domain.dev.php-cat.com'), $d);
 
 //if(
@@ -89,4 +115,3 @@ Route::group( [
 //    || strtolower($_SERVER['HTTP_HOST']) == 'domain.php-cat.com'
 //)
 //    Route::group(array('domain' => $_SERVER['HTTP_HOST'] ), $d);
-
