@@ -50,7 +50,7 @@
 
                         @if( $user->bonus > 0 )
                             <a class="btn btn-success"
-                               href="{{ route('domainNameBuyBonus',['domain_name' => session('domain') ]) }}">
+                               href="{{ route('domain_api.domainNameBuyBonus',['domain_name' => session('domain') ]) }}">
                                 {{ __('local.list_domains__button_buy_bonuses__title') }}
                             </a>
                         @endif
