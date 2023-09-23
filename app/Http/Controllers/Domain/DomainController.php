@@ -176,6 +176,7 @@ class DomainController extends Controller
 //        $in['BOT_TOKEN'] = env('bot_token');
 
         $dom_to_env = str_replace(['-', '.'], ['_', '_'], $_SERVER['HTTP_HOST']);
+//        dd($dom_to_env);
         $in['BOT_USERNAME'] = env('domain_' . $dom_to_env . '__bot_token_name', 'x');
         $in['BOT_TOKEN'] = env('domain_' . $dom_to_env . '__bot_token', 'x');
 

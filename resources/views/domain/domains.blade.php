@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             {{--            <div class="col-4">Домены</div>--}}
             <div class="col-12 col-sm-8 col-lg-6">
-                <form action="{{ route('domain_add') }}" method="POST">
+                <form action="{{ route('domain.domain_add') }}" method="POST">
                     @csrf
                     <input type="text" name="domain" placeholder="{{ __('local.form_add__input__placeholder') }}"/>
                     <button>{{ __('local.form_add_button_add_tittle') }}</button>
