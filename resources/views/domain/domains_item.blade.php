@@ -57,7 +57,7 @@
         {{--                                            @endif--}}
         {{--                                {{ route('domain_deactive',['id'=>$d->id]) }}--}}
 
-        <a href="{{ route('domain.domain_deactive',['domain'=>$d]) }}"
+        <a href="{{ route('domain_api.domain_deactive',['domain'=>$d]) }}"
            title="Удалить домен из активного списка наблюдения"
            onclick="return confirm('{{ __('local.list_domains__domain__udalit_domen',['domain' => $d->name]) }}');"
            class="remove">
