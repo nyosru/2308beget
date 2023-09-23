@@ -45,7 +45,7 @@
                         @if( $user->bonus > 0 )
                             {{--                                                    {{$user->bonus }}--}}
                             <br/>
-                            <a href="{{ route('domain.domainBuyBonus',['domain' => $d]) }}"
+                            <a href="{{ route('domain_api.domainBuyBonus',['domain' => $d]) }}"
                                onclick="return confirm('{{ __('local.list_domains__domain__oplatit_bonusom__podtv') }} {{ $d->name }} ?')"
                             >{{ __('local.list_domains__domain__oplatit_bonusom') }}</a>
             @endif
