@@ -45,7 +45,7 @@
                         @if( $user->bonus > 0 )
                             {{--                                                    {{$user->bonus }}--}}
                             <br/>
-                            <a href="{{ route('domainBuyBonus',['domain' => $d]) }}"
+                            <a href="{{ route('domain.domainBuyBonus',['domain' => $d]) }}"
                                onclick="return confirm('{{ __('local.list_domains__domain__oplatit_bonusom__podtv') }} {{ $d->name }} ?')"
                             >{{ __('local.list_domains__domain__oplatit_bonusom') }}</a>
             @endif
@@ -57,7 +57,7 @@
         {{--                                            @endif--}}
         {{--                                {{ route('domain_deactive',['id'=>$d->id]) }}--}}
 
-        <a href="{{ route('domain_deactive',['domain'=>$d]) }}"
+        <a href="{{ route('domain.domain_deactive',['domain'=>$d]) }}"
            title="Удалить домен из активного списка наблюдения"
            onclick="return confirm('{{ __('local.list_domains__domain__udalit_domen',['domain' => $d->name]) }}');"
            class="remove">
