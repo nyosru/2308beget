@@ -1,6 +1,6 @@
 {{--                        @include('domain.domains.one')--}}
 
-@if( ENV('debug','x') == true )
+@if( 1==2 )
 <tr>
     <td align="left" colspan="3">
         <div style="max-height: 200px; overflow: auto;" >
