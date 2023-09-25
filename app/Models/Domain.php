@@ -21,7 +21,19 @@ class Domain extends Model
 
     public function whois()
     {
-        return $this->hasMany(Whois::class, 'domain', 'name_tech')->orderByDesc('expirationDate');
+        return $this->hasOne(Whois::class, 'domain', 'name_tech')
+            ->orderByDesc('expirationDate')
+//            ->orderByDesc('id')
+            ;
+//      return $this->hasOne(Whois::class, 'domain', 'name')->orderByDesc('expirationDate');
+    }
+
+    public function whois_all()
+    {
+        return $this->hasMany(Whois::class, 'domain', 'name_tech')
+            ->orderByDesc('expirationDate')
+//            ->orderByDesc('id')
+            ;
 //      return $this->hasOne(Whois::class, 'domain', 'name')->orderByDesc('expirationDate');
     }
 
@@ -54,13 +66,17 @@ class Domain extends Model
         return $query->leftJoin('whois',
             function ($join) {
                 $join
-                    ->on('whois.domain', '=', 'domains.name')
-                    ->orOn('whois.domain', '=', 'domains.name_tech')//                    ->on('whois.domain', '=', 'domains.name_tech')
+//                    ->on('whois.domain', '=', 'domains.name')
+//                    ->orOn('whois.domain', '=', 'domains.name_tech')
+                    ->on('whois.domain', '=', 'domains.name_tech')
+//                    ->orderByDESC('whois.expirationDate')
+
+                    //                    ->on('whois.domain', '=', 'domains.name_tech')
                 ;
             }
 //            'whois.domain', '=', 'domains.name'
         )
-            ->orderByDESC('whois.expirationDate')
+            ->orderByDesc('whois.expirationDate')
 //            ->groupBy('whois.domain')
             ->addSelect('whois.expirationDate');
     }

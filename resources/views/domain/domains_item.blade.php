@@ -1,10 +1,33 @@
 {{--                        @include('domain.domains.one')--}}
 
+@if( ENV('debug','x') == true )
+<tr>
+    <td align="left" colspan="3">
+        <div style="max-height: 200px; overflow: auto;" >
+        <small><pre>{{ print_r($d) }}</pre></small>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td align="left" colspan="3">
+        <div style="max-height: 200px; overflow: auto;" >
+        <small><pre>{{ ( !empty($d->whois->expirationDate) ? $d->whois->expirationDate : 'xx' ) }}</pre></small>
+        </div>
+    </td>
+</tr>
+{{--<tr>--}}
+{{--    <td align="left" colspan="3">--}}
+{{--        <div style="max-height: 200px; overflow: auto;" >--}}
+{{--        <small><pre>{{ sizeof( $d->whois ) }}</pre></small>--}}
+{{--        </div>--}}
+{{--    </td>--}}
+{{--</tr>--}}
+@endif
 <tr class="domain">
     <td>
         {{ $d->name }}
     </td>
-    {{--                            <td>{{ $d->expirationDate }}</td>--}}
+{{--                                <td>{{ $d->expirationDate }}</td>--}}
     <td style="font-size: 60%;">
         @if ( $d->available )
             <div class="p-1 bg-success text-white">
@@ -23,9 +46,10 @@
 
 
 
-            @if( !empty($d->whois[0]->expirationDate) || !empty($d->whois2[0]->expirationDate) )
+{{--            @if( !empty($d->whois->expirationDate) || !empty($d->whois2[0]->expirationDate) )--}}
+            @if( !empty($d->whois->expirationDate) )
                 <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">
-                    {{ __('local.list_domains__domain__zanyat_do',['date' => $d->whois2[0]->expirationDate ?? $d->whois[0]->expirationDate ?? '']) }}
+                    {{ __('local.list_domains__domain__zanyat_do',['date' => $d->whois->expirationDate ?? '?']) }}
                 </div>
             @elseif( !empty($d->expirationDate) )
                 <div style="background-color: rgba(255,55,55,0.2)" class="p-1 text-black">

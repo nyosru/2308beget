@@ -108,6 +108,7 @@ class DomainController extends Controller
 
         $add = Domain::create([
             'name' => $request->domain,
+            'name_tech' => idn_to_ascii($request->domain),
             'user_id' => Auth::user()->id
         ]);
 
@@ -205,10 +206,15 @@ class DomainController extends Controller
             $in['user_info'] = DomainLkController::UserInfo($in['user']->id);
 
             $in['domains'] = Domain::with([
+
                 'pays',
+
+//                'whois',
+
                 'whois' => function ($query) {
-//                    $query->orderBy('created_at', 'desc');
-                    $query->limit(1);
+//                    $query->groupBy('whois.domain');
+                    $query->orderBy('whois.created_at', 'desc');
+//                    $query->limit(1);
                 },
 
 //                'whois2' => function ($query) {
@@ -220,11 +226,15 @@ class DomainController extends Controller
                 ->whereUser_id(Auth::user()->id)
                 ->select(['domains.*'])
 //                ->distinct('domains.domain')
-                ->whereShow(true)
                 ->orderBy('domains.name')
-//                ->distinct('domains.name')
 //                ->groupBy('domains.id')
+//                ->groupBy('domains.name')
+
 //                ->ExpiraDate()
+//                ->distinct('domains.name')
+
+                ->whereShow(true)
+
                 ->get();
 
         }
