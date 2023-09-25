@@ -34,13 +34,14 @@ class domainWhoisScan extends Command
         $this->info('Сканирование whois информации о доменах');
 
         try {
-            $e = $whc->whoisUpdate(2, 'array');
+            $e = $whc->whoisUpdate(10, 'array');
             if( !empty($e) ) {
                 $msg = 'скан доменов ';
                 foreach ($e as $domain) {
 //                $this->success($domain);
                     $msg .= ' ' . $domain;
                 }
+                $this->info($msg );
                 $tele::send($msg);
             }
         } catch (\Exception $ex) {

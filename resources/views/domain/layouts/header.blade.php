@@ -88,7 +88,7 @@
                             {{-- <br/>                        {{ $user ?? '' }} --}}
                         @endif
 
-                        <div class="text-end pt-2 mr-2">
+                        <div class="text-end pt-2 mr-2 align-middle">
 
                             {{--                            Баланс: {{ !empty( $user_info['bonuses']->kolvos ) ? $user_info['bonuses']->kolvos : 0}}--}}
                             {{ __('local.balance_title') }}: {{ $user->bonus }}
@@ -99,10 +99,11 @@
                                 <a href="{{ route('domain.cupon.index') }}">{{ __('local.balance_add') }}</a>
                             </small>
                         </div>
+
                         <div class="dropdown text-end">
                             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
                                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ $user->telegram_photo ?? 'https://github.com/mdo.png' }}" alt="mdo"
+                                <img src="{{ $user->telegram_photo ?? 'https://github.com/mdo.png' }}" alt=""
                                      width="32" height="32"
                                      class="rounded-circle">
                             </a>
@@ -111,6 +112,8 @@
                                 {{--                                <li><a class="dropdown-item" href="#">Settings</a></li>--}}
                                 {{--                                <li><a class="dropdown-item" href="#">Profile</a></li>--}}
                                 {{--                                <li><hr class="dropdown-divider"></li>--}}
+                                <li><a class="dropdown-item"
+                                    href="{{ route('domain.cupon.index') }}">{{ __('local.balance_add') }}</a></li>
                                 <li><a class="dropdown-item"
                                        href="{{ route('domain.logout_lk') }}">{{ __('local.lk_exit') }}</a></li>
                             </ul>

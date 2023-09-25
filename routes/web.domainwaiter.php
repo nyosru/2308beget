@@ -66,7 +66,8 @@ $d = function () {
 if (ENV('APP_ENV', 'x') == 'local') {
     Route::group([
         'as' => 'domain.',
-        'domain' => 'domain.dev.php-cat.com'
+//        'domain' => 'domain.dev.php-cat.com'
+        'domain' => 'domainwaiter.co'
     ], $d);
 } // боевой
 else {

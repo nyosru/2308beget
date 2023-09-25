@@ -9,6 +9,7 @@ use App\Models\Whois;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Dns\Dns;
 
 class WhoisController extends Controller
 {
@@ -88,10 +89,32 @@ class WhoisController extends Controller
 
     }
 
+    /**
+     * получаем и ссохраняем доп данные по домену
+     * @param string $domain
+     * @return array
+     */
+    public static function dopWhoisOneDomain(string $domain): array
+    {
+        $data = self::getDopWhoisOneDomain($domain);
+        self::saveDopWhoisOneDomain($data);
+        return [];
+    }
+
+    public function domainSetStatus(string $domain, bool $available = false)
+    {
+
+        Domain::where('name', $domain)
+            ->update([
+                'last_scan' => date('Y-m-d'),
+                'available' => $available
+            ]);
+
+    }
+
 //    public function whoisSaveData(WhoisAddRequest $data)
     public function whoisSaveData(array $data)
     {
-
         $validator = Validator::make($data, [
 //            'email' => 'required|email',
 //            'games' => 'required|numeric',
@@ -122,16 +145,4 @@ class WhoisController extends Controller
 //        dd($data);
 //        return Domain::create($data);
     }
-
-    public function domainSetStatus(string $domain, bool $available = false)
-    {
-
-        Domain::where('name', $domain)
-            ->update([
-                'last_scan' => date('Y-m-d'),
-                'available' => $available
-            ]);
-
-    }
-
 }

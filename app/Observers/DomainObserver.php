@@ -33,7 +33,9 @@ class DomainObserver
 //            dd('да, это обновление');
 
             // сообщение об оплате
-            TelegramController::sendMsgToUser(Auth::user(), '🍀 ' . $domain->getOriginal()['name'] . ' Наблюдение за доменом оплачено бонусом');
+            TelegramController::sendMsgToUser(Auth::user(), '🍀 ' . $domain->getOriginal()['name'] .
+                ' @' . ( Auth::user()->telegram_username ?? 'x' ) . PHP_EOL .
+                ' Наблюдение за доменом оплачено бонусом');
         }
 
     }

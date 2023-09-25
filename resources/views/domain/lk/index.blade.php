@@ -13,7 +13,7 @@
                     }
                 </style>
 {{--                {{ $prices }}--}}
-                <form action="{{ route('buy.store') }}" method="post">
+                <form action="{{ route('domain_api.buy.store') }}" method="post">
                     <div style="width:10px; min-width: 250px; margin: 0 auto;">
                         <table class="table table-striped tab-rig text-left">
                             <thead>
