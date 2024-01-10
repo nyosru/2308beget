@@ -10,24 +10,20 @@ use Illuminate\Support\Facades\Route;
 //use Illuminate\Contracts\Cookie\Factory as Coockie;
 //use Illuminate\Support\Facades\App;
 
-Route::get('phpinfo', function () { phpinfo(); });
-
+Route::get('phpinfo', function () {
+    phpinfo();
+});
 
 $d = function () {
+    Route::get('/a', [KrugiController::class,'create'] )->name('create')    ;
+    Route::post('/a', [KrugiController::class,'store'] )->name('store')    ;
+    Route::post('/a/{cup}', [KrugiController::class,'destroy'] )->name('delete')    ;
     Route::get('/{any?}', [KrugiController::class, 'index'])->name('index');
 };
-//Route::group([
-////    'as' => 'krugi.',
-//    'domain' => 'krugi.local'], $d);
+
 Route::group([
     'as' => 'krugi.',
-    'domain' => 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
-
-
-
-
-
-
+    'domain' => (ENV('APP_ENV', 'x') == 'local') ? 'krugi.local' : 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
 
 
 //$d = function () {
@@ -95,10 +91,7 @@ Route::group([
 //    'as' => 'domain.',
 //    'domain' => 'domainwaiter.com'
 //], $d);
-require ('web.domainwaiter.php');
-
-
-
+require('web.domainwaiter.php');
 
 
 $d = function () {

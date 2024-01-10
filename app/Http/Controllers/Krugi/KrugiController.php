@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Krugi;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Service\ServiceImageController;
 use App\Models\krugi\Cup;
+use http\Env;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class KrugiController extends Controller
 {
@@ -96,7 +100,9 @@ function init() {
      */
     public function create()
     {
-        //
+        $in = [];
+        $in['cups'] = Cup::orderBy('name')->get();
+        return view('krugi.add', $in);
     }
 
     /**
@@ -104,13 +110,61 @@ function init() {
      */
     public function store(Request $request)
     {
-        //
+
+        if ($request->s == env('CUPS_PASS_FOR_ADMIN')){}else {
+            return redirect()->back()->withSuccess('добавлено no');
+        }
+
+
+        $request->validate([
+            'name' => 'required',
+            'photo' => 'required|mimes:jpeg,jpg|max:3048',
+            'photo2' => 'mimes:jpeg,jpg|max:3048',
+            'photo3' => 'mimes:jpeg,jpg|max:3048',
+            'photo4' => 'mimes:jpeg,jpg|max:3048',
+            'photo5' => 'mimes:jpeg,jpg|max:3048',
+        ]);
+
+        $post = new Cup();
+        $post->name = $request->input('name');
+//        if ($request->hasFile('photo'))
+
+        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+            $file_name = (string)date('ymdhis') . '_cup.jpg';
+            $i1 = $request->file('photo')->storeAs('public/krugi/cups', $file_name);
+//            $rebrush[] = self::createMini($dir_img, $f);
+            if (ServiceImageController::createMini(pathinfo(storage_path('app/' . $i1), PATHINFO_DIRNAME), $file_name))
+                $post->img1 = $file_name;
+//            Log::debug($post->img1, [__LINE__]);
+//            dd($post->img1 = ServiceImageController::createMini(pathinfo($i1, PATHINFO_DIRNAME), $file_name));
+//        $post->img1 = $request->file('photo')->storeAs('krugi/cups', date('ymdhis') . '_cup.jpg','public');
+        }
+
+        if ($request->hasFile('photo2') && $request->file('photo2')->isValid())
+            $post->img2 = $request->file('photo2')->storeAs('krugi/cups', date('ymdhis') . '_cup2.jpg', 'public');
+        if ($request->hasFile('photo3') && $request->file('photo3')->isValid())
+            $post->img3 = $request->file('photo3')->storeAs('krugi/cups', date('ymdhis') . '_cup3.jpg', 'public');
+        if ($request->hasFile('photo4') && $request->file('photo4')->isValid())
+            $post->img4 = $request->file('photo4')->storeAs('krugi/cups', date('ymdhis') . '_cup4.jpg', 'public');
+        if ($request->hasFile('photo5') && $request->file('photo5')->isValid())
+            $post->img5 = $request->file('photo5')->storeAs('krugi/cups', date('ymdhis') . '_cup5.jpg', 'public');
+
+        $post->save();
+
+//            return redirect('/')->with('success', 'File uploaded successfully');
+//        } else {
+//            return redirect('/')->with('error', 'Invalid file or file upload failed');
+//        }
+        return redirect()->back()->withSuccess('добавлено');
+//
+////        dd($request->all());
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public
+    function show(string $id)
     {
         //
     }
@@ -118,7 +172,8 @@ function init() {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public
+    function edit(string $id)
     {
         //
     }
@@ -126,7 +181,8 @@ function init() {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public
+    function update(Request $request, string $id)
     {
         //
     }
@@ -134,8 +190,14 @@ function init() {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public
+    function destroy(Cup $cup, Request $r)
     {
-        //
+        if ($r->s != env('CUPS_PASS_FOR_ADMIN'))
+            return redirect()->back()->withSuccess('удалено no');
+
+        $cup->delete();
+        return redirect()->back()->withSuccess('удалено');
+
     }
 }

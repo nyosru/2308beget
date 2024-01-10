@@ -7,6 +7,7 @@ use App\Http\Requests\service\ApiDirResizeRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -103,20 +104,27 @@ class ServiceImageController extends Controller
 
     /**
      * создаёт мини изображение
-     * @param $dir папка
-     * @param $filename файл оригинал
+     * @param $dir string папка
+     * @param $filename string файл оригинал
      * @return bool
      */
     static public function createMini($dir, $filename): string|bool
     {
+        Log::debug($dir.' ' . $filename);
+
         if (file_exists($dir . '/' . $filename)) {
+            Log::debug('файл есть #'.__LINE__);
             $img = self::getImage($dir . '/' . $filename);
             if ($img) {
+                Log::debug('файл есть2 #'.__LINE__);
                 $img_mini = self::imageResize($img, 400, 'jpg');
                 $new_file = $dir . '/mini/' . $filename;
                 imagejpeg($img_mini, $new_file);
+                Log::debug('новый файл '.$new_file.' #'.__LINE__);
                 return $new_file;
             }
+        }else{
+            Log::debug('файл НЕТ #'.__LINE__);
         }
         return false;
     }

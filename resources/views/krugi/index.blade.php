@@ -80,6 +80,9 @@
             </div>
         </div>
     </div>
+
+{{--    $cups: {{$cups}}--}}
+
     <div class="row">
         @foreach( $cups as $item )
             {{--    {{ print_r($item) }}--}}
