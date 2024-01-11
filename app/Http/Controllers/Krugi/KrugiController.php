@@ -136,13 +136,13 @@ function init() {
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name);
 //            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), basename($i1));
-            $ee = ServiceImageController::createMini(storage_path('app/public/krugi/cups' ), basename($i1));
+            $ee = ServiceImageController::createMini('/home'.storage_path('app/public/krugi/cups' ), basename($i1));
             if ($ee)
                 $post->img1 = $file_name;
 
             dd(
                 $ee,
-                storage_path('app/public/' . $i1),
+                '/home'.storage_path('app/public/' . $i1),
                 pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME)
             );
 
