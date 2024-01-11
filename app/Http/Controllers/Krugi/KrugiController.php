@@ -134,7 +134,7 @@ function init() {
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
 
             $file_name = (string)date('ymdhis') . '_cup.jpg';
-            $i1 = $request->file('photo')->storeAs('krugi/cups', $file_name, 'public' );
+            $i1 = $request->file('photo')->storeAs('krugi/cups', $file_name, 'public');
 
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name);
 //            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
@@ -146,11 +146,11 @@ function init() {
                 $post->img1 = $file_name;
             } else {
                 dd($i1,
-                    '$dir '.$dir,
-                    '/home' . storage_path('app/public/' . $i1),
-                    '$ee '.$ee,
+                    '$dir ' . $dir,
+//                    '/home' . storage_path('app/public/' . $i1),
+                    '$ee ' . ($ee ?? 'x'),
 //                json_encode(scandir('/home'.storage_path('app/public/' . $i1))),
-                    pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME)
+                    pathinfo( storage_path('app/public/krugi/cups' . $i1 ), PATHINFO_DIRNAME )
                 );
             }
         }
