@@ -111,7 +111,8 @@ function init() {
     public function store(Request $request)
     {
 
-        if ($request->s == env('CUPS_PASS_FOR_ADMIN')){}else {
+        if ($request->s == env('CUPS_PASS_FOR_ADMIN')) {
+        } else {
             return redirect()->back()->withSuccess('добавлено no');
         }
 
@@ -130,36 +131,36 @@ function init() {
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
-            $i1 = $request->file('photo')->storeAs('krugi/cups', $file_name , 'public');
-            if (ServiceImageController::createMini(pathinfo(storage_path('app/' . $i1), PATHINFO_DIRNAME), $file_name))
+            $i1 = $request->file('photo')->storeAs('krugi/cups', $file_name, 'public');
+            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
                 $post->img1 = $file_name;
         }
 
         if ($request->hasFile('photo2') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
-            $i1 = $request->file('photo2')->storeAs('public/krugi/cups', $file_name);
-            if (ServiceImageController::createMini(pathinfo(storage_path('app/' . $i1), PATHINFO_DIRNAME), $file_name))
+            $i1 = $request->file('photo2')->storeAs('krugi/cups', $file_name, 'public');
+            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
                 $post->img2 = $file_name;
         }
 
         if ($request->hasFile('photo3') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $i1 = $request->file('photo3')->storeAs('public/krugi/cups', $file_name);
-            if (ServiceImageController::createMini(pathinfo(storage_path('app/' . $i1), PATHINFO_DIRNAME), $file_name))
+            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
                 $post->img3 = $file_name;
         }
 
         if ($request->hasFile('photo4') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $i1 = $request->file('photo4')->storeAs('public/krugi/cups', $file_name);
-            if (ServiceImageController::createMini(pathinfo(storage_path('app/' . $i1), PATHINFO_DIRNAME), $file_name))
+            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
                 $post->img4 = $file_name;
         }
 
         if ($request->hasFile('photo5') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $i1 = $request->file('photo5')->storeAs('public/krugi/cups', $file_name);
-            if (ServiceImageController::createMini(pathinfo(storage_path('app/' . $i1), PATHINFO_DIRNAME), $file_name))
+            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
                 $post->img5 = $file_name;
         }
 
