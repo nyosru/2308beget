@@ -145,7 +145,13 @@ function init() {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $dir0 = 'krugi/cups';
             $dir = storage_path('app/public/' . $dir0);
+
+            echo '<pre>',print_r($_FILES),'</pre>';
+            exit;
+
             move_uploaded_file( $_FILES['photo']['tmp_name'],$dir.'/'.$file_name );
+
+
 
 //            $i1 = $request->file('photo')->storeAs($dir0, $file_name, 'public');
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name);
