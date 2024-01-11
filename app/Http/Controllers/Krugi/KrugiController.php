@@ -143,7 +143,7 @@ function init() {
             dd(
                 $ee,
                 '/home'.storage_path('app/public/' . $i1),
-                scandir('/home'.storage_path('app/public/' . $i1))38,
+                json_encode(scandir('/home'.storage_path('app/public/' . $i1))),
                 pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME)
             );
 
