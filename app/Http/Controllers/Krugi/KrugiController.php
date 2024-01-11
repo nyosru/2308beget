@@ -130,7 +130,7 @@ function init() {
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
-            $i1 = $request->file('photo')->storeAs('public/krugi/cups', $file_name);
+            $i1 = $request->file('photo')->storeAs('krugi/cups', $file_name , 'public');
             if (ServiceImageController::createMini(pathinfo(storage_path('app/' . $i1), PATHINFO_DIRNAME), $file_name))
                 $post->img1 = $file_name;
         }
