@@ -139,7 +139,11 @@ function init() {
             if ($ee)
                 $post->img1 = $file_name;
 
-            dd($ee, pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME));
+            dd(
+                $ee,
+                storage_path('app/public/' . $i1),
+                pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME)
+            );
 
         }
 
