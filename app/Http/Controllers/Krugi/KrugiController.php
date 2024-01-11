@@ -139,7 +139,7 @@ function init() {
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name);
 //            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), basename($i1));
-            $dir = storage_path('app/public/krugi/cups');
+            $dir = storage_path('public/krugi/cups');
             $ee = ServiceImageController::createMini($dir, basename($i1));
 
             if ($ee) {
@@ -148,7 +148,7 @@ function init() {
                 dd($i1,
                     $dir,
                     '/home' . storage_path('app/public/' . $i1),
-                    $ee,
+                    '$ee '.$ee,
 //                json_encode(scandir('/home'.storage_path('app/public/' . $i1))),
                     pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME)
                 );
