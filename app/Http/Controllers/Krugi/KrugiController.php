@@ -133,6 +133,9 @@ function init() {
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
 
+            echo __LINE__.' ';
+            var_dump($request->file('photo')->getFileInfo());
+
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $dir0 = 'krugi/cups';
             $dir = storage_path('app/public/' . $dir0);
