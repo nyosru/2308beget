@@ -37,7 +37,13 @@ class ServiceImageController extends Controller
                 $img = @imagecreatefromgif($filename);
                 break;
             case 'jpeg':
-                $img = imagecreatefromjpeg($filename);
+                $img = @imagecreatefromjpeg($filename);
+
+                if (!$img) {
+                    $error = error_get_last();
+                    echo "Ошибка: " . $error['message'];
+                }
+
                 break;
         }
 
@@ -114,8 +120,8 @@ class ServiceImageController extends Controller
 
         if (file_exists($dir . '/' . $filename)) {
 
-            echo __LINE__.' '.PHP_EOL;
-            echo $dir . '/' . $filename.' '.PHP_EOL;
+            echo __LINE__ . ' ' . PHP_EOL;
+            echo $dir . '/' . $filename . ' ' . PHP_EOL;
 
 //            Log::debug('файл есть #'.__LINE__);
 //            dd('file_e');
@@ -123,7 +129,7 @@ class ServiceImageController extends Controller
             $img = self::getImage($dir . '/' . $filename);
 
             if ($img) {
-                echo __LINE__.' ';
+                echo __LINE__ . ' ';
 //                Log::debug('файл есть2 #'.__LINE__);
                 $img_mini = self::imageResize($img, 400, 'jpg');
                 $new_file = $dir . '/mini/' . $filename;
@@ -132,7 +138,7 @@ class ServiceImageController extends Controller
 //                Log::debug('новый файл '.$new_file.' #'.__LINE__);
                 return $new_file;
             }
-        }else{
+        } else {
 //            Log::debug('файл НЕТ #'.__LINE__);
 //            dd('file_no e');
         }
