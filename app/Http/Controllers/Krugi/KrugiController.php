@@ -144,6 +144,8 @@ function init() {
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), basename($i1));
             $ee = ServiceImageController::createMini($dir, basename($i1));
 
+            echo '$ee '; var_dump($ee);
+
             if ($ee) {
                 $post->img1 = $file_name;
             } else {
