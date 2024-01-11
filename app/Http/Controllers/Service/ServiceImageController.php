@@ -114,6 +114,7 @@ class ServiceImageController extends Controller
 
         if (file_exists($dir . '/' . $filename)) {
 //            Log::debug('файл есть #'.__LINE__);
+            dd('file_e');
             $img = self::getImage($dir . '/' . $filename);
             if ($img) {
 //                Log::debug('файл есть2 #'.__LINE__);
@@ -126,6 +127,7 @@ class ServiceImageController extends Controller
             }
         }else{
 //            Log::debug('файл НЕТ #'.__LINE__);
+            dd('file_no e');
         }
         return false;
     }
