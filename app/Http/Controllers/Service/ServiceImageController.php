@@ -40,6 +40,9 @@ class ServiceImageController extends Controller
                 $img = @imagecreatefromjpeg($filename);
 
                 if (!$img) {
+
+                    echo '1 '.filesize($filename);
+
                     $error = error_get_last();
 //                    echo "Ошибка: " . $error['message'];
                     var_dump($error);
