@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.8",
         "pecee/intervention-image": "^2.2",
         "spatie/dns": "^2.5",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+      "ext-gd": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
