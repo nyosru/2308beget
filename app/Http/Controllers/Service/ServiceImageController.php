@@ -120,6 +120,7 @@ class ServiceImageController extends Controller
                 $img_mini = self::imageResize($img, 400, 'jpg');
                 $new_file = $dir . '/mini/' . $filename;
                 imagejpeg($img_mini, $new_file);
+                dd($img_mini, $new_file);
 //                Log::debug('новый файл '.$new_file.' #'.__LINE__);
                 return $new_file;
             }
