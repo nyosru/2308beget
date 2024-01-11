@@ -6,15 +6,17 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Controllers\Service\ServiceImageController;
 use App\Models\krugi\Cup;
-use http\Env;
+
+//use http\Env;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+
+//use Illuminate\Support\Facades\Log;
+//use Illuminate\Support\Facades\Storage;
 
 class KrugiController extends Controller
 {
 
-    public function mapJs()
+    public function mapJs(): string
     {
 
         $t = '
