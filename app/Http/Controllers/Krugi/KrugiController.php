@@ -212,11 +212,16 @@ function init() {
 ////        dd($request->all());
     }
 
-    public static function savePhoto(Request $request, $var)
+    /**
+     * @param Request $request
+     * @param $var String переменная файла из формы отправки
+     * @return string
+     */
+    public static function savePhoto(Request $request, $var): string
     {
 
         if ($request->hasFile($var) && $request->file($var)->isValid()) {
-            $file_name = (string)date('ymdhis') . '_cup.jpg';
+            $file_name = date('ymdhis') . '_' . $var . 'cup.jpg';
             $dir0 = 'krugi/cups';
             $i1 = $request->file($var)->storeAs($dir0, $file_name, 'public');
             $dir = storage_path('app/public/' . $dir0);
