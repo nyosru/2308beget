@@ -113,10 +113,15 @@ class ServiceImageController extends Controller
 //        Log::debug($dir.' ' . $filename);
 
         if (file_exists($dir . '/' . $filename)) {
-            echo __LINE__.' ';
+
+            echo __LINE__.' '.PHP_EOL;
+            echo $dir . '/' . $filename.' '.PHP_EOL;
+
 //            Log::debug('файл есть #'.__LINE__);
 //            dd('file_e');
+
             $img = self::getImage($dir . '/' . $filename);
+
             if ($img) {
                 echo __LINE__.' ';
 //                Log::debug('файл есть2 #'.__LINE__);
