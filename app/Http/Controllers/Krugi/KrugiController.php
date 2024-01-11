@@ -132,8 +132,13 @@ function init() {
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $i1 = $request->file('photo')->storeAs('public/krugi/cups', $file_name);
-            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
+            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name);
+//            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
+            if ($ee)
                 $post->img1 = $file_name;
+
+            dd($ee);
+
         }
 
 //        dd($file_name,$i1);
