@@ -37,7 +37,7 @@ class ServiceImageController extends Controller
                 $img = @imagecreatefromgif($filename);
                 break;
             case 'jpeg':
-                $img = @imagecreatefromjpeg($filename);
+                $img = imagecreatefromjpeg($filename);
                 break;
         }
 
