@@ -136,7 +136,7 @@ function init() {
                 $post->img1 = $file_name;
         }
 
-        dd($file_name,$i1);
+//        dd($file_name,$i1);
 
         if ($request->hasFile('photo2') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
