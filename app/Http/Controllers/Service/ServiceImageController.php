@@ -113,10 +113,12 @@ class ServiceImageController extends Controller
 //        Log::debug($dir.' ' . $filename);
 
         if (file_exists($dir . '/' . $filename)) {
+            echo __LINE__.' ';
 //            Log::debug('файл есть #'.__LINE__);
 //            dd('file_e');
             $img = self::getImage($dir . '/' . $filename);
             if ($img) {
+                echo __LINE__.' ';
 //                Log::debug('файл есть2 #'.__LINE__);
                 $img_mini = self::imageResize($img, 400, 'jpg');
                 $new_file = $dir . '/mini/' . $filename;
