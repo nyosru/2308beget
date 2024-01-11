@@ -136,6 +136,8 @@ function init() {
                 $post->img1 = $file_name;
         }
 
+        dd($i1);
+
         if ($request->hasFile('photo2') && $request->file('photo')->isValid()) {
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $i1 = $request->file('photo2')->storeAs('krugi/cups', $file_name, 'public');
