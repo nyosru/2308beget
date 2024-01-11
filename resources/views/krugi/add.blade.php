@@ -42,34 +42,44 @@
             </div>
 
 
-<br clear="all" />
-<br clear="all" />
+            <br clear="all"/>
+            <br clear="all"/>
 
             @foreach( $cups as $item )
                 <div style="width:300px; margin: 0 auto; float:left;
                 margin-bottom: 5px; margin-right: 5px; padding-left: 5px; border-left: 3px solid green;">
-{{--                {{ print_r($item) }}--}}
-                {{ $item->name }}
+                    {{--                {{ print_r($item) }}--}}
+                    {{ $item->name }}
 
-                    <A href="/storage/krugi/cups/mini/{{$item->img1}}" target="_blank">img1</A>
-                    <A href="/storage/krugi/cups/mini/{{$item->img2}}" target="_blank">img2</A>
-                    <A href="/storage/krugi/cups/mini/{{$item->img3}}" target="_blank">img3</A>
-                    <A href="/storage/krugi/cups/mini/{{$item->img4}}" target="_blank">img4</A>
-                    <A href="/storage/krugi/cups/mini/{{$item->img5}}" target="_blank">img5</A>
+                    @if( !empty($item->img1) )
+                        <A href="/storage/krugi/cups/mini/{{$item->img1}}" target="_blank">img1</A>
+                    @endif
+                    @if( !empty($item->img2) )
+                        <A href="/storage/krugi/cups/mini/{{$item->img2}}" target="_blank">img2</A>
+                    @endif
+                    @if( !empty($item->img3) )
+                        <A href="/storage/krugi/cups/mini/{{$item->img3}}" target="_blank">img3</A>
+                    @endif
+                    @if( !empty($item->img4) )
+                        <A href="/storage/krugi/cups/mini/{{$item->img4}}" target="_blank">img4</A>
+                    @endif
+                    @if( !empty($item->img5) )
+                        <A href="/storage/krugi/cups/mini/{{$item->img5}}" target="_blank">img5</A>
+                    @endif
 
-                <Br/>
-            <form action="{{ route('krugi.delete',['cup'=>$item->id]) }}" method="post" >
-                @csrf
-                <input type="text" name="s" required size="5"/>
-                <button type="submit" >удалить</button>
-            </form>
+                    <Br/>
+                    <form action="{{ route('krugi.delete',['cup'=>$item->id]) }}" method="post">
+                        @csrf
+                        <input type="text" name="s" required size="5"/>
+                        <button type="submit">удалить</button>
+                    </form>
                 </div>
                 {{--                @include('krugi.item',['item'=>$item])--}}
                 {{--    @include('krugi.item')--}}
             @endforeach
 
-        </div>
-    </div>
+</div>
+</div>
 </div>
 </body>
 
