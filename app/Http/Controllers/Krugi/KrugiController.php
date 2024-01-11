@@ -134,7 +134,11 @@ function init() {
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
 
             echo __LINE__.' ';
+            echo PHP_EOL;
             var_dump($request->file('photo')->getFileInfo());
+            echo PHP_EOL;
+            var_dump($_FILES);
+            echo PHP_EOL;
 
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $dir0 = 'krugi/cups';
