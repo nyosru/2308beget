@@ -131,49 +131,36 @@ function init() {
         $post->name = $request->input('name');
 //        if ($request->hasFile('photo'))
 
-        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+        $e = self::savePhoto($request, 'photo');
+        if ($e)
+            $post->img1 = $e;
 
-//            echo __LINE__.' ';
-//            echo PHP_EOL;
-//            var_dump($request->file('photo')->getFileInfo());
-//            echo PHP_EOL;
-//            var_dump($_FILES);
-//            echo PHP_EOL;
-////            $uniqueFilename = uniqid() . '_' . $uploadedFile['name'];
+        $e = self::savePhoto($request, 'photo2');
+        if ($e)
+            $post->img2 = $e;
 
+        $e = self::savePhoto($request, 'photo3');
+        if ($e)
+            $post->img3 = $e;
 
-            $file_name = (string)date('ymdhis') . '_cup.jpg';
-            $dir0 = 'krugi/cups';
-            $dir = storage_path('app/public/' . $dir0);
+        $e = self::savePhoto($request, 'photo4');
+        if ($e)
+            $post->img4 = $e;
 
-//            echo '<pre>',print_r($_FILES),'</pre>';
-//            exit;
-//
-//            move_uploaded_file( $_FILES['photo']['tmp_name'],$dir.'/'.$file_name );
+        $e = self::savePhoto($request, 'photo5');
+        if ($e)
+            $post->img5 = $e;
 
+//        if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
+//            $file_name = (string)date('ymdhis') . '_cup.jpg';
+//            $dir0 = 'krugi/cups';
+//            $i1 = $request->file('photo')->storeAs($dir0, $file_name, 'public');
+//            $dir = storage_path('app/public/' . $dir0);
+//            $ee = ServiceImageController::createMini($dir . '/', $file_name);
+//            if ($ee)
+//                $post->img1 = $file_name;
+//        }
 
-
-            $i1 = $request->file('photo')->storeAs($dir0, $file_name, 'public');
-//            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name);
-//            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
-//            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), basename($i1));
-            $ee = ServiceImageController::createMini($dir.'/',$file_name);
-
-            echo '$ee '; var_dump($ee);
-
-            if ($ee) {
-                $post->img1 = $file_name;
-            } else {
-                dd($i1,
-                    'basename($i1) '.basename($i1),
-                    '$dir ' . $dir,
-//                    '/home' . storage_path('app/public/' . $i1),
-                    '$ee ' . ($ee ? 'x1': 'x2'),
-//                json_encode(scandir('/home'.storage_path('app/public/' . $i1))),
-                    pathinfo(storage_path('app/public/krugi/cups' . $i1), PATHINFO_DIRNAME)
-                );
-            }
-        }
 
 ////        dd($file_name,$i1);
 //
@@ -224,6 +211,22 @@ function init() {
 //
 ////        dd($request->all());
     }
+
+    public static function savePhoto(Request $request, $var)
+    {
+
+        if ($request->hasFile($var) && $request->file($var)->isValid()) {
+            $file_name = (string)date('ymdhis') . '_cup.jpg';
+            $dir0 = 'krugi/cups';
+            $i1 = $request->file($var)->storeAs($dir0, $file_name, 'public');
+            $dir = storage_path('app/public/' . $dir0);
+            $ee = ServiceImageController::createMini($dir . '/', $file_name);
+            return $ee ? $file_name : false;
+//                $post->img1 = $file_name;
+        }
+        return false;
+    }
+
 
     /**
      * Display the specified resource.
