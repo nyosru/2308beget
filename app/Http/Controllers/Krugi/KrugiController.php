@@ -133,23 +133,25 @@ function init() {
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
 
-            echo __LINE__.' ';
-            echo PHP_EOL;
-            var_dump($request->file('photo')->getFileInfo());
-            echo PHP_EOL;
-            var_dump($_FILES);
-            echo PHP_EOL;
+//            echo __LINE__.' ';
+//            echo PHP_EOL;
+//            var_dump($request->file('photo')->getFileInfo());
+//            echo PHP_EOL;
+//            var_dump($_FILES);
+//            echo PHP_EOL;
+////            $uniqueFilename = uniqid() . '_' . $uploadedFile['name'];
+
 
             $file_name = (string)date('ymdhis') . '_cup.jpg';
             $dir0 = 'krugi/cups';
             $dir = storage_path('app/public/' . $dir0);
+            move_uploaded_file( $_FILES['photo']['tmp_name'],$dir.'/'.$file_name );
 
-            $i1 = $request->file('photo')->storeAs($dir0, $file_name, 'public');
-
+//            $i1 = $request->file('photo')->storeAs($dir0, $file_name, 'public');
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name);
 //            if (ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), $file_name))
 //            $ee = ServiceImageController::createMini(pathinfo(storage_path('app/public/' . $i1), PATHINFO_DIRNAME), basename($i1));
-            $ee = ServiceImageController::createMini($dir, basename($i1));
+            $ee = ServiceImageController::createMini($dir.'/',$file_name);
 
             echo '$ee '; var_dump($ee);
 
