@@ -41,7 +41,8 @@ class ServiceImageController extends Controller
 
                 if (!$img) {
                     $error = error_get_last();
-                    echo "Ошибка: " . $error['message'];
+//                    echo "Ошибка: " . $error['message'];
+                    var_dump($error);
                 }
 
                 break;
