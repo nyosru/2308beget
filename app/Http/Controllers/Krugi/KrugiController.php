@@ -148,9 +148,10 @@ function init() {
                 $post->img1 = $file_name;
             } else {
                 dd($i1,
+                    'basename($i1) '.basename($i1),
                     '$dir ' . $dir,
 //                    '/home' . storage_path('app/public/' . $i1),
-                    '$ee ' . ($ee ?? 'x'),
+                    '$ee ' . ($ee ? 'x1': 'x2'),
 //                json_encode(scandir('/home'.storage_path('app/public/' . $i1))),
                     pathinfo(storage_path('app/public/krugi/cups' . $i1), PATHINFO_DIRNAME)
                 );
