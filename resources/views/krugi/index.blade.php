@@ -14,19 +14,21 @@
     {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>--}}
     {{--    <script src="https://cdn.tailwindcss.com"></script>--}}
 
-
-    @if(1==2)
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            sans: ['Inter', 'sans-serif'],
-                        },
-                    }
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
                 }
             }
-        </script>
+        }
+    </script>
+
+    @if(1==2)
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
         {{--    <link rel="stylesheet" href="/build/assets/app-15fb0b48.css"/>--}}
 
