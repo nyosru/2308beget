@@ -42,12 +42,14 @@
         {{-- <script src="/site_photo/js1/baloon_html.js" type="text/javascript"></script> --}}
     @endif
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"--}}
+    {{--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
 
+    @livewireStyles
 
 </head>
 <body class="font-sans antialiased">
+
 
 @if(1==2)
     <div id="map"></div>
@@ -60,58 +62,77 @@
     </div>
 @endif
 
-<div class="p-2 alert alert-info shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">Создание
+<div class="p-2 bg-orange-300 rounded-lg shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">
+    Создание
     сайта <a href="https://php-cat.com" class="underline" target="_blank">php-cat.com</a></div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-12 py-5">
+<div class="container-fluid mx-auto">
+
+
+        <div class="w-full mt-10 text-center mb-5">
 
             <h1 class="text-xl"><b>Коллекция кружек для питья горячего сладкого кофе с молоком</b></h1>
             <p>на которой написано название страны или места где получилось ими обзавестись</p>
 
             <br/>
-            <div class="alert alert-warning">
-                <p>Как получится прислать кружку от себя, присылайте!</p>
+            <div class="bg-yellow-200 p-5 inline-block">
+                <p>Как получится прислать кружку, присылайте!</p>
                 <br/>
                 <p>
                     используйте почту россии, получатель по
                     номеру телефона 8-922-262-22-89 Сергей Бакланов (доставят мне прямо в руки)</p>
             </div>
         </div>
-    </div>
+{{--    </div>--}}
 
-{{--    $cups: {{$cups}}--}}
+    {{--    $cups: {{$cups}}--}}
 
-    <div class="row">
-        @foreach( $cups as $item )
-            {{--    {{ print_r($item) }}--}}
-            @include('krugi.item',['item'=>$item])
-            {{--    @include('krugi.item')--}}
-        @endforeach
-    </div>
+        <div class="columns-6 px-5">
+            @foreach( $cups as $item )
+                {{--    {{ print_r($item) }}--}}
+                {{--                        @include('krugi.item',['item'=>$item])--}}
+                <livewire:cup.item :i="$item"/>
+                {{--    @include('krugi.item')--}}
+            @endforeach
+        </div>
+{{--    </div>--}}
+
 </div>
 <br/>
 <br/>
 <br/>
 <br/>
 <br/>
+
+@livewireScripts
+
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+<script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+            if (document.scripts[j].src === r) {
+                return;
+            }
+        }
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
     ym(96033624, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true
     });
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/96033624" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/96033624" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
 <!-- /Yandex.Metrika counter -->
+
 </body>
 
 </html>
