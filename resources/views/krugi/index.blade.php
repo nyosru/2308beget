@@ -12,7 +12,7 @@
 
     {{--    <link rel="stylesheet" href="{{ asset('app.css') }}"/>--}}
 {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>--}}
-    <script src="https://cdn.tailwindcss.com"></script>
+{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
 
 
     @if(1==2)
