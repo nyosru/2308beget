@@ -7,11 +7,11 @@
 
     <link rel="shortcut icon" href="/storage/krugi/favicon.png" type="image/png"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>--}}
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
 
     {{--    <link rel="stylesheet" href="{{ asset('app.css') }}"/>--}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
+{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>--}}
     <script src="https://cdn.tailwindcss.com"></script>
 
 
@@ -69,33 +69,33 @@
 <div class="container-fluid mx-auto">
 
 
-        <div class="w-full mt-10 text-center mb-5">
+    <div class="w-full mt-10 text-center mb-5">
 
-            <h1 class="text-xl"><b>Коллекция кружек для питья горячего сладкого кофе с молоком</b></h1>
-            <p>на которой написано название страны или места где получилось ими обзавестись</p>
+        <h1 class="text-xl"><b>Коллекция кружек для питья горячего сладкого кофе с молоком</b></h1>
+        <p>на которой написано название страны или места где получилось ими обзавестись</p>
 
+        <br/>
+        <div class="bg-yellow-200 p-5 inline-block">
+            <p>Как получится прислать кружку, присылайте!</p>
             <br/>
-            <div class="bg-yellow-200 p-5 inline-block">
-                <p>Как получится прислать кружку, присылайте!</p>
-                <br/>
-                <p>
-                    используйте почту россии, получатель по
-                    номеру телефона 8-922-262-22-89 Сергей Бакланов (доставят мне прямо в руки)</p>
-            </div>
+            <p>
+                используйте почту россии, получатель по
+                номеру телефона 8-922-262-22-89 Сергей Бакланов (доставят мне прямо в руки)</p>
         </div>
-{{--    </div>--}}
+    </div>
+    {{--    </div>--}}
 
     {{--    $cups: {{$cups}}--}}
 
-        <div class="columns-6 px-5">
-            @foreach( $cups as $item )
-                {{--    {{ print_r($item) }}--}}
-                {{--                        @include('krugi.item',['item'=>$item])--}}
-                <livewire:cup.item :i="$item"/>
-                {{--    @include('krugi.item')--}}
-            @endforeach
-        </div>
-{{--    </div>--}}
+    <div class="columns-6 px-5">
+        @foreach( $cups as $item )
+            {{--    {{ print_r($item) }}--}}
+            {{--                        @include('krugi.item',['item'=>$item])--}}
+            <livewire:cup.item :i="$item"/>
+            {{--    @include('krugi.item')--}}
+        @endforeach
+    </div>
+    {{--    </div>--}}
 
 </div>
 <br/>
