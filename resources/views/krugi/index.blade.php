@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
         {{--    <link rel="stylesheet" href="/build/assets/app-15fb0b48.css"/>--}}
 
+
+
         {{--    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"            type="text/javascript">--}}
         {{--    </script>--}}
 
