@@ -35,7 +35,6 @@
         {{--    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"            type="text/javascript">--}}
         {{--    </script>--}}
 
-
         {{--<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=07d38e77-67fa-4fe8-9c64-2ec295d03440"--}}
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=d459c05b-ae5a-4168-86ba-15c5487e307c"
                 type="text/javascript"></script>
