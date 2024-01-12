@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    <div class="columns-2 md:columns-3 lg:columns-5 xl:columns-6 px-5">
+    <div class="columns-2 md:columns-3 lg:columns-4 xl:columns-5 px-5">
         @foreach( $cups as $item )
             {{--    {{ print_r($item) }}--}}
             {{--                        @include('krugi.item',['item'=>$item])--}}
