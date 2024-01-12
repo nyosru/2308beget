@@ -7,12 +7,12 @@
 
     <link rel="shortcut icon" href="/storage/krugi/favicon.png" type="image/png"/>
 
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>--}}
+    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>--}}
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
 
     {{--    <link rel="stylesheet" href="{{ asset('app.css') }}"/>--}}
-{{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>--}}
-{{--    <script src="https://cdn.tailwindcss.com"></script>--}}
+    {{--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>--}}
+    {{--    <script src="https://cdn.tailwindcss.com"></script>--}}
 
 
     @if(1==2)
@@ -64,13 +64,11 @@
 
 <div class="p-2 bg-orange-300 rounded-lg shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">
     Создание
-    сайта <a href="https://php-cat.com" class="underline" target="_blank">php-cat.com</a></div>
+    сайта <a href="https://php-cat.com" class="underline" target="_blank">php-cat.com</a>
+</div>
 
 <div class="container-fluid mx-auto">
-
-
     <div class="w-full mt-10 text-center mb-5">
-
         <h1 class="text-xl"><b>Коллекция кружек для питья горячего сладкого кофе с молоком</b></h1>
         <p>на которой написано название страны или места где получилось ими обзавестись</p>
 
@@ -83,9 +81,6 @@
                 номеру телефона 8-922-262-22-89 Сергей Бакланов (доставят мне прямо в руки)</p>
         </div>
     </div>
-    {{--    </div>--}}
-
-    {{--    $cups: {{$cups}}--}}
 
     <div class="columns-6 px-5">
         @foreach( $cups as $item )
@@ -95,7 +90,6 @@
             {{--    @include('krugi.item')--}}
         @endforeach
     </div>
-    {{--    </div>--}}
 
 </div>
 <br/>
@@ -106,7 +100,7 @@
 
 @livewireScripts
 
-<!-- Yandex.Metrika counter -->
+{{--<!-- Yandex.Metrika counter -->--}}
 <script type="text/javascript">
     (function (m, e, t, r, i, k, a) {
         m[i] = m[i] || function () {
@@ -131,8 +125,6 @@
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/96033624" style="position:absolute; left:-9999px;" alt=""/></div>
 </noscript>
-<!-- /Yandex.Metrika counter -->
-
+{{--<!-- /Yandex.Metrika counter -->--}}
 </body>
-
 </html>
