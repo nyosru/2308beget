@@ -21,7 +21,8 @@ $d = function() {
     Route::get('/{any?}', [KrugiController::class, 'index'])->name('index');
 };
 
-Route::group(['as' => 'krugi.', 'domain' => (ENV('APP_ENV', 'x') == 'local') ? 'krugi.local' : 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
+Route::group(['as' => 'krugi.', 'domain' => (ENV('APP_ENV', 'x') == 'local') ? 'krugi.local' : 'кружки.сергейсб.рф'], $d);
+//Route::group(['as' => 'krugi.', 'domain' => (ENV('APP_ENV', 'x') == 'local') ? 'krugi.local' : 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
 
 //$d = function () {
 //    Route::get('/test', [DomainController::class, 'test']);
