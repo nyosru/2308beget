@@ -10,21 +10,18 @@ use Illuminate\Support\Facades\Route;
 //use Illuminate\Contracts\Cookie\Factory as Coockie;
 //use Illuminate\Support\Facades\App;
 
-Route::get('phpinfo', function () {
+Route::get('phpinfo', function() {
     phpinfo();
 });
 
-$d = function () {
-    Route::get('/a', [KrugiController::class,'create'] )->name('create')    ;
-    Route::post('/a', [KrugiController::class,'store'] )->name('store')    ;
-    Route::post('/a/{cup}', [KrugiController::class,'destroy'] )->name('delete')    ;
+$d = function() {
+    Route::get('/a', [KrugiController::class, 'create'])->name('create');
+    Route::post('/a', [KrugiController::class, 'store'])->name('store');
+    Route::post('/a/{cup}', [KrugiController::class, 'destroy'])->name('delete');
     Route::get('/{any?}', [KrugiController::class, 'index'])->name('index');
 };
 
-Route::group([
-    'as' => 'krugi.',
-    'domain' => (ENV('APP_ENV', 'x') == 'local') ? 'krugi.local' : 'xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai'], $d);
-
+Route::group(['as' => 'krugi.', 'domain' => (ENV('APP_ENV', 'x') == 'local') ? 'krugi.local' : 'XN--90ADFBU3BFF.XN--P1AI'], $d);
 
 //$d = function () {
 //    Route::get('/test', [DomainController::class, 'test']);
@@ -94,7 +91,7 @@ Route::group([
 require('web.domainwaiter.php');
 
 
-$d = function () {
+$d = function() {
     Route::get('/{any?}', [PhpcatController::class, 'index']);
 };
 Route::group(array('domain' => 'phpcat.local'), $d);
@@ -116,7 +113,7 @@ Route::group(array('domain' => 'phpcat.local'), $d);
 //
 //require __DIR__ . '/auth.php';
 
-$d = function () {
+$d = function() {
     Route::view('/', 'site_ttt.welcome')->name('site_ttt_index');
 };
 
@@ -127,3 +124,11 @@ Route::group(array('domain' => 'ттт72.рф'), $d);
 
 //xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai.
 //IDN: кружки.сергейсб.рф
+
+
+Route::get('/{.*}', function() {
+    return '12345';
+});
+Route::get('/', function() {
+    return '123';
+});
