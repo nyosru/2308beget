@@ -11,7 +11,7 @@ env:
 on:
   push:
     branches:
-      - cicd_to_ihc_docker24
+      - cicd-to-docker24
 
 
 
