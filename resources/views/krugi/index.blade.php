@@ -20,11 +20,11 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
+                        sans: ['Inter', 'sans-serif']
+                    }
                 }
             }
-        }
+        };
     </script>
 
     @if(1==2)
@@ -79,12 +79,15 @@
         <div class="bg-yellow-200 p-5 inline-block">
             <p>Как получится прислать кружку, присылайте!</p>
             <p>
-<b>                используйте почту россии,</b><br/>
+                <b> используйте почту россии,</b><br/>
                 625062 г.Тюмень, ул. Революции 208а, кв 1<br/>
                 Сергей Бакланов 8-922-262-22-89</p>
         </div>
     </div>
 
+    @include('krugi.map')
+<br/>
+<br/>
     <div class="columns-2 md:columns-3 lg:columns-4 xl:columns-5 px-5">
         @foreach( $cups as $item )
             {{--    {{ print_r($item) }}--}}
@@ -105,9 +108,9 @@
 
 {{--<!-- Yandex.Metrika counter -->--}}
 <script type="text/javascript">
-    (function (m, e, t, r, i, k, a) {
-        m[i] = m[i] || function () {
-            (m[i].a = m[i].a || []).push(arguments)
+    (function(m, e, t, r, i, k, a) {
+        m[i] = m[i] || function() {
+            (m[i].a = m[i].a || []).push(arguments);
         };
         m[i].l = 1 * new Date();
         for (var j = 0; j < document.scripts.length; j++) {
@@ -115,11 +118,12 @@
                 return;
             }
         }
-        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k,
+            a);
     })
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-    ym(96033624, "init", {
+    ym(96033624, 'init', {
         clickmap: true,
         trackLinks: true,
         accurateTrackBounce: true
