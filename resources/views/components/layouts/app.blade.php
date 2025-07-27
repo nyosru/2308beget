@@ -50,7 +50,7 @@
 
 </head>
 <body class="font-sans antialiased">
-
+{{ $slot }}
 
 
 <div class="p-2 bg-orange-300 rounded-lg shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">

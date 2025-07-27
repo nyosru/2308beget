@@ -1,6 +1,7 @@
 <div class="mb-5">
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
 {{--    item : {{ $i }}--}}
+
 {{--    sdf--}}
 
 {{--    <div class="">--}}
