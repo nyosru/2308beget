@@ -128,9 +128,20 @@ Route::group(array('domain' => 'ттт72.рф'), $d);
 //IDN: кружки.сергейсб.рф
 
 
+
+$d = function() {
+    Route::view('/', 'krugi.index')->name('cup.index');
+    Route::get('/aa', \App\Livewire\Cup\CupCreate::class )->name('cup.add');
+};
+
+Route::group(array('domain' => 'cup.local'), $d);
+
+
+
 Route::get('/{.*}', function() {
-    return '12345';
+    return 'ищем сайты ... ищем сайты ...';
 });
+
 Route::get('/', function() {
-    return '123';
+    return 'ищем сайт ... ищем сайт ...';
 });
