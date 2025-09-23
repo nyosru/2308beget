@@ -25,15 +25,13 @@
         }
     </script>
 
-    @if(1==2)
+    @if(1==1)
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
-        {{--    <link rel="stylesheet" href="/build/assets/app-15fb0b48.css"/>--}}
+{{--            <link rel="stylesheet" href="/build/assets/app-15fb0b48.css"/>--}}
 
-
-
-        {{--    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"            type="text/javascript">--}}
-        {{--    </script>--}}
+            <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU"            type="text/javascript">
+            </script>
 
         {{--<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=07d38e77-67fa-4fe8-9c64-2ec295d03440"--}}
         <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=d459c05b-ae5a-4168-86ba-15c5487e307c"
@@ -49,13 +47,40 @@
     @livewireStyles
 
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased"
+style="background: linear-gradient(135deg, #e0e0e0, #f3f3f3);">
 
 
 
-<div class="p-2 bg-orange-300 rounded-lg shadow-md" style="z-index:10; position: fixed; bottom: 10px; right: 10px;">
-    Создание
-    сайта <a href="https://php-cat.com" class="underline" target="_blank">php-cat.com</a>
+<div class="p-2
+{{--bg-gray-200 --}}
+rounded-lg shadow-md" style="z-index:10;
+position: fixed; bottom: 10px; right: 10px;
+text-align:center;
+ background: linear-gradient(135deg, #808080, #d3d3d3);
+">
+{{--    Создание--}}
+{{--    сайта <a href="https://php-cat.com" class="underline" target="_blank">php-cat.com</a>--}}
+    <div class="flex flex-row items-center justify-center">
+        <div>
+            <a href="https://php-cat.com"
+               class="whitespace-nowrap text-blue-600 hover:underline"
+               target="_blank">
+                <img src="https://php-cat.com/phpcat/cat.png" style="max-height: 60px;" class="inline-block "/>
+            </a>
+        </div>
+        <div>
+            Создание сайта<br/>
+            <a href="https://php-cat.com"
+               class="whitespace-nowrap text-blue-600 hover:underline"
+               target="_blank"
+            style="color: blue; "
+            >
+                &nbsp;php-cat.com
+            </a>
+        </div>
+    </div>
+
 </div>
 
 <div class="container-fluid mx-auto">
