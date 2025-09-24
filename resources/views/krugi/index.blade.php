@@ -51,13 +51,16 @@
 style="background: linear-gradient(135deg, #e0e0e0, #f3f3f3);">
 
 
-
 <div class="p-2
 {{--bg-gray-200 --}}
 rounded-lg shadow-md" style="z-index:10;
-position: fixed; bottom: 10px; right: 10px;
+position: fixed; bottom: 20px; right: 20px;
+padding: 10px 20px;
 text-align:center;
- background: linear-gradient(135deg, #808080, #d3d3d3);
+/*box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);*/
+ background: linear-gradient(135deg, #ffffff, #fffbef);
+ border: 1px solid #ccc;
+
 ">
 {{--    Создание--}}
 {{--    сайта <a href="https://php-cat.com" class="underline" target="_blank">php-cat.com</a>--}}
@@ -89,7 +92,7 @@ text-align:center;
         <p>на которой написано название страны, города или места где получилось ей обзавестись, купить, получить</p>
 
         <br/>
-        <div class="bg-yellow-200 p-5 inline-block">
+        <div class="bg-yellow-200 p-5 inline-block" style="border-radius: 10px;">
             <p>Как получится прислать кружку, присылайте!</p>
             <p>
 <b>                используйте почту россии,</b><br/>
