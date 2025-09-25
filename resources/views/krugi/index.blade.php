@@ -45,17 +45,16 @@
     {{--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
 
 
-
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https://xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Коллекция кружек для питья горячего сладкого кофе!">
     <meta property="og:description" content="коллекция Сергея Бакланова программиста, от себя и моих друзей!">
 
-    <meta property="og:image" content="https://php-cat.com/cups/preview_link_phpcat_for_fb.jpg">
+    <meta property="og:image" content="https://php-cat.com/cups/preview_link_cups_for_fb.jpg">
 
     <!-- VK Meta Tags -->
-    <meta property="vk:image"  content="https://php-cat.com/cups/preview_link_phpcat_for_vk.jpg" />
+    <meta property="vk:image"  content="https://php-cat.com/cups/preview_link_cups_for_vk.jpg" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
@@ -63,7 +62,7 @@
     <meta property="twitter:url" content="https://xn--f1aeeb2as.xn--90adfbu3bff.xn--p1ai">
     <meta name="twitter:title" content="Коллекция кружек для питья горячего сладкого кофе!">
     <meta name="twitter:description" content="коллекция Сергея Бакланова программиста, от себя и моих друзей!">
-    <meta name="twitter:image" content="https://php-cat.com/cups/preview_link_phpcat_for_vk.jpg">
+    <meta name="twitter:image" content="https://php-cat.com/cups/preview_link_cups_for_vk.jpg">
 
 
 
